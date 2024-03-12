@@ -37,6 +37,11 @@ body {
   width: 95%;
   height: 89.5vh;
 }
+.login-size_pannel {
+  width: 37%!important;
+  height: 60.5vh!important;
+  margin-top: 70px !important;
+}
 .inputBox span{
   color: rgba(0, 0, 0, 0.55);
   position: absolute;
