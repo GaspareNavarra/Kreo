@@ -1,15 +1,14 @@
 <template>
   <div id="MainBody">
-    <div id="navbar" class="navbar">
+    <div id="navbar" class="custom-navbar">
       <img src="/Img/Logo.png" class="logo_size">
     </div>
     
-    <DataSheet></DataSheet>
+    <router-view></router-view>
   </div>
 </template>
 <script>
-import DataSheet from './components/DataSheet.vue';
 export default {
-  components: { DataSheet },
+
 }
 </script>
