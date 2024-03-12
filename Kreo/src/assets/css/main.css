@@ -57,7 +57,7 @@ body {
 }
 .inputBox {
   position: relative;
-  width: 250px;
+  height: fit-content;
 }
 .inputBox input {
   width: 100%;
