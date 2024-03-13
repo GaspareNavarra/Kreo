@@ -28,7 +28,7 @@
 <script>
 import userlist from '@/assets/CryptedPassword.json';
 export default {
-  inject: ['classSelector', 'getCookieByName'],
+  inject: ['classSelector', 'getCookieByName', 'Login'],
   data() {
     return {
       username: '',
@@ -49,8 +49,9 @@ export default {
             
             if(checked && !this.isCookied()) {
               this.setCookie();
+              this.Login();
             } else {
-              
+              this.Login();
             }
             break;
           }

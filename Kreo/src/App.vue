@@ -15,6 +15,7 @@ export default {
     return {
       classSelector: this.classSelector,
       getCookieByName: this.getCookieByName,
+      Login: this.Login,
     }
   },
   methods: {
@@ -22,8 +23,8 @@ export default {
       if(window.location.href.includes('/Login')) {
         document.getElementById('scheda-tecnica').classList.add('login-size_pannel');
       } else {
-        if(document.getElementById('scheda-tecnica').classList.includes('login-size_pannel'))
-          document.getElementById('scheda-tecnica').classList.remove('login-size_pannel');
+        if(document.getElementById('scheda-tecnica').classList.value.includes('login-size_pannel'))
+          document.getElementById('scheda-tecnica').classList.value.remove('login-size_pannel');
       }
     },
     getCookieByName(cookiename) {
@@ -41,7 +42,15 @@ export default {
         }
       }
       return '';
-    }
+    },
+    Login() {
+      if(document.getElementById('scheda-tecnica').classList.value.includes('login-size_pannel'))
+          document.getElementById('scheda-tecnica').classList.remove('login-size_pannel');
+      this.linkTo('/HomePage');
+    },
+    linkTo(page) {
+      this.$router.push(page);
+    },
   }
 }
 </script>
