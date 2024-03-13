@@ -14,6 +14,7 @@ export default {
   provide() {
     return {
       classSelector: this.classSelector,
+      getCookieByName: this.getCookieByName,
     }
   },
   methods: {
@@ -24,6 +25,22 @@ export default {
         if(document.getElementById('scheda-tecnica').classList.includes('login-size_pannel'))
           document.getElementById('scheda-tecnica').classList.remove('login-size_pannel');
       }
+    },
+    getCookieByName(cookiename) {
+      let name = cookiename + '=';
+      let decodedCookie = decodeURIComponent(document.cookie);
+      let ca = decodedCookie.split(';');
+
+      for(let index in ca) {
+        let c = ca[index];
+        while(c.charAt(0) == ' ') {
+          c = c.substring(1);
+        }
+        if(c.indexOf(name) == 0) {
+          return c.substring(name.length, c.length);
+        }
+      }
+      return '';
     }
   }
 }
