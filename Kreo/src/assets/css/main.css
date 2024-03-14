@@ -195,11 +195,41 @@ input:checked[type="checkbox"]::before {
   background-color: #920b0b;
 }
 .piastra {
-  border: solid 2px gray;
+  border: solid 2px #c6c7d2;
   border-radius: 5px;
+  height: 30vh;
+  margin: 5px;
+  display: flex;
+  justify-content: center;
 }
 .container-piastre {
   display: flex;
+  justify-content: center;
+}
+.functionality-page {
+  width: 45% !important;
+  height: 76.5vh;
+}
+.container-funzioni {
+  margin-top: 10%;
+}
+.icona-piastra {
+  font-size: 90px;
+  text-align: center;
+  padding: 85px;
+  color: #c6c7d2;
+}
+.piastra-label {
+  position: absolute;
+  margin-top: 10%;
+}
+.piastra:hover {
+  /* border-color: #000000; */
+  background-color: #000000;
+}
+.piastra:hover .icona-piastra,
+.piastra:hover .piastra-label {
+  color: #fff;
 }
 /* ----------------------------------------------------------------------------------------------------------- */
                                       /*

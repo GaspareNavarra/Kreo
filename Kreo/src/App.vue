@@ -28,9 +28,11 @@ export default {
     classSelector() {
       if(window.location.href.includes('/Login')) {
         document.getElementById('scheda-tecnica').classList.add('login-size_pannel');
+      } else if(window.location.href.includes('/HomePage')){
+        document.getElementById('scheda-tecnica').classList.add('functionality-page');
       } else {
-        if(document.getElementById('scheda-tecnica').classList.value.includes('login-size_pannel'))
-          document.getElementById('scheda-tecnica').classList.value.remove('login-size_pannel');
+        document.getElementById('scheda-tecnica').classList.remove('login-size_pannel');
+        document.getElementById('scheda-tecnica').classList.remove('functionality-page');
       }
     },
     Login() {
