@@ -7,12 +7,15 @@
         </div>
         <div class="container-input">
           <div class="inputBox col-sm-9">
-            <input type="text" required="required" v-model="username">
+            <input id="username" type="text" required="required" v-model="username">
             <span>Username</span>
           </div>
           <div class="inputBox col-sm-9">
-            <input type="text" required="required" v-model="password">
+            <input id="password" type="password" required="required" v-model="password">
             <span>Password</span>
+            <div class="password-eye" @click="setPasswordVisibility()">
+              <i  class="fa-regular" :class="eyeIcon?'fa-eye' : 'fa-eye-slash'"></i>
+            </div>
           </div>
           <div id="actionButton" class="row no-margin">
             <div id="checkBox" class="col-sm-9 checkbox-container">
@@ -28,27 +31,35 @@
 <script>
 import userlist from '@/assets/CryptedPassword.json';
 export default {
-  inject: ['classSelector', 'getCookieByName', 'Login'],
+  inject: ['classSelector', 'Login'],
   data() {
     return {
       username: '',
       password: '',
       userList: userlist,
+      eyeIcon: true
     }
   },
   methods: {
     doLogin() {
       let user;
+      let username;
+      let password;
 
       if(this.userList.username != '' && this.userList.password != '') {
         for(let key in this.userList.users) {
           user = this.userList.users[key];
-          
           if(user.username == this.username && user.password == this.password) {
+            username = this.username;
+            password = this.password;
             let checked = document.getElementById('rememberme').checked;
             
-            if(checked && !this.isCookied()) {
-              this.setCookie();
+            if(checked && !this.isLocalStored()) {
+              this.setCredentials();
+              this.Login();
+            } else if(checked && this.isLocalStored()) {
+              this.resetCredential();
+              this.setCredentials();
               this.Login();
             } else {
               this.Login();
@@ -56,29 +67,76 @@ export default {
             break;
           }
         }
+
+        if(username != this.username) {
+          document.getElementById('username').classList.add('input-error');
+        }
+        if(password != this.password) {
+          document.getElementById('password').classList.add('input-error');
+        }
+      } else {
+        if(user.username != this.username) {
+          document.getElementById('username').classList.add('input-error');
+        }
+        if(user.password != this.password) {
+          document.getElementById('password').classList.add('input-error');
+        }
       }
     },
-    setCookie() {
-      document.cookie = 'username=' + this.username + ';path=http://localhost/web6pm/';
-      document.cookie = 'password=' + this.password + ';path=http://localhost/web6pm/';
+    setCredentials() {
+      window.localStorage.setItem('username', this.username);
+      window.localStorage.setItem('password', this.password);
     },
-    getCookie() {
-      this.username = this.getCookieByName('username');
-      this.password = this.getCookieByName('password');
+    resetCredential() {
+      window.localStorage.setItem('username', '');
+      window.localStorage.setItem('password', '');
     },
-    isCookied() {
-      debugger
-      let username = this.getCookieByName('username');
-      let password = this.getCookieByName('password');
+    getCredentialStored() {
+      if(window.localStorage.getItem('username') != undefined && window.localStorage.getItem('password') != undefined) {
+        this.username = window.localStorage.getItem('username');
+        this.password = window.localStorage.getItem('password');
+      }
+    },
+    isLocalStored() {
+      let username = window.localStorage.getItem('username');
+      let password = window.localStorage.getItem('password');
 
-      if(username != '' && password != '') 
+      if(username != undefined && password != undefined) 
         return true;
       else
         return false;
     },
+    setPasswordVisibility() {
+      this.eyeIcon = !this.eyeIcon;
+      if(this.eyeIcon)
+        document.getElementById('password').type = 'password';
+      else
+        document.getElementById('password').type = 'text';
+    },
+    checkIconState() {
+      let input = document.getElementById('password');
+      if(this.eyeIcon == true && input.type == 'text') {
+        input.type = 'password';
+      }
+    },
+  },
+  watch: {
+    username(newValue, oldValue) {
+      if(newValue != oldValue) {
+        document.getElementById('username').classList.remove('input-error');
+        document.getElementById('password').classList.remove('input-error');
+      }
+    },
+    password(newValue, oldValue) {
+      if(newValue != oldValue) {
+        document.getElementById('username').classList.remove('input-error');
+        document.getElementById('password').classList.remove('input-error');
+      }
+    },
   },
   mounted() {
-    this.getCookie();
+    this.checkIconState();
+    this.getCredentialStored();
     this.classSelector();
   },
 }
