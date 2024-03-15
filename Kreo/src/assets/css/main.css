@@ -224,12 +224,48 @@ input:checked[type="checkbox"]::before {
   margin-top: 10%;
 }
 .piastra:hover {
-  /* border-color: #000000; */
   background-color: #000000;
+  cursor: pointer;
 }
 .piastra:hover .icona-piastra,
 .piastra:hover .piastra-label {
   color: #fff;
+}
+.not-found {
+  margin-top: 155px!important;
+  width: 58%;
+  height: 45.5vh;
+}
+.not-found-label {
+  font-size: 220%;
+}
+.warning {
+  color: #d60505;
+  padding-top: 50px;
+  font-size: 150px;
+}
+.warning-button {
+  border-radius: 20px;
+  border: none;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 45px;
+  outline: none;
+  font-size: 22px;
+  background-color: #000000;
+  color: whitesmoke;
+}
+.not-found-container {
+  text-align: center;
+  margin: 0!important;
+}
+.add-user {
+  margin-top: auto!important;
+  margin-bottom: auto!important;
+}
+.align-button {
+  display: flex;
+  justify-content: center;
 }
 /* ----------------------------------------------------------------------------------------------------------- */
                                       /*

@@ -135,6 +135,7 @@ export default {
     },
   },
   mounted() {
+    document.getElementById('scheda-tecnica').classList.remove('not-found');
     this.checkIconState();
     this.getCredentialStored();
     this.classSelector();

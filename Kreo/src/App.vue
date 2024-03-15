@@ -6,7 +6,7 @@
       <div v-show="userState" id="logoutButton" class="logout-button col-sm-1" @click="doLogout">Logout</div>
     </div>
     
-    <div id="scheda-tecnica" class="datasheet_size row">
+    <div id="scheda-tecnica" class="datasheet_size row" :class="{'login-size_pannel': loginPage, 'functionality-page': homePage, 'not-found': notFound}">
       <router-view></router-view>
     </div>
   </div>
@@ -17,27 +17,41 @@ export default {
     return {
       classSelector: this.classSelector,
       Login: this.Login,
+      linkTo: this.linkTo,
     }
   },
   data() {
     return {
-      userState: false
+      userState: false,
+      loginPage: true,
+      homePage: false,
+      notFound: false,
     }
   },
   methods: {
-    classSelector() {
-      if(window.location.href.includes('/Login')) {
-        document.getElementById('scheda-tecnica').classList.add('login-size_pannel');
-      } else if(window.location.href.includes('/HomePage')){
-        document.getElementById('scheda-tecnica').classList.add('functionality-page');
+    classSelector(notFound) {
+      let url = window.location.href;
+      if(notFound == 1) {
+        this.notFound = true;
+        this.homePage = false;
+        this.loginPage = false;
+      } else if(url.includes('/Login') || url.includes('/AddUser')) {
+        this.notFound = false;
+        this.homePage = false;
+        this.loginPage = true;
+      } else if(url.includes('/HomePage')){
+        this.notFound = false;
+        this.homePage = true
+        this.loginPage = false;
       } else {
-        document.getElementById('scheda-tecnica').classList.remove('login-size_pannel');
-        document.getElementById('scheda-tecnica').classList.remove('functionality-page');
+        this.notFound = false;
+        this.homePage = false;
+        this.loginPage = false;
       }
     },
     Login() {
-      if(document.getElementById('scheda-tecnica').classList.value.includes('login-size_pannel'))
-          document.getElementById('scheda-tecnica').classList.remove('login-size_pannel');
+      if(this.loginPage)
+          this.loginPage = false;
 
       this.userState = true;
       window.localStorage.setItem('isAuth', this.userState);
