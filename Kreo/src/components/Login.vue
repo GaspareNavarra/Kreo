@@ -7,8 +7,8 @@
         </div>
         <div class="container-input">
           <div class="inputBox col-sm-9">
-            <input id="username" type="text" required="required" v-model="username">
-            <span>Username</span>
+            <input id="email" type="text" required="required" v-model="email">
+            <span>E-mail</span>
           </div>
           <div class="inputBox col-sm-9">
             <input id="password" type="password" required="required" v-model="password">
@@ -18,9 +18,9 @@
             </div>
           </div>
           <div id="actionButton" class="row no-margin">
-            <div id="checkBox" class="col-sm-9 checkbox-container">
+            <!-- <div id="checkBox" class="col-sm-9 checkbox-container">
               <input id="rememberme" type="checkbox"><div class="remember-label">Ricordami</div>
-            </div>
+            </div> -->
             <button @click="doLogin" class="access-button no-padding col-sm-9">Accedi</button>
           </div>
         </div>
@@ -29,83 +29,80 @@
 </template>
 
 <script>
-import userlist from '@/assets/CryptedPassword.json';
+import axios from 'axios';
 export default {
-  inject: ['classSelector', 'Login'],
+  inject: ['classSelector', 'Login', 'showLoader', 'hideLoader', 'displayBack'],
   data() {
     return {
-      username: '',
+      email: '',
       password: '',
-      userList: userlist,
       eyeIcon: true
     }
   },
   methods: {
     doLogin() {
-      let user;
-      let username;
-      let password;
+      let request = {};
+      request.email = this.email;
+      request.password = this.password;
 
-      if(this.userList.username != '' && this.userList.password != '') {
-        for(let key in this.userList.users) {
-          user = this.userList.users[key];
-          if(user.username == this.username && user.password == this.password) {
-            username = this.username;
-            password = this.password;
-            let checked = document.getElementById('rememberme').checked;
+      this.showLoader();
+      axios.post('https://x8ki-letl-twmt.n7.xano.io/api:Fh-KZon-/login', request).then((data) => {
+        let response = data.data;
+        if(response.Authorized == true) {
+          // let checked = document.getElementById('rememberme').checked;
+          window.localStorage.setItem('user-data', response.user);
+          this.Login();
+        }
+        this.hideLoader();
+      }).catch((error) => {
+        document.getElementById('email').classList.add('input-error');
+        document.getElementById('password').classList.add('input-error');
+        console.log(error);
+        this.hideLoader();
+      });
+    },
+    // doLogin() {
+    //   let user;
+    //   let username;
+    //   let password;
+
+    //   if(this.userList.username != '' && this.userList.password != '') {
+    //     for(let key in this.userList.users) {
+    //       user = this.userList.users[key];
+    //       if(user.username == this.username && user.password == this.password) {
+    //         username = this.username;
+    //         password = this.password;
+    //         let checked = document.getElementById('rememberme').checked;
             
-            if(checked && !this.isLocalStored()) {
-              this.setCredentials();
-              this.Login();
-            } else if(checked && this.isLocalStored()) {
-              this.resetCredential();
-              this.setCredentials();
-              this.Login();
-            } else {
-              this.Login();
-            }
-            break;
-          }
-        }
+    //         if(checked && !this.isLocalStored()) {
+    //           this.setCredentials();
+    //           this.Login();
+    //         } else if(checked && this.isLocalStored()) {
+    //           this.resetCredential();
+    //           this.setCredentials();
+    //           this.Login();
+    //         } else {
+    //           this.Login();
+    //         }
+    //         break;
+    //       }
+    //     }
 
-        if(username != this.username) {
-          document.getElementById('username').classList.add('input-error');
-        }
-        if(password != this.password) {
-          document.getElementById('password').classList.add('input-error');
-        }
-      } else {
-        if(user.username != this.username) {
-          document.getElementById('username').classList.add('input-error');
-        }
-        if(user.password != this.password) {
-          document.getElementById('password').classList.add('input-error');
-        }
-      }
-    },
-    setCredentials() {
-      window.localStorage.setItem('username', this.username);
-      window.localStorage.setItem('password', this.password);
-    },
-    resetCredential() {
-      window.localStorage.setItem('username', '');
-      window.localStorage.setItem('password', '');
-    },
-    getCredentialStored() {
-      if(window.localStorage.getItem('username') != undefined && window.localStorage.getItem('password') != undefined) {
-        this.username = window.localStorage.getItem('username');
-        this.password = window.localStorage.getItem('password');
-      }
-    },
-    isLocalStored() {
-      let username = window.localStorage.getItem('username');
-      let password = window.localStorage.getItem('password');
-
-      if(username != undefined && password != undefined) 
-        return true;
-      else
-        return false;
-    },
+    //     if(username != this.username) {
+    //       document.getElementById('username').classList.add('input-error');
+    //     }
+    //     if(password != this.password) {
+    //       document.getElementById('password').classList.add('input-error');
+    //     }
+    //   } else {
+    //     if(user.username != this.username) {
+    //       document.getElementById('username').classList.add('input-error');
+    //     }
+    //     if(user.password != this.password) {
+    //       document.getElementById('password').classList.add('input-error');
+    //     }
+    //   }
+    // },
     setPasswordVisibility() {
       this.eyeIcon = !this.eyeIcon;
       if(this.eyeIcon)
@@ -121,15 +118,15 @@ export default {
     },
   },
   watch: {
-    username(newValue, oldValue) {
+    email(newValue, oldValue) {
       if(newValue != oldValue) {
-        document.getElementById('username').classList.remove('input-error');
+        document.getElementById('email').classList.remove('input-error');
         document.getElementById('password').classList.remove('input-error');
       }
     },
     password(newValue, oldValue) {
       if(newValue != oldValue) {
-        document.getElementById('username').classList.remove('input-error');
+        document.getElementById('email').classList.remove('input-error');
         document.getElementById('password').classList.remove('input-error');
       }
     },
@@ -137,8 +134,9 @@ export default {
   mounted() {
     document.getElementById('scheda-tecnica').classList.remove('not-found');
     this.checkIconState();
-    this.getCredentialStored();
     this.classSelector();
+    this.displayBack();
+    // this.getCredentialStored();
   },
 }
 </script>

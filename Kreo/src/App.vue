@@ -1,7 +1,14 @@
 <template>
   <div id="MainBody">
+    <div v-show="loader" class="container-loader">
+      <div class="center-loader">
+        <div class="loader-text">Loading...</div>
+        <div class="ring"></div>
+      </div>
+    </div>
+
     <div id="navbar" class="custom-navbar">
-      <!-- <i class="fa-regular fa-arrow-left"></i> -->
+      <i v-show="back" class="fa-regular fa-arrow-left back-arrow" @click="goBack()"></i>
       <img src="/Img/Logo.png" class="logo_size">
       <div v-show="userState" id="logoutButton" class="logout-button col-sm-1" @click="doLogout">Logout</div>
     </div>
@@ -18,6 +25,9 @@ export default {
       classSelector: this.classSelector,
       Login: this.Login,
       linkTo: this.linkTo,
+      showLoader: this.showLoader,
+      hideLoader: this.hideLoader,
+      displayBack: this.displayBack
     }
   },
   data() {
@@ -26,6 +36,8 @@ export default {
       loginPage: true,
       homePage: false,
       notFound: false,
+      loader: false,
+      back: false
     }
   },
   methods: {
@@ -51,7 +63,7 @@ export default {
     },
     Login() {
       if(this.loginPage)
-          this.loginPage = false;
+        this.loginPage = false;
 
       this.userState = true;
       window.localStorage.setItem('isAuth', this.userState);
@@ -72,6 +84,23 @@ export default {
       this.userState = false;
       window.localStorage.setItem('isAuth', this.userState);
       this.linkTo('/');
+    },
+    showLoader() {
+      this.loader = true;
+    },
+    hideLoader() {
+      this.loader = false;
+    },
+    displayBack() {
+      let url = window.location.href;
+      
+      if(url.includes('/Login'))
+        this.back = false;
+      else
+        this.back = true;
+    },
+    goBack() {
+      this.linkTo('/HomePage');
     }
   },
   mounted() {
