@@ -6,7 +6,6 @@
   scroll-behavior: smooth;
   text-decoration: none;
   list-style: none;
-  color: white;
   font-family: 'Poppins';
   color: #000000;
 }
@@ -89,7 +88,7 @@ body {
   padding: 10px;
   border: 1px solid #c6c7d2;
   background: #fff;
-  border-radius: 5px;
+  border-radius: 10px;
   outline: none;
   color: black;
   font-size: 1em;
@@ -205,10 +204,16 @@ input:checked[type="checkbox"]::before {
 .container-piastre {
   display: flex;
   justify-content: center;
+  /* margin-top: 20%; */
+  margin-top: auto;
+  margin-bottom: auto;
 }
 .functionality-page {
-  width: 45% !important;
-  height: 76.5vh;
+  width: 70% !important;
+  height: 68.5vh;
+  margin-top: 50px !important;
+  /* width: 45% !important;
+  height: 76.5vh; */
 }
 .container-funzioni {
   margin-top: 10%;
@@ -272,7 +277,7 @@ input:checked[type="checkbox"]::before {
   height: 100%;
   position: absolute;
   background: rgba(0, 0, 0, 0.573);
-  z-index: 1;
+  z-index: 2;
 }
 .center-loader {
   position: absolute;
@@ -305,17 +310,212 @@ input:checked[type="checkbox"]::before {
   color: #fff;
 }
 .back-arrow {
+  position: absolute;
   color: #fff;
+  font-size: 35px;
+  top: 2.5%;
+  left: 2%;
 }
-/* ----------------------------------------------------------------------------------------------------------- */
-                                      /*
-                                        320px — 480px: Mobile devices
-                                        481px — 768px: iPads, Tablets
-                                        769px — 1024px: Small screens, laptops
-                                        1025px — 1200px: Desktops, large screens
-                                        1201px and more —  Extra large screens, TV
-                                      */
-/* ----------------------------------------------------------------------------------------------------------- */
+.welcome-message {
+  font-size: xxx-large;
+  text-align: center;
+  padding-top: 45px;
+}
+.register {
+  margin-left: auto;
+  margin-right: auto;
+  text-align: right;
+  padding: 0;
+}
+.fill-data {
+  font-size: xx-large;
+  text-align: center;
+}
+.container-message-modal {
+  text-align: center;
+  margin: 0!important;
+}
+.check {
+  font-size: 590%;
+}
+.message-label {
+  font-size: 220%;
+}
+.message-button {
+  border-radius: 20px;
+  border: none;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 45px;
+  outline: none;
+  font-size: 22px;
+  background-color: #000000;
+  color: whitesmoke;
+}
+.custom-dropdown-container {
+  border: 1px solid;
+  border-radius: 5px;
+  position: absolute;
+  max-height: 230%;
+  overflow-y: auto;
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+.custom-dropdown:hover {
+  background-color: rgb(14, 91, 233);
+}
+.custom-dropdown {
+  font-size: larger;
+}
+.dati-scheda-tecnica {
+  padding: 2%;
+}
+.label-datasheet {
+  justify-content: center;
+  font-size: xxx-large;
+  margin-bottom: 10%;
+}
+.custom-dropdown-container::-webkit-scrollbar {
+  /* Hide scrollbar */
+  display: none;
+}
+.birthday-box {
+  margin-top: 25vh;
+  position: absolute;
+  background: #fff;
+  border-radius: 0 20px 20px 0;
+  transition: .4s;
+  height: 30vh;
+  width: 31vw;
+  border: solid 1px;
+  z-index: 1;
+}
+.arrow-birthday-box {
+  background: #fff;
+  border-radius: 0 20px 20px 0;
+  transition: .4s;
+  height: 6vh;
+  width: 3vw;
+  margin-left: 94%;
+  font-size: xx-large;
+  display: flex;
+  justify-content: center;
+  margin-top: 10vh;
+  border-right: solid 2px;
+}
+.birthday-cake, .angle-right {
+  margin-top: auto;
+  margin-bottom: auto;
+}
+.birthday-cake {
+  padding-right: 3px;
+}
+.closed-birthday-box {
+  margin-left: -31vw;
+}
+.arrow-birthday-box:hover {
+  margin-left: 100%;
+  width: 4vw;
+}
+.open-birthday-box {
+  margin-left: 94% !important;
+  width: 3vw !important;
+}
+.close-arrow {
+  rotate: 180deg;
+}
+#CustomersBirthDay {
+  position: absolute;
+  width: 31vw;
+  height: 20vh;
+  top: 3vh;
+  left: 0vw;
+  text-align: center;
+  z-index: -1;
+}
+.birthday-title {
+  font-size: x-large;
+  margin-top: -1vh;
+  margin-bottom: 1vh;
+}
+.box-customer-birthday {
+  overflow-y: auto;
+  height: 100%;
+  width: 90%;
+  border: solid 1px;
+  position: absolute;
+  left: 1vw;
+  border-radius: 20px;
+}
+.no-birthday-icon {
+  font-size: xxx-large;
+  margin-top: 4vh;
+  color: red;
+}
+.no-birthday-label {
+  padding-top: 1vh;
+  font-size: x-large;
+}
+.birthday-row {
+  text-align: left;
+  padding: 1vw;
+  font-size: large;
+}
+.align-birthday-customers {
+  border: solid 1px;
+  border-radius: 15px;
+  border-top: none;
+  border-right: none;
+}
+::-webkit-scrollbar {
+  display: none;
+}
+.align-birthday-message-icon {
+  position: absolute;
+  right: 2vw;
+  margin-top: 0.5vh;
+}
+.align-birthday-message-icon:hover {
+  cursor: pointer;
+}
+#sendMessageModal {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  margin: 0;
+  justify-content: center;
+}
+.textarea-message {
+  border: solid 1px;
+  border-radius: 15px;
+  margin-top: auto!important;
+  height: 20vh;
+  margin-bottom: 2vh;
+  font-size: x-large;
+  outline: none;
+}
+.annulla-button {
+  margin-right: 1.5vw;
+  color: white;
+  background: red;
+  border: none;
+  border-radius: 6px;
+  outline: none;
+}
+.invia-button {
+  color: white;
+  background: #1DB954;
+  border: none;
+  border-radius: 6px;
+  outline: none;
+}
+.container-message-button {
+  display: flex;
+  justify-content: center;
+  height: fit-content;
+}
 @keyframes shake {
   0% {
     transform: translateX(0);
@@ -336,7 +536,16 @@ input:checked[type="checkbox"]::before {
   }
 }
 
-@media screen and (min-width: 320px) and (max-width: 768px) {
+/* ----------------------------------------------------------------------------------------------------------- */
+                /*
+                  320px — 480px: Mobile devices
+                  481px — 768px: iPads, Tablets
+                  769px — 1024px: Small screens, laptops
+                  1025px — 1200px: Desktops, large screens
+                  1201px and more —  Extra large screens, TV
+                */
+/* ----------------------------------------------------------------------------------------------------------- */
+@media screen and (min-width: 320px) and (max-width: 480px) {
   #MainBody {
     height: 100dvh;
     width: 100dvw;

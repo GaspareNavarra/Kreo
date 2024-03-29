@@ -11,7 +11,7 @@
             <span>E-mail</span>
           </div>
           <div class="inputBox col-sm-9">
-            <input id="password" type="password" required="required" v-model="password">
+            <input id="password" type="password" required="required" v-model="password" @keydown="checkKey">
             <span>Password</span>
             <div class="password-eye" @click="setPasswordVisibility()">
               <i  class="fa-regular" :class="eyeIcon?'fa-eye' : 'fa-eye-slash'"></i>
@@ -21,6 +21,7 @@
             <!-- <div id="checkBox" class="col-sm-9 checkbox-container">
               <input id="rememberme" type="checkbox"><div class="remember-label">Ricordami</div>
             </div> -->
+            <!-- <div class="register col-sm-9"><a rel="stylesheet" href="javascript:void(0);" @click="linkTo('/AddUser')">Non sei registrato? Registrati</a></div> -->
             <button @click="doLogin" class="access-button no-padding col-sm-9">Accedi</button>
           </div>
         </div>
@@ -31,11 +32,11 @@
 <script>
 import axios from 'axios';
 export default {
-  inject: ['classSelector', 'Login', 'showLoader', 'hideLoader', 'displayBack'],
+  inject: ['classSelector', 'Login', 'showLoader', 'hideLoader', 'displayBack', 'linkTo', 'getCustomers'],
   data() {
     return {
-      email: '',
-      password: '',
+      email: 'kreo@gmail.com',
+      password: 'kreo12',
       eyeIcon: true
     }
   },
@@ -46,13 +47,17 @@ export default {
       request.password = this.password;
 
       this.showLoader();
-      axios.post('https://x8ki-letl-twmt.n7.xano.io/api:Fh-KZon-/login', request).then((data) => {
-        let response = data.data;
-        if(response.Authorized == true) {
+      axios.post(window.BASE_URL_API + '/login', request).then((data) => {
+        let response = data.data.user;
+        if(response.logged == true) {
           // let checked = document.getElementById('rememberme').checked;
-          window.localStorage.setItem('user-data', response.user);
+          window.localStorage.setItem('user-data', JSON.stringify(response));
           this.Login();
+        } else {
+          document.getElementById('email').classList.add('input-error');
+          document.getElementById('password').classList.add('input-error');
         }
+        this.getCustomers();
         this.hideLoader();
       }).catch((error) => {
         document.getElementById('email').classList.add('input-error');
@@ -61,48 +66,6 @@ export default {
         this.hideLoader();
       });
     },
-    // doLogin() {
-    //   let user;
-    //   let username;
-    //   let password;
-
-    //   if(this.userList.username != '' && this.userList.password != '') {
-    //     for(let key in this.userList.users) {
-    //       user = this.userList.users[key];
-    //       if(user.username == this.username && user.password == this.password) {
-    //         username = this.username;
-    //         password = this.password;
-    //         let checked = document.getElementById('rememberme').checked;
-            
-    //         if(checked && !this.isLocalStored()) {
-    //           this.setCredentials();
-    //           this.Login();
-    //         } else if(checked && this.isLocalStored()) {
-    //           this.resetCredential();
-    //           this.setCredentials();
-    //           this.Login();
-    //         } else {
-    //           this.Login();
-    //         }
-    //         break;
-    //       }
-    //     }
-
-    //     if(username != this.username) {
-    //       document.getElementById('username').classList.add('input-error');
-    //     }
-    //     if(password != this.password) {
-    //       document.getElementById('password').classList.add('input-error');
-    //     }
-    //   } else {
-    //     if(user.username != this.username) {
-    //       document.getElementById('username').classList.add('input-error');
-    //     }
-    //     if(user.password != this.password) {
-    //       document.getElementById('password').classList.add('input-error');
-    //     }
-    //   }
-    // },
     setPasswordVisibility() {
       this.eyeIcon = !this.eyeIcon;
       if(this.eyeIcon)
@@ -116,6 +79,11 @@ export default {
         input.type = 'password';
       }
     },
+    checkKey() {
+      if(event.key == 'Enter') {
+        this.doLogin();
+      }
+    }
   },
   watch: {
     email(newValue, oldValue) {
@@ -136,7 +104,6 @@ export default {
     this.checkIconState();
     this.classSelector();
     this.displayBack();
-    // this.getCredentialStored();
   },
 }
 </script>

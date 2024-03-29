@@ -12,6 +12,8 @@
       <img src="/Img/Logo.png" class="logo_size">
       <div v-show="userState" id="logoutButton" class="logout-button col-sm-1" @click="doLogout">Logout</div>
     </div>
+
+    <BirthDay v-show="userState" :customerList="customerList" :userState="userState"></BirthDay>
     
     <div id="scheda-tecnica" class="datasheet_size row" :class="{'login-size_pannel': loginPage, 'functionality-page': homePage, 'not-found': notFound}">
       <router-view></router-view>
@@ -19,7 +21,11 @@
   </div>
 </template>
 <script>
+import axios from 'axios';
+import BirthDay from '@/components/BirthDay.vue';
+
 export default {
+  components: { BirthDay },
   provide() {
     return {
       classSelector: this.classSelector,
@@ -27,7 +33,9 @@ export default {
       linkTo: this.linkTo,
       showLoader: this.showLoader,
       hideLoader: this.hideLoader,
-      displayBack: this.displayBack
+      displayBack: this.displayBack,
+      showMessageModal: this.showMessageModal,
+      getCustomers: this.getCustomers
     }
   },
   data() {
@@ -37,7 +45,8 @@ export default {
       homePage: false,
       notFound: false,
       loader: false,
-      back: false
+      back: false,
+      customerList: [],
     }
   },
   methods: {
@@ -60,6 +69,11 @@ export default {
         this.homePage = false;
         this.loginPage = false;
       }
+
+      if(!url.includes('/Login') && !url.includes('/HomePage'))
+        this.back = true;
+      else
+        this.back = false;
     },
     Login() {
       if(this.loginPage)
@@ -81,9 +95,22 @@ export default {
       }
     },
     doLogout() {
-      this.userState = false;
-      window.localStorage.setItem('isAuth', this.userState);
-      this.linkTo('/');
+      this.showLoader();
+      let request = { 'users_id': JSON.parse(window.localStorage.getItem('user-data')).id *1};
+
+      axios.post(window.BASE_URL_API + '/logout', request).then((data) => {
+        let response = data.data;
+        if(!response.logged) {
+          this.userState = false;
+          window.localStorage.setItem('isAuth', this.userState);
+          window.localStorage.setItem('user-data', '');
+          this.linkTo('/');
+        }
+        this.hideLoader();
+      }).catch((error) => {
+        this.hideLoader();
+        console.log(error);
+      });
     },
     showLoader() {
       this.loader = true;
@@ -100,8 +127,31 @@ export default {
         this.back = true;
     },
     goBack() {
-      this.linkTo('/HomePage');
-    }
+      let url = window.location.href;
+      
+      if(url.includes('/AddUser'))
+        this.linkTo('/Login');
+      else
+        this.linkTo('/HomePage');
+    },
+    showMessageModal() {
+      this.notFound = true;
+      this.homePage = false;
+      this.loginPage = false;
+      this.back = false;
+    },
+    getCustomers() {
+      this.showLoader();
+      axios.get(window.BASE_URL_API + '/customer').then((data) => {
+        let response = data.data;
+        this.customerList = response;
+        window.localStorage.setItem('customerList', JSON.stringify(this.customerList));
+        this.hideLoader();
+      }).catch((error) => {
+        this.hideLoader();
+        console.log(error);
+      });
+    },
   },
   mounted() {
     this.setUserState();
