@@ -35,8 +35,8 @@ export default {
   inject: ['classSelector', 'Login', 'showLoader', 'hideLoader', 'displayBack', 'linkTo', 'getCustomers'],
   data() {
     return {
-      email: 'kreo@gmail.com',
-      password: 'kreo12',
+      email: '',
+      password: '',
       eyeIcon: true
     }
   },
