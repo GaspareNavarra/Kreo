@@ -1,1 +1,0 @@
-window.BASE_URL_API = 'https://x8ki-letl-twmt.n7.xano.io/api:Fh-KZon-';
