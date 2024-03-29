@@ -7,7 +7,7 @@ import DataSheet from '@/components/DataSheet.vue';
 import NotFound from '@/components/NotFound.vue';
 
 const router = createRouter({
-  history: createWebHistory(import.meta.env.BASE_URL),
+  history: createWebHistory(process.env.NODE_ENV),
   routes: [
     {path: '/', redirect: '/Login'},
     {path: '/Login', component: Login},
