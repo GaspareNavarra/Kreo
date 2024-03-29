@@ -155,7 +155,7 @@ export default {
   },
   mounted() {
     this.setUserState();
-    console.log('import.meta.env.BASE_URL: ' + import.meta.env.BASE_URL);
+    console.log('process.env.NODE_ENV: ' + process.env.NODE_ENV);
   },
 }
 </script>
