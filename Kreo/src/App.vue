@@ -155,6 +155,7 @@ export default {
   },
   mounted() {
     this.setUserState();
+    console.log('import.meta.env.BASE_URL: ' + import.meta.env.BASE_URL);
   },
 }
 </script>
