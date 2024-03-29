@@ -86,6 +86,7 @@ body {
 .inputBox input {
   width: 100%;
   padding: 10px;
+  padding-right: 40px;
   border: 1px solid #c6c7d2;
   background: #fff;
   border-radius: 10px;
@@ -537,17 +538,93 @@ input:checked[type="checkbox"]::before {
 }
 
 /* ----------------------------------------------------------------------------------------------------------- */
-                /*
-                  320px — 480px: Mobile devices
-                  481px — 768px: iPads, Tablets
-                  769px — 1024px: Small screens, laptops
-                  1025px — 1200px: Desktops, large screens
-                  1201px and more —  Extra large screens, TV
-                */
+/*
+  320px — 480px: Mobile devices
+  481px — 768px: iPads, Tablets
+  769px — 1024px: Small screens, laptops
+  1025px — 1200px: Desktops, large screens
+  1201px and more —  Extra large screens, TV
+*/
+
+
+/* Extra small devices (phones, 600px and down) */
+/* @media only screen and (max-width: 600px) {...} */
+/* Small devices (portrait tablets and large phones, 600px and up) */
+/* @media only screen and (min-width: 600px) {...} */
+/* Medium devices (landscape tablets, 768px and up) */
+/* @media only screen and (min-width: 768px) {...} */
+/* Large devices (laptops/desktops, 992px and up) */
+/* @media only screen and (min-width: 992px) {...} */
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+/* @media only screen and (min-width: 1200px) {...} */
 /* ----------------------------------------------------------------------------------------------------------- */
-@media screen and (min-width: 320px) and (max-width: 480px) {
+/* @media screen and (min-width: 320px) and (max-width: 480px) {
   #MainBody {
     height: 100dvh;
     width: 100dvw;
   }
+} */
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+  #MainBody {
+    height: 100vh;
+    width: 100vw;
+  }
+  .login-size_pannel {
+    width: 80vw!important;
+    height: 45.5vh!important;
+    margin-top: 12vh !important;
+    margin-bottom: auto;
+  }
+  .logo_size {
+    margin-top: -3vh;
+    width: 60vw;
+    height: 15vh;
+  }
+  .ring {
+    width: 100px;
+    height: 100px;
+  }
+  .loader-text {
+    width: 100px;
+    height: 100px;
+    line-height: 12vh;
+    font-size: 1em;
+}
+}
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) and (max-width: 767px) {
+  .logo_size {
+    margin-top: -3vh;
+    width: 60vw;
+    height: 15vh;
+  }
+  .loader-text {
+    width: 165px;
+    height: 165px;
+    line-height: 19vh;
+    font-size: 1.5em;
+  }
+  .ring {
+    width: 165px;
+    height: 165px;
+  }
+  .login-size_pannel {
+    width: 80vw!important;
+    height: 45.5vh!important;
+    margin-top: 12vh !important;
+    margin-bottom: auto;
+  }
+}
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) and (max-width: 991) {
+
+}
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) and (max-width: 1199px) {
+
+}
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
+
 }
