@@ -578,7 +578,7 @@ input:checked[type="checkbox"]::before {
   }
   .logo_size {
     margin-top: -3vh;
-    width: 60vw;
+    width: 50vw;
     height: 15vh;
   }
   .ring {
@@ -596,7 +596,7 @@ input:checked[type="checkbox"]::before {
 @media only screen and (min-width: 600px) and (max-width: 767px) {
   .logo_size {
     margin-top: -3vh;
-    width: 60vw;
+    width: 50vw;
     height: 15vh;
   }
   .loader-text {
@@ -617,14 +617,43 @@ input:checked[type="checkbox"]::before {
   }
 }
 /* Medium devices (landscape tablets, 768px and up) */
-@media only screen and (min-width: 768px) and (max-width: 991) {
-
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+  .login-size_pannel {
+    width: 80vw!important;
+    height: 50.5vh!important;
+    margin-top: 12vh !important;
+  }
+  .logo_size {
+    margin-top: -3vh;
+    width: 50vw;
+    height: 15vh;
+  }
+  .container-input {
+    margin-top: 6%!important;
+  }
 }
 /* Large devices (laptops/desktops, 992px and up) */
 @media only screen and (min-width: 992px) and (max-width: 1199px) {
-
+  .login-size_pannel {
+    width: 80vw!important;
+    height: 50.5vh!important;
+    margin-top: 12vh !important;
+  }
+  .logo_size {
+    margin-top: -3vh;
+    width: 50vw;
+    height: 15vh;
+  }
+  .container-input {
+    margin-top: 6%!important;
+  }
 }
 /* Extra large devices (large laptops and desktops, 1200px and up) */
 @media only screen and (min-width: 1200px) {
 
+  .logo_size {
+    margin-top: -3vh;
+    width: 25vw;
+    height: 15vh;
+  }
 }
