@@ -98,7 +98,6 @@ export default {
       // axios.post('http://localhost:3000/send-mail', mail)
       .then((response) => {
         console.log(response);
-        debugger
       }).catch((error) => {
         console.log(error);
       });
