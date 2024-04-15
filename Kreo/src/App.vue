@@ -10,7 +10,9 @@
     <div id="navbar" class="custom-navbar">
       <i v-show="back" class="fa-regular fa-arrow-left back-arrow" @click="goBack()"></i>
       <img src="/Img/Logo.png" class="logo_size">
-      <div v-show="userState" id="logoutButton" class="logout-button col-sm-1" @click="doLogout">Logout</div>
+      <div v-show="userState" id="logoutButton" class="logout-button col-sm-1" @click="doLogout">
+        <i class="fa-solid fa-power-off logout-icon"></i>Logout
+      </div>
     </div>
 
     <BirthDay v-show="userState" :customerList="customerList" :userState="userState"></BirthDay>
@@ -155,7 +157,6 @@ export default {
   },
   mounted() {
     this.setUserState();
-    console.log('process.env.NODE_ENV: ' + process.env.NODE_ENV);
   },
 }
 </script>

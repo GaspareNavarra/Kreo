@@ -517,6 +517,11 @@ input:checked[type="checkbox"]::before {
   justify-content: center;
   height: fit-content;
 }
+.logout-icon {
+  padding-right: 0.3vw;
+  color: white;
+}
+/* ------------------------------------------------------------------------------------------------------------ */
 @keyframes shake {
   0% {
     transform: translateX(0);

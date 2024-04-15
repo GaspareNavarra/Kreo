@@ -14,12 +14,12 @@
         <span>Cognome</span>
       </div>
     </div>
-    <div class="row">
+    <!-- <div class="row">
       <div class="inputBox col-sm-3 no-padding">
         <input id="cellphone" type="text" required="required" v-model="cellphone" ref="cellphone">
         <span>Telefono</span>
       </div>
-    </div>
+    </div> -->
   </div>
 </template>
 <script>
