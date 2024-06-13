@@ -7,17 +7,21 @@
       </div>
     </div>
 
-    <div id="navbar" class="custom-navbar">
-      <i v-show="back" class="fa-regular fa-arrow-left back-arrow" @click="goBack()"></i>
-      <img src="/Img/Logo.png" class="logo_size">
-      <div v-show="userState" id="logoutButton" class="logout-button col-sm-1" @click="doLogout">
-        <i class="fa-solid fa-power-off logout-icon"></i>Logout
+    <div id="navbar" class="custom-navbar row">
+      <div class="col-sm-2">
+        <i v-show="back" class="fa-regular fa-arrow-left back-arrow" @click="goBack()"></i><!--  -->
+      </div>
+      <img src="/Img/LogoNew.png" class="logo_size h-100">
+      <div class="col-sm-2 container-logout">
+        <div v-show="userState" id="logoutButton" class="logout-button col-sm-8" @click="doLogout"><!--  -->
+          <i class="fa-solid fa-power-off logout-icon"></i>Logout
+        </div>
       </div>
     </div>
 
     <BirthDay v-show="userState" :customerList="customerList" :userState="userState"></BirthDay>
     
-    <div id="scheda-tecnica" class="datasheet_size row" :class="{'login-size_pannel': loginPage, 'functionality-page': homePage, 'not-found': notFound}">
+    <div id="scheda-tecnica" class="datasheet_size" :class="{'login-size_pannel': loginPage, 'col-sm-8 mt-5 h-75': homePage, 'not-found': notFound, 'select_customer_size': selectCustomerPage}">
       <router-view></router-view>
     </div>
   </div>
@@ -37,7 +41,8 @@ export default {
       hideLoader: this.hideLoader,
       displayBack: this.displayBack,
       showMessageModal: this.showMessageModal,
-      getCustomers: this.getCustomers
+      getCustomers: this.getCustomers,
+      capitalize: this.capitalize
     }
   },
   data() {
@@ -45,6 +50,7 @@ export default {
       userState: false,
       loginPage: true,
       homePage: false,
+      selectCustomerPage: false,
       notFound: false,
       loader: false,
       back: false,
@@ -55,18 +61,27 @@ export default {
     classSelector(notFound) {
       let url = window.location.href;
       if(notFound == 1) {
+        this.selectCustomerPage = false;
         this.notFound = true;
         this.homePage = false;
         this.loginPage = false;
       } else if(url.includes('/Login') || url.includes('/AddUser')) {
+        this.selectCustomerPage = false;
         this.notFound = false;
         this.homePage = false;
         this.loginPage = true;
       } else if(url.includes('/HomePage')){
+        this.selectCustomerPage = false;
         this.notFound = false;
         this.homePage = true
         this.loginPage = false;
+      } else if(url.includes('/SelectCustomer')){
+        this.selectCustomerPage = true;
+        this.notFound = false;
+        this.homePage = false;
+        this.loginPage = false;
       } else {
+        this.selectCustomerPage = false;
         this.notFound = false;
         this.homePage = false;
         this.loginPage = false;
@@ -154,6 +169,11 @@ export default {
         console.log(error);
       });
     },
+    capitalize(string) {
+      return string.replace(/\b\w/g, (char) => {
+        return char.toUpperCase();
+      });
+    }
   },
   mounted() {
     this.setUserState();

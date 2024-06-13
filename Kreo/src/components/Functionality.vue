@@ -1,5 +1,5 @@
 <template>
-  <div id="function">
+  <div id="function" class="col-sm-12">
     <div class="welcome-message col-sm-12">{{ getUserName() }}</div>
     <div class="container-funzioni">
       <div class="container-piastre">
