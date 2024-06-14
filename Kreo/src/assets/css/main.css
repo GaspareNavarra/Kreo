@@ -47,7 +47,7 @@ body {
 }
 .login-size_pannel {
   width: 37%!important;
-  height: 55.5vh!important;
+  height: fit-content;
   margin-top: 70px !important;
 }
 .inputBox span{
@@ -102,15 +102,16 @@ body {
   color: #000000;
 }
 .subtitle {
-  font-size: 2.5vw;
+  font-size: 1.5vw;
 }
 .title {
   font-weight: bold;
-  font-size: 4vw;
+  font-size: 3vw;
   /* font-size: 4em; */
 }
 .container-input {
-  margin-top: 8%;
+  margin-top: 5vh;
+  padding-bottom: 4vh;
 }
 .access-button {
   background-color: #000000;
