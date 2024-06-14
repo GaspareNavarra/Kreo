@@ -101,9 +101,13 @@ body {
   text-align: center;
   color: #000000;
 }
+.subtitle {
+  font-size: 2.5vw;
+}
 .title {
   font-weight: bold;
-  font-size: 4em;
+  font-size: 4vw;
+  /* font-size: 4em; */
 }
 .container-input {
   margin-top: 8%;
@@ -648,66 +652,15 @@ input:checked[type="checkbox"]::before {
     height: 100vh;
     width: 100vw;
   }
-  .login-size_pannel {
-    width: 80vw!important;
-    height: 45.5vh!important;
-    margin-top: 12vh !important;
-    margin-bottom: auto;
-  }
-  .ring {
-    width: 100px;
-    height: 100px;
-  }
-  .loader-text {
-    width: 100px;
-    height: 100px;
-    line-height: 12vh;
-    font-size: 1em;
-}
 }
 /* Small devices (portrait tablets and large phones, 600px and up) */
 @media only screen and (min-width: 600px) and (max-width: 767px) {
-  .loader-text {
-    width: 165px;
-    height: 165px;
-    line-height: 19vh;
-    font-size: 1.5em;
-  }
-  .ring {
-    width: 165px;
-    height: 165px;
-  }
-  .login-size_pannel {
-    width: 80vw!important;
-    height: 45.5vh!important;
-    margin-top: 12vh !important;
-    margin-bottom: auto;
-  }
 }
 /* Medium devices (landscape tablets, 768px and up) */
 @media only screen and (min-width: 768px) and (max-width: 991px) {
-  .login-size_pannel {
-    width: 80vw!important;
-    height: 50.5vh!important;
-    margin-top: 12vh !important;
-  }
-  .container-input {
-    margin-top: 6%!important;
-  }
 }
 /* Large devices (laptops/desktops, 992px and up) */
 @media only screen and (min-width: 992px) and (max-width: 1199px) {
-  .login-size_pannel {
-    width: 80vw!important;
-    height: 50.5vh!important;
-    margin-top: 12vh !important;
-  }
-  .container-input {
-    margin-top: 6%!important;
-  }
-  .functionality-page {
-    height: 495px;
-  }
 }
 /* Extra large devices (large laptops and desktops, 1200px and up) */
 @media only screen and (min-width: 1200px) {

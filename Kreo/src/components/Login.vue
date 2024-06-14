@@ -1,7 +1,7 @@
 <template>
     <div id="LoginPage">
       <div class="container-login-input">
-        <div class="header">
+        <div class="">
           <div class="title">KREO</div>
           <div class="subtitle">Hair and Makeup Artist</div>
         </div>
