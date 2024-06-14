@@ -46,7 +46,6 @@ body {
   transition: .4s;
 }
 .login-size_pannel {
-  width: 37%!important;
   height: fit-content;
   margin-top: 70px !important;
 }
