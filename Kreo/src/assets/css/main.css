@@ -103,12 +103,11 @@ body {
   color: #000000;
 }
 .subtitle {
-  font-size: 1.5vw;
+  font-size: 4.5vh;
 }
 .title {
   font-weight: bold;
-  font-size: 3vw;
-  /* font-size: 4em; */
+  font-size: 8vh;
 }
 .container-input {
   margin-top: 5vh;
