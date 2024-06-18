@@ -24,6 +24,7 @@ body {
   background-color: #383636;
   height: 100vh;
   width: 100vw;
+  overflow: hidden;
 }
 .custom-navbar {
   background-color: black;
@@ -195,14 +196,15 @@ input:checked[type="checkbox"]::before {
   color: white;
   line-height: 35px;
   border-radius: 5px;
+  overflow: hidden;
+  margin: auto;
 }
 .logout-button:hover {
   cursor: pointer;
   background-color: #920b0b;
 }
 .container-logout {
-  padding-top: 20px;
-  padding-bottom: 20px;
+  padding: 0 !important;
 }
 .piastra {
   border: solid 2px #524d4d;
@@ -323,11 +325,11 @@ input:checked[type="checkbox"]::before {
   color: #fff;
 }
 .back-arrow {
-  position: absolute;
+  /* position: absolute; */
   color: #fff;
   font-size: 35px;
-  top: 2.5%;
-  left: 2%;
+  /* top: 2.5%;
+  left: 2%; */
 }
 .welcome-message {
   font-size: xxx-large;

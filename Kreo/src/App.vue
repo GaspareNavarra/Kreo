@@ -8,13 +8,14 @@
     </div>
 
     <div id="navbar" class="custom-navbar row col-sm-12 col-12">
-      <div class="col-sm-2">
+      <div class="col-sm-2 col-2">
         <i v-show="back" class="fa-regular fa-arrow-left back-arrow" @click="goBack()"></i><!--  -->
       </div>
       <img src="/Img/LogoNew.png" class="logo_size">
-      <div class="col-sm-2 container-logout">
-        <div v-show="userState" id="logoutButton" class="logout-button col-sm-8" @click="doLogout"><!--  -->
-          <i class="fa-solid fa-power-off logout-icon"></i>Logout
+      <div class="col-sm-2  col-2 container-logout">
+        <div v-show="userState" id="logoutButton" class="logout-button col-8 col-sm-8" @click="doLogout"><!--  -->
+          <i class="fa-solid fa-power-off logout-icon"></i>
+          <span style="color: #fff;">Logout</span>
         </div>
       </div>
     </div>
