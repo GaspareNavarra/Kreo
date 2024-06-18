@@ -13,7 +13,7 @@
       </div>
       <img src="/Img/LogoNew.png" class="logo_size">
       <div class="col-sm-2  col-2 container-logout">
-        <div v-show="userState" id="logoutButton" class="logout-button col-8 col-sm-8" @click="doLogout"><!--  -->
+        <div v-show="userState" id="logoutButton" class="logout-button col-8 col-sm-8" @click="doLogout()"><!--  -->
           <i class="fa-solid fa-power-off logout-icon"></i>
           <span style="color: #fff;">Logout</span>
         </div>
@@ -22,7 +22,7 @@
 
     <BirthDay v-show="userState" :customerList="customerList" :userState="userState"></BirthDay>
     
-    <div id="scheda-tecnica" class="datasheet_size" :class="{'login-size_pannel col-9 col-sm-5': loginPage, 'col-sm-8 mt-5 h-75': homePage, 'not-found': notFound, 'select_customer_size': selectCustomerPage}">
+    <div id="scheda-tecnica" class="datasheet_size" :class="{'login-size_pannel col-9 col-sm-5': loginPage, 'col-11 col-sm-8 mt-5 h-50': homePage, 'not-found': notFound, 'select_customer_size': selectCustomerPage}">
       <router-view></router-view>
     </div>
   </div>
@@ -63,9 +63,9 @@ export default {
       let url = window.location.href;
       if(notFound == 1) {
         this.selectCustomerPage = false;
-        this.notFound = true;
         this.homePage = false;
         this.loginPage = false;
+        this.notFound = true;
       } else if(url.includes('/Login') || url.includes('/AddUser')) {
         this.selectCustomerPage = false;
         this.notFound = false;
@@ -74,13 +74,13 @@ export default {
       } else if(url.includes('/HomePage')){
         this.selectCustomerPage = false;
         this.notFound = false;
-        this.homePage = true
         this.loginPage = false;
+        this.homePage = true
       } else if(url.includes('/SelectCustomer')){
-        this.selectCustomerPage = true;
         this.notFound = false;
         this.homePage = false;
         this.loginPage = false;
+        this.selectCustomerPage = true;
       } else {
         this.selectCustomerPage = false;
         this.notFound = false;
@@ -94,9 +94,6 @@ export default {
         this.back = false;
     },
     Login() {
-      if(this.loginPage)
-        this.loginPage = false;
-
       this.userState = true;
       window.localStorage.setItem('isAuth', this.userState);
       this.linkTo('/HomePage');

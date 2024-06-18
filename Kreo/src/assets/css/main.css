@@ -45,8 +45,8 @@ body {
   margin-left: auto!important;
   margin-right: auto!important;
   margin-top: 10px!important;
-  width: 95%;
-  height: 89.5vh;
+  /* width: 95%;
+  height: 89.5vh; */
   transition: .4s;
 }
 .login-size_pannel {
@@ -219,7 +219,7 @@ input:checked[type="checkbox"]::before {
   display: flex;
   justify-content: center;
   /* margin-top: 20%; */
-  margin-top: auto;
+  /* margin-top: auto; */
   margin-bottom: auto;
 }
 .functionality-page {
@@ -230,17 +230,17 @@ input:checked[type="checkbox"]::before {
   height: 76.5vh; */
 }
 .container-funzioni {
-  margin-top: 10%;
+  margin-top: 4%;
 }
 .icona-piastra {
-  font-size: 10vh;
+  font-size: 450%;
   text-align: center;
-  padding: 8vh;
-  padding-bottom: 0;
+  /* padding: 8vh; */
+  /* padding-bottom: 0; */
   color: #404144;
 }
 .piastra-label {
-  margin-top: 10%;
+
 }
 .piastra:hover {
   background-color: #000000;
@@ -334,7 +334,7 @@ input:checked[type="checkbox"]::before {
 .welcome-message {
   font-size: xxx-large;
   text-align: center;
-  padding-top: 45px;
+  padding-top: 30px;
 }
 .register {
   margin-left: auto;
@@ -587,6 +587,13 @@ input:checked[type="checkbox"]::before {
   padding: 10px;
   padding-left: 5px;
   padding-right: 15px;
+}
+#function {
+  overflow: hidden;
+}
+.align-content-piastra {
+  margin: auto;
+  text-align: center;
 }
 /* ------------------------------------------------------------------------------------------------------------ */
 @keyframes shake {

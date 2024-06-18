@@ -22,7 +22,7 @@
               <input id="rememberme" type="checkbox"><div class="remember-label">Ricordami</div>
             </div> -->
             <!-- <div class="register col-sm-9"><a rel="stylesheet" href="javascript:void(0);" @click="linkTo('/AddUser')">Non sei registrato? Registrati</a></div> -->
-            <button @click="doLogin" class="access-button no-padding col-sm-9">Accedi</button>
+            <button @click="doLogin()" class="access-button no-padding col-sm-9">Accedi</button>
           </div>
         </div>
       </div>
