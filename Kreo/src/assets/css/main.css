@@ -226,7 +226,7 @@ input:checked[type="checkbox"]::before {
   height: 76.5vh; */
 }
 .container-funzioni {
-  margin-top: 4%;
+  margin-top: 6%;
 }
 .icona-piastra {
   font-size: 450%;
@@ -590,6 +590,7 @@ input:checked[type="checkbox"]::before {
 }
 .Homepage {
   padding-bottom: 15px;
+  min-height: 55%;
 }
 /* ------------------------------------------------------------------------------------------------------------ */
 @keyframes shake {
