@@ -7,11 +7,11 @@
       </div>
     </div>
 
-    <div id="navbar" class="custom-navbar row">
+    <div id="navbar" class="custom-navbar row col-sm-12 col-12">
       <div class="col-sm-2">
         <i v-show="back" class="fa-regular fa-arrow-left back-arrow" @click="goBack()"></i><!--  -->
       </div>
-      <img src="/Img/LogoNew.png" class="logo_size h-100">
+      <img src="/Img/LogoNew.png" class="logo_size">
       <div class="col-sm-2 container-logout">
         <div v-show="userState" id="logoutButton" class="logout-button col-sm-8" @click="doLogout"><!--  -->
           <i class="fa-solid fa-power-off logout-icon"></i>Logout
