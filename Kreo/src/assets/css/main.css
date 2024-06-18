@@ -216,11 +216,7 @@ input:checked[type="checkbox"]::before {
   flex-direction: column;
 }
 .container-piastre {
-  display: flex;
   justify-content: center;
-  /* margin-top: 20%; */
-  /* margin-top: auto; */
-  margin-bottom: auto;
 }
 .functionality-page {
   width: 70% !important;
@@ -238,9 +234,6 @@ input:checked[type="checkbox"]::before {
   /* padding: 8vh; */
   /* padding-bottom: 0; */
   color: #404144;
-}
-.piastra-label {
-
 }
 .piastra:hover {
   background-color: #000000;
@@ -594,6 +587,9 @@ input:checked[type="checkbox"]::before {
 .align-content-piastra {
   margin: auto;
   text-align: center;
+}
+.Homepage {
+  padding-bottom: 15px;
 }
 /* ------------------------------------------------------------------------------------------------------------ */
 @keyframes shake {
