@@ -214,6 +214,7 @@ input:checked[type="checkbox"]::before {
   display: flex;
   align-items: center;
   flex-direction: column;
+  min-width: min-content;
 }
 .container-piastre {
   justify-content: center;
@@ -674,5 +675,4 @@ input:checked[type="checkbox"]::before {
 }
 /* Extra large devices (large laptops and desktops, 1200px and up) */
 @media only screen and (min-width: 1200px) {
-
 }

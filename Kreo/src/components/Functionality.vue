@@ -3,22 +3,28 @@
     <div class="welcome-message col-sm-12">{{ getUserName() }}</div>
     <div class="container-funzioni">
       <div class="container-piastre row no-margin no-padding">
-        <div class="piastra col-5 col-sm-3" @click="selectFunction('Aggiungi Scheda')">
+        <div class="piastra col-5 col-sm-2" @click="selectFunction('Aggiungi Scheda')">
           <div class="align-content-piastra">
             <i class="fa-regular fa-file-circle-plus icona-piastra col-12 col-sm-12"></i>
             <span class="piastra-label">Aggiungi Scheda</span>
           </div>
         </div>
-        <div class="piastra col-5 col-sm-3" @click="selectFunction('Cerca Scheda/Ingressi')">
+        <div class="piastra col-5 col-sm-2" @click="selectFunction('Cerca Scheda/Ingressi')">
           <div class="align-content-piastra">
             <i class="fa-solid fa-magnifying-glass icona-piastra col-12 col-sm-12"></i>
             <span class="piastra-label">Cerca Scheda/Ingressi</span>
           </div>
         </div>
-        <div class="piastra col-5 col-sm-3" @click="selectFunction('Modifica Dati di Accesso')">
+        <div class="piastra col-5 col-sm-2" @click="selectFunction('Modifica Dati di Accesso')">
           <div class="align-content-piastra">
             <i class="fa-solid fa-gear icona-piastra col-12 col-sm-12"></i>
             <span class="piastra-label">Modifica Dati di Accesso</span>
+          </div>
+        </div>
+        <div class="piastra col-5 col-sm-2" @click="selectFunction('')">
+          <div class="align-content-piastra">
+            <i class="fa-solid fa-cake-candles icona-piastra col-12 col-sm-12"></i>
+            <span class="piastra-label">Invia Auguri di Compleanno</span>
           </div>
         </div>
       </div>
