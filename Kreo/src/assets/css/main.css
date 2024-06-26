@@ -214,7 +214,7 @@ input:checked[type="checkbox"]::before {
   display: flex;
   align-items: center;
   flex-direction: column;
-  min-width: min-content;
+  /* min-width: min-content; */
 }
 .container-piastre {
   justify-content: center;
@@ -230,7 +230,8 @@ input:checked[type="checkbox"]::before {
   margin-top: 6%;
 }
 .icona-piastra {
-  font-size: 450%;
+  /* font-size: 450%; */
+  font-size: 5.5vw;
   text-align: center;
   /* padding: 8vh; */
   /* padding-bottom: 0; */
@@ -244,6 +245,9 @@ input:checked[type="checkbox"]::before {
 .piastra:hover .icona-piastra,
 .piastra:hover .piastra-label {
   color: #fff;
+}
+.piastra-label {
+  overflow: hidden;
 }
 .not-found {
   margin-top: 155px!important;

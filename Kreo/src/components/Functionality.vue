@@ -4,40 +4,30 @@
     <div class="container-funzioni">
       <div class="container-piastre row no-margin no-padding">
         <div class="piastra col-5 col-sm-2" @click="selectFunction('Aggiungi Scheda')">
-          <div class="align-content-piastra">
+          <div class="align-content-piastra col-12 col-sm-12">
             <i class="fa-regular fa-file-circle-plus icona-piastra col-12 col-sm-12"></i>
-            <span class="piastra-label">Aggiungi Scheda</span>
+            <div class="piastra-label text-truncate">Aggiungi Scheda</div>
           </div>
         </div>
         <div class="piastra col-5 col-sm-2" @click="selectFunction('Cerca Scheda/Ingressi')">
-          <div class="align-content-piastra">
+          <div class="align-content-piastra col-12 col-sm-12">
             <i class="fa-solid fa-magnifying-glass icona-piastra col-12 col-sm-12"></i>
-            <span class="piastra-label">Cerca Scheda/Ingressi</span>
+            <div class="piastra-label text-truncate">Cerca Scheda/Ingressi</div>
           </div>
         </div>
         <div class="piastra col-5 col-sm-2" @click="selectFunction('Modifica Dati di Accesso')">
-          <div class="align-content-piastra">
+          <div class="align-content-piastra col-12 col-sm-12">
             <i class="fa-solid fa-gear icona-piastra col-12 col-sm-12"></i>
-            <span class="piastra-label">Modifica Dati di Accesso</span>
+            <div class="piastra-label text-truncate">Modifica Dati di Accesso</div>
           </div>
         </div>
         <div class="piastra col-5 col-sm-2" @click="selectFunction('')">
-          <div class="align-content-piastra">
+          <div class="align-content-piastra col-12 col-sm-12">
             <i class="fa-solid fa-cake-candles icona-piastra col-12 col-sm-12"></i>
-            <span class="piastra-label">Invia Auguri di Compleanno</span>
+            <div class="piastra-label text-truncate">Invia Auguri di Compleanno</div>
           </div>
         </div>
       </div>
-      <!-- <div class="container-piastre">
-                <div class="piastra col-sm-4" @click="selectFunction('Modifica Dati di Accesso')">
-                    <i class="fa-solid fa-gear icona-piastra"></i>
-                    <span class="piastra-label">Modifica Dati di Accesso</span>
-                </div>
-                <div class="piastra col-sm-4" @click="selectFunction('Aggiungi Utente')">
-                    <i class="fa-regular fa-user-plus icona-piastra"></i>
-                    <span class="piastra-label">Aggiungi Utente</span>
-                </div>
-            </div> -->
     </div>
   </div>
 </template>
