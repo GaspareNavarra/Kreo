@@ -22,7 +22,7 @@
 
     <BirthDay v-show="userState" :customerList="customerList" :userState="userState"></BirthDay>
     
-    <div id="scheda-tecnica" class="datasheet_size" :class="{'login-size_pannel col-9 col-sm-5': loginPage, 'Homepage col-11 col-sm-9 mt-4 mt-sm-4': homePage, 'not-found': notFound, 'select_customer_size': selectCustomerPage}">
+    <div id="scheda-tecnica" class="datasheet_size" :class="{'login-size_pannel col-9 col-sm-5': loginPage, 'Homepage col-11 col-sm-9 mt-4 mt-sm-5': homePage, 'not-found': notFound, 'select_customer_size': selectCustomerPage}">
       <router-view></router-view>
     </div>
   </div>
