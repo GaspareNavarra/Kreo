@@ -22,7 +22,7 @@
 
     <BirthDay v-show="userState" :customerList="customerList" :userState="userState"></BirthDay>
     
-    <div id="scheda-tecnica" class="datasheet_size" :class="{'login-size_pannel col-9 col-sm-5': loginPage, 'Homepage col-11 col-sm-9 mt-4 mt-sm-5': homePage, 'not-found': notFound, 'select_customer_size': selectCustomerPage}">
+    <div id="scheda-tecnica" class="datasheet_size" :class="{'login-size_pannel col-9 col-sm-5': loginPage, 'Homepage col-11 col-sm-9 mt-4 mt-sm-5': homePage, 'not-found': notFound, 'select_customer_size': selectCustomerPage, 'Customer col-11 col-sm-9 mt-4 mt-sm-5': customer}">
       <router-view></router-view>
     </div>
   </div>
@@ -55,37 +55,30 @@ export default {
       notFound: false,
       loader: false,
       back: false,
-      customerList: [],
+      customer: false,
+      customerList: []
     }
   },
   methods: {
     classSelector(notFound) {
       let url = window.location.href;
+
+      this.customer = false;
+      this.selectCustomerPage = false;
+      this.notFound = false;
+      this.homePage = false;
+      this.loginPage = false;
+
       if(notFound == 1) {
-        this.selectCustomerPage = false;
-        this.homePage = false;
-        this.loginPage = false;
         this.notFound = true;
-      } else if(url.includes('/Login') || url.includes('/AddUser')) {
-        this.selectCustomerPage = false;
-        this.notFound = false;
-        this.homePage = false;
+      } else if(url.includes('/Login')) {
         this.loginPage = true;
       } else if(url.includes('/HomePage')){
-        this.selectCustomerPage = false;
-        this.notFound = false;
-        this.loginPage = false;
         this.homePage = true
       } else if(url.includes('/SelectCustomer')){
-        this.notFound = false;
-        this.homePage = false;
-        this.loginPage = false;
         this.selectCustomerPage = true;
-      } else {
-        this.selectCustomerPage = false;
-        this.notFound = false;
-        this.homePage = false;
-        this.loginPage = false;
+      } else if(url.includes('/Customer')) {
+        this.customer = true;
       }
 
       if(!url.includes('/Login') && !url.includes('/HomePage'))

@@ -236,6 +236,7 @@ input:checked[type="checkbox"]::before {
   /* padding: 8vh; */
   /* padding-bottom: 0; */
   color: #404144;
+  margin-bottom: 8px;
 }
 .piastra:hover {
   background-color: #000000;
@@ -596,6 +597,14 @@ input:checked[type="checkbox"]::before {
 .Homepage {
   padding-bottom: 15px;
   min-height: 55%;
+}
+.Customer {
+  min-height: 70%;
+  max-height: 70%;
+}
+.table-container {
+  padding-left: 2%;
+  padding-right: 2%;
 }
 /* ------------------------------------------------------------------------------------------------------------ */
 @keyframes shake {

@@ -4,6 +4,7 @@ import Login from '@/components/Login.vue';
 import SelectCustomer from '@/components/SelectCustomer.vue';
 import DataSheet from '@/components/DataSheet.vue';
 // import AddUser from '@/components/AddUser.vue';
+import Customer from '@/components/Customer.vue';
 import NotFound from '@/components/NotFound.vue';
 
 const router = createRouter({
@@ -14,6 +15,7 @@ const router = createRouter({
     {path: '/HomePage', component: Functionality},
     {path: '/SelectCustomer', component: SelectCustomer},
     {path: '/DataSheet', component: DataSheet},
+    {path: '/Customer', component: Customer},
     // {path: '/AddUser', component: AddUser},
     {path: '/:pathMatch(.*)*', component: NotFound},
   ]

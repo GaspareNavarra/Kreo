@@ -9,10 +9,10 @@
             <div class="piastra-label text-truncate">Aggiungi Scheda</div>
           </div>
         </div>
-        <div class="piastra col-5 col-sm-2" @click="selectFunction('Cerca Scheda/Ingressi')">
+        <div class="piastra col-5 col-sm-2" @click="selectFunction('Gestisci Clienti')">
           <div class="align-content-piastra col-12 col-sm-12">
-            <i class="fa-solid fa-magnifying-glass icona-piastra col-12 col-sm-12"></i>
-            <div class="piastra-label text-truncate">Cerca Scheda/Ingressi</div>
+            <i class="fa-solid fa-user icona-piastra col-12 col-sm-12"></i>
+            <div class="piastra-label text-truncate">Gestisci Clienti</div>
           </div>
         </div>
         <div class="piastra col-5 col-sm-2" @click="selectFunction('Modifica Dati di Accesso')">
@@ -21,12 +21,12 @@
             <div class="piastra-label text-truncate">Modifica Dati di Accesso</div>
           </div>
         </div>
-        <div class="piastra col-5 col-sm-2" @click="selectFunction('')">
+        <!-- <div class="piastra col-5 col-sm-2" @click="selectFunction('Invia Auguri di Compleanno')">
           <div class="align-content-piastra col-12 col-sm-12">
             <i class="fa-solid fa-cake-candles icona-piastra col-12 col-sm-12"></i>
             <div class="piastra-label text-truncate">Invia Auguri di Compleanno</div>
           </div>
-        </div>
+        </div> -->
       </div>
     </div>
   </div>
@@ -41,15 +41,12 @@ export default {
         case 'Aggiungi Scheda':
           this.linkTo('/SelectCustomer');
           break;
-        case 'Cerca Scheda/Ingressi':
-          this.linkTo('/');
+        case 'Gestisci Clienti':
+          this.linkTo('/Customer');
           break;
         case 'Modifica Dati di Accesso':
           this.linkTo('/');
           break;
-        // case 'Aggiungi Utente':
-        //     this.linkTo('/AddUser');
-        //     break;
       }
     },
     getUserName() {
