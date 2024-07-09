@@ -607,12 +607,19 @@ input:checked[type="checkbox"]::before {
   padding-right: 2%;
 }
 .table-size {
-  max-height: 48vh;
-  min-height: 48vh;
+  /* margin: 5px; */
+  max-height: 46.5vh;
+  overflow-y: auto;
+  border-top: solid 2px;
+  border-top-color: #212529;
+}
+.arrow-down {
+  font-size: xx-large;
+  justify-content: center;
+  display: flex;
 }
 .customer-button {
   border-radius: 5px;
-  /* padding: 0 !important; */
   font-size: x-large;
 }
 .content-aligned {
@@ -623,6 +630,10 @@ input:checked[type="checkbox"]::before {
 }
 .labelBirthdayChecked {
   color: #fff;
+}
+.btn:focus {
+  outline: none!important;
+  box-shadow: none;
 }
 /* ------------------------------------------------------------------------------------------------------------ */
 @keyframes shake {
