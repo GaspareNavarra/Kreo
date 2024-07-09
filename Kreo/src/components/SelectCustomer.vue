@@ -164,7 +164,7 @@ export default {
         axios.get(window.BASE_URL_API_CUSTOM + '/search-customer').then((data) => {
           let response = data.data;
           let result = this.searCustomer(response, customer);
-debugger
+
           if(result) {
             this.customerSelection = false;
             this.hideLoader();
@@ -187,7 +187,6 @@ debugger
 
           // }
           console.log(response);
-          debugger
         }).catch((error) => {
           console.log(error);
         });

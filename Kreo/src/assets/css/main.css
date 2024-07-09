@@ -610,6 +610,20 @@ input:checked[type="checkbox"]::before {
   max-height: 48vh;
   min-height: 48vh;
 }
+.customer-button {
+  border-radius: 5px;
+  /* padding: 0 !important; */
+  font-size: x-large;
+}
+.content-aligned {
+  align-content: center;
+}
+.birthdayChecked {
+  background-color: black;
+}
+.labelBirthdayChecked {
+  color: #fff;
+}
 /* ------------------------------------------------------------------------------------------------------------ */
 @keyframes shake {
   0% {

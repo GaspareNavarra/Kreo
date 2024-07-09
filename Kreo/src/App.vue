@@ -152,7 +152,31 @@ export default {
       this.showLoader();
       axios.get(window.BASE_URL_API + '/customer').then((data) => {
         let response = data.data;
-        this.customerList = response;
+        this.customerList = response.sort((customer_one, customer_two) => {
+          customer_one.compleanno = false;
+          customer_two.compleanno = false;
+          let customer_birthday_one = customer_one.data_di_nascita.split('-');
+          let customer_birthday_two = customer_two.data_di_nascita.split('-');
+          let today = new Date();
+          let dd = String(today.getDate()).padStart(2, '0');
+          let mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+
+          if((customer_birthday_one[2] == dd && customer_birthday_one[1] == mm) && !(customer_birthday_two[2] == dd && customer_birthday_two[1] == mm)) {
+            customer_one.compleanno = true;
+            return -1;
+          } else if((customer_birthday_two[2] == dd && customer_birthday_two[1] == mm) && !(customer_birthday_one[2] == dd && customer_birthday_one[1] == mm)) {
+            customer_two.compleanno = true;
+            return 1;
+          } else if((customer_birthday_one[2] == dd && customer_birthday_one[1] == mm) && (customer_birthday_two[2] == dd && customer_birthday_two[1] == mm)) {
+            customer_one.compleanno = true;
+            customer_two.compleanno = true;
+            return 0;
+          } else {
+            customer_one.compleanno = false;
+            customer_two.compleanno = false;
+            return 0;
+          }
+        });
         window.localStorage.setItem('customerList', JSON.stringify(this.customerList));
         this.hideLoader();
       }).catch((error) => {
