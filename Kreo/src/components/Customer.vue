@@ -1,7 +1,7 @@
 <template>
   <div id="BirthdayList">
     <div class="welcome-message col-sm-12">Gestione Clienti</div>
-    <div class="table-container table-responsive">
+    <div class="table-container table-responsive table-size">
       <table class="table table-hover">
         <thead class="table-dark">
           <tr>
