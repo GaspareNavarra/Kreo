@@ -3,8 +3,8 @@ import Functionality from '@/components/Functionality.vue';
 import Login from '@/components/Login.vue';
 import SelectCustomer from '@/components/SelectCustomer.vue';
 import DataSheet from '@/components/DataSheet.vue';
-// import AddUser from '@/components/AddUser.vue';
 import Customer from '@/components/Customer.vue';
+import Birthday from '@/components/BirthDayNew.vue';
 import NotFound from '@/components/NotFound.vue';
 
 const router = createRouter({
@@ -16,7 +16,7 @@ const router = createRouter({
     {path: '/SelectCustomer', component: SelectCustomer},
     {path: '/DataSheet', component: DataSheet},
     {path: '/Customer', component: Customer},
-    // {path: '/AddUser', component: AddUser},
+    {path: '/BirthDay', component: Birthday},
     {path: '/:pathMatch(.*)*', component: NotFound},
   ]
 });

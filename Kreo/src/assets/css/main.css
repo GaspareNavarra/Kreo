@@ -618,22 +618,32 @@ input:checked[type="checkbox"]::before {
   justify-content: center;
   display: flex;
 }
-.customer-button {
-  border-radius: 5px;
-  font-size: x-large;
-}
 .content-aligned {
   align-content: center;
 }
-.birthdayChecked {
-  background-color: black;
-}
-.labelBirthdayChecked {
+.whiteLabels {
   color: #fff;
 }
 .btn:focus {
   outline: none!important;
   box-shadow: none;
+}
+.btn-warning {
+  background-color: #8a2be2!important;
+  border-color: #8a2be2!important;
+}
+.btn-outline-warning {
+  border-color: #212529!important;
+}
+.birthdayUnchecked:hover {
+  background-color: inherit!important;
+  color: inherit!important;
+  text-decoration: none!important;
+  box-shadow: none!important;
+}
+.mail-content {
+  border-radius: 20px;
+  resize: none;
 }
 /* ------------------------------------------------------------------------------------------------------------ */
 @keyframes shake {

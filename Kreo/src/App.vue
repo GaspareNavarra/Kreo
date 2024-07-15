@@ -22,7 +22,15 @@
 
     <!-- <BirthDay v-show="userState" :customerList="customerList" :userState="userState"></BirthDay> -->
     
-    <div id="scheda-tecnica" class="datasheet_size" :class="{'login-size_pannel col-9 col-sm-5': loginPage, 'Homepage col-11 col-sm-9 mt-4 mt-sm-5': homePage, 'not-found': notFound, 'select_customer_size': selectCustomerPage, 'Customer col-11 col-sm-9 mt-4 mt-sm-5': customer}">
+    <div id="scheda-tecnica" class="datasheet_size"
+    :class="{
+      'login-size_pannel col-9 col-sm-5': loginPage,
+      'Homepage col-11 col-sm-9 mt-4 mt-sm-5': homePage,
+      'not-found': notFound,
+      'select_customer_size': selectCustomerPage,
+      'Customer col-11 col-sm-9 mt-4 mt-sm-5': customer,
+      'col-sm-4 h-75 mt-4 mt-sm-5': birthday
+      }">
       <router-view></router-view>
     </div>
   </div>
@@ -56,6 +64,7 @@ export default {
       loader: false,
       back: false,
       customer: false,
+      birthday: false,
       customerList: []
     }
   },
@@ -68,6 +77,7 @@ export default {
       this.notFound = false;
       this.homePage = false;
       this.loginPage = false;
+      this.birthday = false;
 
       if(notFound == 1) {
         this.notFound = true;
@@ -79,6 +89,8 @@ export default {
         this.selectCustomerPage = true;
       } else if(url.includes('/Customer')) {
         this.customer = true;
+      } else if(url.includes('/BirthDay')) {
+        this.birthday = true;
       }
 
       if(!url.includes('/Login') && !url.includes('/HomePage'))
@@ -137,10 +149,10 @@ export default {
     goBack() {
       let url = window.location.href;
       
-      if(url.includes('/AddUser'))
-        this.linkTo('/Login');
-      else
-        this.linkTo('/HomePage');
+      if(url.includes('/BirthDay')) {
+        this.linkTo('/Customer');
+      } 
+      else this.linkTo('/HomePage');
     },
     showMessageModal() {
       this.notFound = true;
