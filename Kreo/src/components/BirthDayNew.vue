@@ -1,5 +1,5 @@
 <template>
-    <div id="MailContainer" class="no-margin MailContainer">
+    <div id="MailContainer" class="row no-margin MailContainer">
       <div class="welcome-message col-sm-12">{{ customer.name + ' ' + customer.surname }}</div>
       <div class="inputBox col-sm-8">
         <input id="receiver" class="disabled-input" type="text" required="required" v-model="destinatario" disabled>
