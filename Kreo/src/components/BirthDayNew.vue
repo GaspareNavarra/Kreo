@@ -11,7 +11,7 @@
         <span>Oggetto</span>
       </div>
       <div class="inputBox col-sm-8">
-        <textarea class="col-sm-12 mail-content" name="messaggio" id="messaggio" cols="48" rows="10" ></textarea>
+        <textarea class="col-sm-12 col-12 mail-content" name="messaggio" id="messaggio" cols="48" rows="10" ></textarea>
       </div>
     </div>
   </div>
