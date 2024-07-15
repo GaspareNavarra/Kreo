@@ -1,6 +1,5 @@
 <template>
-  <div id="MailForm">
-    <div id="MailContainer" class="row no-margin">
+    <div id="MailContainer" class="no-margin MailContainer">
       <div class="welcome-message col-sm-12">{{ customer.name + ' ' + customer.surname }}</div>
       <div class="inputBox col-sm-8">
         <input id="receiver" class="disabled-input" type="text" required="required" v-model="destinatario" disabled>
@@ -11,10 +10,12 @@
         <span>Oggetto</span>
       </div>
       <div class="inputBox col-sm-8">
-        <textarea class="col-sm-12 col-12 mail-content" name="messaggio" id="messaggio" cols="48" rows="10" ></textarea>
+        <textarea id="messaggio" class="col-sm-12 col-12 mail-content" name="messaggio" :style="{height: textAreaHeight + 'vh'}"></textarea>
+      </div>
+      <div id="button-container" class="row col-sm-12 col-12 no-margin align-button-mail">
+        <button class="btn btn-success col-sm-3 col-3">Invia</button>
       </div>
     </div>
-  </div>
 </template>
 <script>
 export default {
@@ -24,18 +25,34 @@ export default {
       customer: '',
       oggetto: '',
       destinatario: '',
-      messaggio: ''
+      messaggio: '',
+      textAreaHeight: 0
     }
   },
   methods: {
     getCustomerToText() {
       this.customer = JSON.parse(window.localStorage.getItem('customer'));
       this.destinatario = this.customer.email;
+    },
+    adjustTextareaHeight() {
+      const screen = window.innerHeight;
+      // 1032 sta a 34 come Screen sta a X
+      const height = (((34 * screen)/1032).toFixed(0)) *1 +1;
+      this.textAreaHeight = height;
     }
   },
   mounted() {
+    window.addEventListener('resize', () => {
+      this.adjustTextareaHeight();
+    });
+    this.adjustTextareaHeight();
     this.classSelector();
     this.getCustomerToText();
+  },
+  beforeDestroy() {
+    window.removeEventListener('resize', () => {
+      this.adjustTextareaHeight();
+    });
   }
 }
 </script>
@@ -60,6 +77,9 @@ export default {
 }
 .inputBox {
   margin-bottom: 3vh;
+}
+.welcome-message {
+  font-size: xx-large!important;
 }
 </style>
 <!-- .disabled-input {

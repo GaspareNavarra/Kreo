@@ -9,11 +9,11 @@
 
     <div id="navbar" class="custom-navbar row col-sm-12 col-12">
       <div class="col-sm-2 col-2">
-        <i v-show="back" class="fa-regular fa-arrow-left back-arrow" @click="goBack()"></i><!--  -->
+        <i v-show="back" class="fa-regular fa-arrow-left back-arrow" @click="goBack()"></i>
       </div>
       <img src="/Img/LogoNew.png" class="logo_size">
       <div class="col-sm-2  col-2 container-logout">
-        <div v-show="userState" id="logoutButton" class="logout-button col-8 col-sm-8" @click="doLogout()"><!--  -->
+        <div v-show="userState" id="logoutButton" class="logout-button col-8 col-sm-8" @click="doLogout()">
           <i class="fa-solid fa-power-off logout-icon"></i>
           <span style="color: #fff;">Logout</span>
         </div>
@@ -30,7 +30,7 @@
       'select_customer_size': selectCustomerPage,
       'Customer col-11 col-sm-9 mt-4 mt-sm-5': customer,
       'col-sm-4 col-10 h-75 mt-4 mt-sm-5': birthday
-      }">
+    }">
       <router-view></router-view>
     </div>
   </div>

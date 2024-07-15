@@ -68,15 +68,4 @@ export default {
 .welcome-message {
   margin-bottom: 6%;
 }
-.btn-success {
-  background-color: #212529;
-  border-color: #212529;
-
-  /* #198754 verde chiaro
-  #157347 verde scuro */
-}
-.btn-success:hover {
-  background-color: black;
-  border-color: black;
-}
 </style>
