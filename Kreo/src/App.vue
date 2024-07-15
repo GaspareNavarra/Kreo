@@ -29,7 +29,7 @@
       'not-found': notFound,
       'select_customer_size': selectCustomerPage,
       'Customer col-11 col-sm-9 mt-4 mt-sm-5': customer,
-      'col-sm-4 h-75 mt-4 mt-sm-5': birthday
+      'col-sm-4 col-10 h-75 mt-4 mt-sm-5': birthday
       }">
       <router-view></router-view>
     </div>
