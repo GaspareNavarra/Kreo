@@ -8,7 +8,7 @@
     </div>
 
     <div id="emailPopUp" v-show="popup_email" class="shadow-container row no-margin">
-      <div class="datasheet_size popup-message col-sm-5">
+      <div class="datasheet_size popup-message col-sm-5 col-11">
         <div id="description" class="popup-description">
           <div id="paper-plane-icon" class="paper-plane-icon col-sm-12">
             <i class="fa-solid fa-paper-plane"></i>
