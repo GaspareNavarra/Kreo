@@ -94,8 +94,7 @@ export default {
         // textMail = this.default_message;
       }
       mail.text = textMail;
-      axios.post('https://kreo-be.vercel.app/send-mail', mail)
-      // axios.post('http://localhost:3000/send-mail', mail)
+      axios.post(window.BASE_URL_API_CUSTOM + '/send-mail', mail)
       .then((response) => {
         console.log(response);
       }).catch((error) => {

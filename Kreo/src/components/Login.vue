@@ -46,7 +46,7 @@ export default {
       request.password = this.password;
 
       this.showLoader();
-      axios.post(window.BASE_URL_API + '/login', request).then((data) => {
+      axios.post(window.BASE_URL_API_XANO + '/login', request).then((data) => {
         let response = data.data.user;
         if(response.logged == true) {
           // let checked = document.getElementById('rememberme').checked;

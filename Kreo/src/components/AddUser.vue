@@ -84,7 +84,7 @@ export default {
         if(this.name !== '' && this.surname !== '' && this.email !== '' && this.password != '' && this.repeatPassword != '' && this.password === this.repeatPassword) {
           this.showLoader();
           let request = {'name': this.name, 'surname': this.surname, 'password': this.password, 'email': this.email, 'rememberMe': false, "logged": false};
-          axios.post(window.BASE_URL_API + '/users', request).then((data) => {
+          axios.post(window.BASE_URL_API_XANO + '/users', request).then((data) => {
             let response = data.data;
             if(response.created) {
               this.name = '';
