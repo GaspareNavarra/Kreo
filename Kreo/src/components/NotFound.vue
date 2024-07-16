@@ -8,6 +8,7 @@
 <script>
 export default {
     inject: ['classSelector', 'linkTo'],
+    props: ['empty_subject', 'empty_mail_text'],
     mounted() {
       this.classSelector(1);
     }

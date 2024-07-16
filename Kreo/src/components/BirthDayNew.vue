@@ -6,11 +6,11 @@
         <span id="destinatario">Destinatario</span>
       </div>
       <div class="inputBox col-sm-10">
-        <input id="object" type="text" required="required" v-model="oggetto">
+        <input id="object" type="text" required="required" v-model="oggetto" :class="{'input-error': error_subject}">
         <span>Oggetto</span>
       </div>
       <div class="inputBox col-sm-10">
-        <textarea id="messaggio" class="col-sm-12 col-12 mail-content" name="messaggio" :style="{height: textAreaHeight + 'vh'}" v-model="messaggio"></textarea>
+        <textarea id="messaggio" class="col-sm-12 col-12 mail-content" :class="{'input-error': error_mail_text}" name="messaggio" :style="{height: textAreaHeight + 'vh'}" v-model="messaggio"></textarea>
       </div>
       <div id="button-container" class="row col-sm-12 col-12 no-margin align-button-mail">
         <button class="btn btn-success col-sm-3 col-3" @click="openPopUp()">Invia</button>
@@ -18,16 +18,18 @@
     </div>
 </template>
 <script>
-import axios from 'axios';
 export default {
-  inject: ['classSelector', 'openPopUpEmail'],
+  inject: ['classSelector', 'openPopUpEmail','resetMailError'],
+  props: ['empty_subject', 'empty_mail_text'],
   data() {
     return {
       customer: '',
       oggetto: '',
       destinatario: '',
       messaggio: '',
-      textAreaHeight: 0
+      textAreaHeight: 0,
+      error_subject: false,
+      error_mail_text: false
     }
   },
   methods: {
@@ -53,6 +55,29 @@ export default {
       mail.text = this.messaggio;
       this.openPopUpEmail(mail);
     }
+  },
+  watch: {
+    empty_subject(newValue) {
+      if(newValue) this.error_subject = true;
+      else this.error_subject = false;
+    },
+    empty_mail_text(newValue) {
+      if(newValue) this.error_mail_text = true;
+      else this.error_mail_text = false;
+    },
+    oggetto(newValue, oldValue) {
+      if(oldValue == '' && newValue != '') {
+        this.error_subject = false;
+        this.resetMailError('error_subject');
+      }
+    },
+    messaggio(newValue, oldValue) {
+      if(oldValue == '' && newValue != '') {
+        this.error_mail_text = false;
+        this.resetMailError('error_mail_text');
+      }
+    },
+
   },
   mounted() {
     window.addEventListener('resize', () => {

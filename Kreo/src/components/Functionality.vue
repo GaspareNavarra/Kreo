@@ -35,6 +35,7 @@
 <script>
 export default {
   inject: ['classSelector', 'linkTo'],
+  props: ['empty_subject', 'empty_mail_text'],
   methods: {
     selectFunction(functionality) {
       switch (functionality) {

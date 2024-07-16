@@ -46,7 +46,7 @@
       'Customer col-11 col-sm-9 mt-4 mt-sm-5': customer,
       'Birthday col-sm-4 col-10 mt-4 mt-sm-4': birthday
     }">
-      <router-view></router-view>
+      <router-view :empty_subject="empty_subject" :empty_mail_text="empty_mail_text"></router-view>
     </div>
   </div>
 </template>
@@ -67,7 +67,8 @@ export default {
       showMessageModal: this.showMessageModal,
       getCustomers: this.getCustomers,
       capitalize: this.capitalize,
-      openPopUpEmail: this.openPopUpEmail
+      openPopUpEmail: this.openPopUpEmail,
+      resetMailError: this.resetMailError
     }
   },
   data() {
@@ -83,7 +84,9 @@ export default {
       birthday: false,
       customerList: [],
       popup_email: false,
-      email: {}
+      email: {},
+      empty_subject: false,
+      empty_mail_text: false,
     }
   },
   methods: {
@@ -229,17 +232,39 @@ export default {
     sendMail() {
       this.closePopUpEmail();
       this.showLoader();
-      axios.post(window.BASE_URL_API_CUSTOM + '/send-mail', this.email)
-      .then((response) => {
-        this.email = {};
-        this.goBack();
+      if(this.checkMailParameter()) {
+        axios.post(window.BASE_URL_API_CUSTOM + '/send-mail', this.email)
+        .then((response) => {
+          this.email = {};
+          this.goBack();
+          this.hideLoader();
+          console.log(response);
+        }).catch((error) => {
+          this.email = {};
+          this.hideLoader();
+          console.log(error);
+        });
+      } else {
         this.hideLoader();
-        console.log(response);
-      }).catch((error) => {
-        this.email = {};
-        this.hideLoader();
-        console.log(error);
-      });
+      }
+    },
+    checkMailParameter() {
+      let error = false;
+      if(this.email.subject == undefined || this.email.subject == '' || this.email.subject == null) {
+        this.empty_subject = true;
+        error = true;
+      }
+      if(this.email.text == undefined || this.email.text == '' || this.email.text == null) {
+        this.empty_mail_text = true;
+        error = true;
+      }
+
+      if(!error) return true;
+      else return false;
+    },
+    resetMailError(value) {
+      if(value == 'error_subject') this.empty_subject = false;
+      if(value == 'error_mail_text') this.empty_mail_text = false;
     }
   },
   mounted() {

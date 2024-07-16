@@ -49,199 +49,199 @@ import axios from 'axios';
 import Entrance from '@/components/Entrance.vue';
 export default {
   components: {Entrance},
-    inject: ['classSelector', 'showLoader', 'hideLoader', 'linkTo', 'capitalize'],
-    data() {
-      return {
-        filtredCustomerList: [],
-        filterLimit: 2,
-        searchname: '',
-        viewDropdown: false,
-        surname: '',
-        selectedCustomer: {},
-        cellphone: '',
-        email: '',
-        birthday: '',
-        gender: false,
-        customerSelection: true
+  inject: ['classSelector', 'showLoader', 'hideLoader', 'linkTo', 'capitalize'],
+  data() {
+    return {
+      filtredCustomerList: [],
+      filterLimit: 2,
+      searchname: '',
+      viewDropdown: false,
+      surname: '',
+      selectedCustomer: {},
+      cellphone: '',
+      email: '',
+      birthday: '',
+      gender: false,
+      customerSelection: true
+    }
+  },
+  methods: {
+    alreadyExist(idCustomer) {
+      for(let index in this.filtredCustomerList) {
+        if(this.filtredCustomerList[index].id == idCustomer) {
+          return true;
+        }
       }
+      return false;
     },
-    methods: {
-      alreadyExist(idCustomer) {
-        for(let index in this.filtredCustomerList) {
-          if(this.filtredCustomerList[index].id == idCustomer) {
-            return true;
-          }
-        }
-        return false;
-      },
-      removeCustomerFromFiltered(idCustomer) {
-        let list = [];
+    removeCustomerFromFiltered(idCustomer) {
+      let list = [];
 
-        for(let customer in this.filtredCustomerList) {
-          if(this.filtredCustomerList[customer].id != idCustomer) {
-            list.push(this.filtredCustomerList[customer]);
+      for(let customer in this.filtredCustomerList) {
+        if(this.filtredCustomerList[customer].id != idCustomer) {
+          list.push(this.filtredCustomerList[customer]);
+        }
+      }
+      this.filtredCustomerList = list;
+    },
+    setCustomerData(customer) {
+      this.searchname = customer.name;
+      this.surname = customer.surname;
+      this.cellphone = customer.numero_di_telefono;
+      this.email = customer.email;
+      this.gender = customer.gender == 'D'? false : true;
+      this.birthday = this.formatDateForText(customer.data_di_nascita);
+      this.filtredCustomerList = [];
+      this.viewDropdown = false;
+      this.selectedCustomer = customer;
+      console.log(customer);
+    },
+    searchName() {
+      let searchnameLower = this.searchname.toLowerCase();
+      if(searchnameLower.length >= this.filterLimit) {
+        this.viewDropdown = true;
+        for(let index in this.customerList) {
+          if(this.customerList[index].name.toLowerCase().includes(searchnameLower) && !this.alreadyExist(this.customerList[index].id)) {
+            this.filtredCustomerList.push(this.customerList[index]);
+          } else if(!this.customerList[index].name.toLowerCase().includes(searchnameLower) && this.alreadyExist(this.customerList[index].id)) {
+            this.removeCustomerFromFiltered(this.customerList[index].id);
+            this.filtredCustomerList[index];
           }
         }
-        this.filtredCustomerList = list;
-      },
-      setCustomerData(customer) {
-        this.searchname = customer.name;
-        this.surname = customer.surname;
-        this.cellphone = customer.numero_di_telefono;
-        this.email = customer.email;
-        this.gender = customer.gender == 'D'? false : true;
-        this.birthday = this.formatDateForText(customer.data_di_nascita);
+      } else {
         this.filtredCustomerList = [];
         this.viewDropdown = false;
-        this.selectedCustomer = customer;
-        console.log(customer);
-      },
-      searchName() {
-        let searchnameLower = this.searchname.toLowerCase();
-        if(searchnameLower.length >= this.filterLimit) {
-          this.viewDropdown = true;
-          for(let index in this.customerList) {
-            if(this.customerList[index].name.toLowerCase().includes(searchnameLower) && !this.alreadyExist(this.customerList[index].id)) {
-              this.filtredCustomerList.push(this.customerList[index]);
-            } else if(!this.customerList[index].name.toLowerCase().includes(searchnameLower) && this.alreadyExist(this.customerList[index].id)) {
-              this.removeCustomerFromFiltered(this.customerList[index].id);
-              this.filtredCustomerList[index];
-            }
-          }
-        } else {
-          this.filtredCustomerList = [];
-          this.viewDropdown = false;
-        }
-      },
-      formatDateForText(data) {
-        if(data == '') return '';
-        let array_data = data.split('-');
-        return array_data[2] + '/' + array_data[1] + '/' + array_data[0];
-      },
-      clearData() {
-        this.searchname = '';
-        this.surname = '';
-        this.cellphone = '';
-        this.email = '';
-        this.birthday = '';
-        this.gender = false;
+      }
+    },
+    formatDateForText(data) {
+      if(data == '') return '';
+      let array_data = data.split('-');
+      return array_data[2] + '/' + array_data[1] + '/' + array_data[0];
+    },
+    clearData() {
+      this.searchname = '';
+      this.surname = '';
+      this.cellphone = '';
+      this.email = '';
+      this.birthday = '';
+      this.gender = false;
 
-        this.$refs.searchname.classList.remove('input-error');
-        this.$refs.surname.classList.remove('input-error');
-        this.$refs.cellphone.classList.remove('input-error');
-        this.$refs.email.classList.remove('input-error');
-        this.$refs.birthday.classList.remove('input-error');
-      },
-      forward() {
-        let customer = {};
-        if(this.searchname != '' && this.surname != '' && this.cellphone != '' && this.email != '' && this.birthday != '') {
-          customer.name = this.capitalize(this.searchname);
-          customer.surname = this.capitalize(this.surname);
-          customer.cellphone = this.cellphone;
-          customer.email = this.email.toLowerCase();
-          customer.birthday = this.birthday;
-          this.selectCustomer(customer);
-        } else {
-          if(this.searchname == '') {
-            this.$refs.searchname.classList.add('input-error');
-          }
-          if(this.surname == '') {
-            this.$refs.surname.classList.add('input-error');
-          }
-          if(this.cellphone == '') {
-            this.$refs.cellphone.classList.add('input-error');
-          }
-          if(this.email == '') {
-            this.$refs.email.classList.add('input-error');
-          }
-          if(this.birthday == '') {
-            this.$refs.birthday.classList.add('input-error');
-          }
+      this.$refs.searchname.classList.remove('input-error');
+      this.$refs.surname.classList.remove('input-error');
+      this.$refs.cellphone.classList.remove('input-error');
+      this.$refs.email.classList.remove('input-error');
+      this.$refs.birthday.classList.remove('input-error');
+    },
+    forward() {
+      let customer = {};
+      if(this.searchname != '' && this.surname != '' && this.cellphone != '' && this.email != '' && this.birthday != '') {
+        customer.name = this.capitalize(this.searchname);
+        customer.surname = this.capitalize(this.surname);
+        customer.cellphone = this.cellphone;
+        customer.email = this.email.toLowerCase();
+        customer.birthday = this.birthday;
+        this.selectCustomer(customer);
+      } else {
+        if(this.searchname == '') {
+          this.$refs.searchname.classList.add('input-error');
         }
-      },
-      selectCustomer(customer) {
-        this.showLoader();
-        axios.get(window.BASE_URL_API_CUSTOM + '/search-customer').then((data) => {
-          let response = data.data;
-          let result = this.searCustomer(response, customer);
+        if(this.surname == '') {
+          this.$refs.surname.classList.add('input-error');
+        }
+        if(this.cellphone == '') {
+          this.$refs.cellphone.classList.add('input-error');
+        }
+        if(this.email == '') {
+          this.$refs.email.classList.add('input-error');
+        }
+        if(this.birthday == '') {
+          this.$refs.birthday.classList.add('input-error');
+        }
+      }
+    },
+    selectCustomer(customer) {
+      this.showLoader();
+      axios.get(window.BASE_URL_API_CUSTOM + '/search-customer').then((data) => {
+        let response = data.data;
+        let result = this.searCustomer(response, customer);
 
-          if(result) {
-            this.customerSelection = false;
-            this.hideLoader();
-          } else {
-            this.addCustomer(customer);
-          }
-          console.log(response);
-        }).catch((error) => {
+        if(result) {
+          this.customerSelection = false;
           this.hideLoader();
-          console.log(error);
-        });
-      },
-      changeCheckboxState() {
-        this.gender = !this.gender;
-      },
-      addCustomer(customer) {
-        axios.patch(window.BASE_URL_API_XANO + '/customer', customer).then((data) => {
-          let response = data.data;
-          // if() {
+        } else {
+          this.addCustomer(customer);
+        }
+        console.log(response);
+      }).catch((error) => {
+        this.hideLoader();
+        console.log(error);
+      });
+    },
+    changeCheckboxState() {
+      this.gender = !this.gender;
+    },
+    addCustomer(customer) {
+      axios.patch(window.BASE_URL_API_XANO + '/customer', customer).then((data) => {
+        let response = data.data;
+        // if() {
 
-          // }
-          console.log(response);
-        }).catch((error) => {
-          console.log(error);
-        });
-      },
-      searCustomer(customerList, customer) {
-        for(let singleCustomer in customerList) {
-          if(customerList[singleCustomer].name == customer.name && customerList[singleCustomer].surname == customer.surname && customerList[singleCustomer].numero_di_telefono == customer.cellphone && customerList[singleCustomer].email == customer.email && this.formatDateForText(customerList[singleCustomer].data_di_nascita) == customer.birthday) {
-            return true;
-          }
-        };
-        return false;
-      },
-      disableDropdown() {
-        this.viewDropdown = false;
-      },
-      checkChar() {
-        if(event.keyCode != 8 && event.keyCode != 37 && event.keyCode != 38 && event.keyCode != 40 && event.keyCode != 39) {
-          if(event.keyCode < 48 || (event.keyCode >= 65 && event.keyCode <= 95) || event.keyCode > 105) {
-            event.preventDefault();
-          }
+        // }
+        console.log(response);
+      }).catch((error) => {
+        console.log(error);
+      });
+    },
+    searCustomer(customerList, customer) {
+      for(let singleCustomer in customerList) {
+        if(customerList[singleCustomer].name == customer.name && customerList[singleCustomer].surname == customer.surname && customerList[singleCustomer].numero_di_telefono == customer.cellphone && customerList[singleCustomer].email == customer.email && this.formatDateForText(customerList[singleCustomer].data_di_nascita) == customer.birthday) {
+          return true;
+        }
+      };
+      return false;
+    },
+    disableDropdown() {
+      this.viewDropdown = false;
+    },
+    checkChar() {
+      if(event.keyCode != 8 && event.keyCode != 37 && event.keyCode != 38 && event.keyCode != 40 && event.keyCode != 39) {
+        if(event.keyCode < 48 || (event.keyCode >= 65 && event.keyCode <= 95) || event.keyCode > 105) {
+          event.preventDefault();
         }
       }
-    },
-    watch: {
-      searchname(newValue, oldValue) {
-        if(oldValue == '' && newValue != '')
-          this.$refs.searchname.classList.remove('input-error');
-      },
-      surname(newValue, oldValue) {
-        if(oldValue == '' && newValue != '')
-          this.$refs.surname.classList.remove('input-error');
-      },
-      cellphone(newValue, oldValue) {
-        if(oldValue == '' && newValue != '')
-          this.$refs.cellphone.classList.remove('input-error');
-      },
-      email(newValue, oldValue) {
-        if(oldValue == '' && newValue != '')
-          this.$refs.email.classList.remove('input-error');
-      },
-      birthday(newValue, oldValue) {
-        if(oldValue == '' && newValue != '')
-          this.$refs.birthday.classList.remove('input-error');
-        
-          if((newValue.length > oldValue.length && newValue.length == 2) || (newValue.length > oldValue.length && newValue.length == 5)) {
-            this.birthday += '/';
-          } else if((newValue.length < oldValue.length && newValue.length == 3) || (newValue.length < oldValue.length && newValue.length == 6)) {
-            this.birthday = this.birthday.slice(0, -1);
-          }
-      }
-    },
-    mounted() {
-      this.customerList = JSON.parse(window.localStorage.getItem('customerList'));
-      this.classSelector();
     }
+  },
+  watch: {
+    searchname(newValue, oldValue) {
+      if(oldValue == '' && newValue != '')
+        this.$refs.searchname.classList.remove('input-error');
+    },
+    surname(newValue, oldValue) {
+      if(oldValue == '' && newValue != '')
+        this.$refs.surname.classList.remove('input-error');
+    },
+    cellphone(newValue, oldValue) {
+      if(oldValue == '' && newValue != '')
+        this.$refs.cellphone.classList.remove('input-error');
+    },
+    email(newValue, oldValue) {
+      if(oldValue == '' && newValue != '')
+        this.$refs.email.classList.remove('input-error');
+    },
+    birthday(newValue, oldValue) {
+      if(oldValue == '' && newValue != '')
+        this.$refs.birthday.classList.remove('input-error');
+      
+        if((newValue.length > oldValue.length && newValue.length == 2) || (newValue.length > oldValue.length && newValue.length == 5)) {
+          this.birthday += '/';
+        } else if((newValue.length < oldValue.length && newValue.length == 3) || (newValue.length < oldValue.length && newValue.length == 6)) {
+          this.birthday = this.birthday.slice(0, -1);
+        }
+    }
+  },
+  mounted() {
+    this.customerList = JSON.parse(window.localStorage.getItem('customerList'));
+    this.classSelector();
+  }
 }
 </script>
 <style scoped>

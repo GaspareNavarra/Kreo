@@ -42,6 +42,7 @@
 <script>
 export default {
   inject: ['classSelector', 'getCustomers', 'linkTo'],
+  props: ['empty_subject', 'empty_mail_text'],
   data() {
     return {
       customerList: JSON.parse(window.localStorage.getItem('customerList'))
