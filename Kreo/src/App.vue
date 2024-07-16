@@ -16,8 +16,8 @@
           <span class="col-sm-12">Vuoi inviare la mail?</span>
         </div>
         <div id="buttonContainer" class="email-popup-button col-sm-12">
-          <button class="btn btn-success col-sm-3 col-3 back-popup-button" @click="closePopUpEmail()">Annulla</button>
-          <button class="btn btn-success col-sm-3 col-3" @click="sendMail()">Conferma</button>
+          <button class="btn btn-success col-sm-3 col-4 back-popup-button" @click="closePopUpEmail()">Annulla</button>
+          <button class="btn btn-success col-sm-3 col-4" @click="sendMail()">Conferma</button>
         </div>
       </div>
     </div>
