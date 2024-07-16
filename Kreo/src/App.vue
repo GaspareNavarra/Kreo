@@ -136,7 +136,8 @@ export default {
       this.showLoader();
       let request = { 'users_id': JSON.parse(window.localStorage.getItem('user-data')).id *1};
 
-      axios.post(window.BASE_URL_API_XANO + '/logout', request).then((data) => {
+      // axios.post(window.BASE_URL_API_XANO + '/logout', request).then((data) => {
+        axios.post(window.BASE_URL_API + '/logout', request).then((data) => {
         let response = data.data;
         if(!response.logged) {
           this.userState = false;
