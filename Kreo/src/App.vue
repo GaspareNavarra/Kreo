@@ -231,7 +231,7 @@ export default {
       this.closePopUpEmail();
       this.showLoader();
       // axios.post(window.BASE_URL_API_CUSTOM + '/send-mail', this.email)
-      axios.post('https://kreo-be.vercel.app/send-mail', this.email)
+      axios.post(window.BASE_URL_API_CUSTOM + '/send-mail', this.email)
       .then((response) => {
         this.email = {};
         this.goBack();
