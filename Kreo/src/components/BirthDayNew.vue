@@ -1,25 +1,26 @@
 <template>
-    <div id="MailContainer" class="row no-margin MailContainer">
-      <div class="welcome-message col-sm-12">{{ customer.name + ' ' + customer.surname }}</div>
-      <div class="inputBox col-sm-8">
+    <div id="MailContainer" class="row no-margin MailContainer" style="align-content: flex-end;">
+      <div class="welcome-message">{{ customer.name + ' ' + customer.surname }}</div>
+      <div class="inputBox col-sm-10">
         <input id="receiver" class="disabled-input" type="text" required="required" v-model="destinatario" disabled>
         <span id="destinatario">Destinatario</span>
       </div>
-      <div class="inputBox col-sm-8">
+      <div class="inputBox col-sm-10">
         <input id="object" type="text" required="required" v-model="oggetto">
         <span>Oggetto</span>
       </div>
-      <div class="inputBox col-sm-8">
-        <textarea id="messaggio" class="col-sm-12 col-12 mail-content" name="messaggio" :style="{height: textAreaHeight + 'vh'}"></textarea>
+      <div class="inputBox col-sm-10">
+        <textarea id="messaggio" class="col-sm-12 col-12 mail-content" name="messaggio" :style="{height: textAreaHeight + 'vh'}" v-model="messaggio"></textarea>
       </div>
       <div id="button-container" class="row col-sm-12 col-12 no-margin align-button-mail">
-        <button class="btn btn-success col-sm-3 col-3">Invia</button>
+        <button class="btn btn-success col-sm-3 col-3" @click="openPopUp()">Invia</button>
       </div>
     </div>
 </template>
 <script>
+import axios from 'axios';
 export default {
-  inject: ['classSelector'],
+  inject: ['classSelector', 'openPopUpEmail'],
   data() {
     return {
       customer: '',
@@ -39,6 +40,18 @@ export default {
       // 1032 sta a 34 come Screen sta a X
       const height = (((34 * screen)/1032).toFixed(0)) *1 +1;
       this.textAreaHeight = height;
+    },
+    openPopUp() {
+      // {
+      //   "email": "example@mail.com",
+      //   "subject": "Title of the mail",
+      //   "text": "Body of the mail"
+      // }
+      const mail = {};
+      mail.email = this.destinatario;
+      mail.subject = this.oggetto;
+      mail.text = this.messaggio;
+      this.openPopUpEmail(mail);
     }
   },
   mounted() {

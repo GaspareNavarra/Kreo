@@ -1,9 +1,24 @@
 <template>
   <div id="MainBody">
-    <div v-show="loader" class="container-loader">
+    <div v-show="loader" class="shadow-container">
       <div class="center-loader">
         <div class="loader-text">Loading...</div>
         <div class="ring"></div>
+      </div>
+    </div>
+
+    <div id="emailPopUp" v-show="popup_email" class="shadow-container row no-margin">
+      <div class="datasheet_size popup-message col-sm-5">
+        <div id="description" class="popup-description">
+          <div id="paper-plane-icon" class="paper-plane-icon col-sm-12">
+            <i class="fa-solid fa-paper-plane"></i>
+          </div>
+          <span class="col-sm-12">Vuoi inviare la mail?</span>
+        </div>
+        <div id="buttonContainer" class="email-popup-button col-sm-12">
+          <button class="btn btn-success col-sm-3 col-3 back-popup-button" @click="closePopUpEmail()">Annulla</button>
+          <button class="btn btn-success col-sm-3 col-3" @click="sendMail()">Conferma</button>
+        </div>
       </div>
     </div>
 
@@ -29,7 +44,7 @@
       'not-found': notFound,
       'select_customer_size': selectCustomerPage,
       'Customer col-11 col-sm-9 mt-4 mt-sm-5': customer,
-      'col-sm-4 col-10 h-75 mt-4 mt-sm-5': birthday
+      'Birthday col-sm-4 col-10 mt-4 mt-sm-4': birthday
     }">
       <router-view></router-view>
     </div>
@@ -51,7 +66,8 @@ export default {
       displayBack: this.displayBack,
       showMessageModal: this.showMessageModal,
       getCustomers: this.getCustomers,
-      capitalize: this.capitalize
+      capitalize: this.capitalize,
+      openPopUpEmail: this.openPopUpEmail
     }
   },
   data() {
@@ -65,7 +81,9 @@ export default {
       back: false,
       customer: false,
       birthday: false,
-      customerList: []
+      customerList: [],
+      popup_email: false,
+      email: {}
     }
   },
   methods: {
@@ -118,7 +136,7 @@ export default {
       this.showLoader();
       let request = { 'users_id': JSON.parse(window.localStorage.getItem('user-data')).id *1};
 
-      axios.post(window.BASE_URL_API + '/logout', request).then((data) => {
+      axios.post(window.BASE_URL_API_XANO + '/logout', request).then((data) => {
         let response = data.data;
         if(!response.logged) {
           this.userState = false;
@@ -162,7 +180,7 @@ export default {
     },
     getCustomers() {
       this.showLoader();
-      axios.get(window.BASE_URL_API + '/customer').then((data) => {
+      axios.get(window.BASE_URL_API_XANO + '/customer').then((data) => {
         let response = data.data;
         this.customerList = response.sort((customer_one, customer_two) => {
           customer_one.compleanno = false;
@@ -199,6 +217,29 @@ export default {
     capitalize(string) {
       return string.replace(/\b\w/g, (char) => {
         return char.toUpperCase();
+      });
+    },
+    openPopUpEmail(mail) {
+      this.email = mail;
+      this.popup_email = true;
+    },
+    closePopUpEmail() {
+      this.popup_email = false;
+    },
+    sendMail() {
+      this.closePopUpEmail();
+      this.showLoader();
+      // axios.post(window.BASE_URL_API_CUSTOM + '/send-mail', this.email)
+      axios.post('https://kreo-be.vercel.app/send-mail', this.email)
+      .then((response) => {
+        this.email = {};
+        this.goBack();
+        this.hideLoader();
+        console.log(response);
+      }).catch((error) => {
+        this.email = {};
+        this.hideLoader();
+        console.log(error);
       });
     }
   },

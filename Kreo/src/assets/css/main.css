@@ -286,7 +286,7 @@ input:checked[type="checkbox"]::before {
   display: flex;
   justify-content: center;
 }
-.container-loader {
+.shadow-container {
   width: 100%;
   height: 100%;
   position: absolute;
@@ -661,6 +661,31 @@ input:checked[type="checkbox"]::before {
 .align-button-mail {
   justify-content: flex-end;
   padding: 15px;
+}
+.popup-message {
+  height: 30vh;
+  margin-top: 30vh !important;
+}
+.Birthday {
+  height: 80%;
+}
+.back-popup-button {
+  background-color: red!important;
+  border-color: red!important;
+  margin-right: 8vw;
+}
+.popup-description {
+  font-size: 4vh;
+  text-align: center;
+  margin-top: 3vh;
+  margin-bottom: 6vh;
+}
+.email-popup-button {
+  display: flex;
+  justify-content: center;
+}
+.paper-plane-icon {
+  font-size: 5vh;
 }
 /* ------------------------------------------------------------------------------------------------------------ */
 @keyframes shake {
