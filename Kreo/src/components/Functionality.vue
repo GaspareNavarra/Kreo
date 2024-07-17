@@ -51,7 +51,7 @@ export default {
       }
     },
     getUserName() {
-      let name = JSON.parse(window.localStorage.getItem('user-data')).name;
+      let name = JSON.parse(window.localStorage.getItem('user-data')).user.name;
 
       return 'Benvenuta ' + name;
     },

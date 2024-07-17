@@ -7,8 +7,8 @@
         </div>
         <div class="container-input">
           <div class="inputBox col-sm-9">
-            <input id="email" type="text" required="required" v-model="email">
-            <span>E-mail</span>
+            <input id="name" type="text" required="required" v-model="name">
+            <span>Username</span>
           </div>
           <div class="inputBox col-sm-9">
             <input id="password" type="password" required="required" v-model="password" @keydown="checkKey">
@@ -40,26 +40,44 @@ export default {
     }
   },
   methods: {
-    doLogin() {
+    async doLogin() {
       let request = {};
-      request.email = this.email;
+      request.name = this.name;
       request.password = this.password;
 
       this.showLoader();
-      axios.post(window.BASE_URL_API_XANO + '/login', request).then((data) => {
-        let response = data.data.user;
-        if(response.logged == true) {
-          // let checked = document.getElementById('rememberme').checked;
-          window.localStorage.setItem('user-data', JSON.stringify(response));
-          this.Login();
+      await axios.post(window.BASE_URL_API_XANO + '/login', request).then((data) => {
+        let response = data.data;
+        if(response.user && response.authToken) {
+          this.confirmAuthorization(response);
         } else {
-          document.getElementById('email').classList.add('input-error');
+          document.getElementById('name').classList.add('input-error');
           document.getElementById('password').classList.add('input-error');
         }
         this.getCustomers();
         this.hideLoader();
       }).catch((error) => {
-        document.getElementById('email').classList.add('input-error');
+        document.getElementById('name').classList.add('input-error');
+        document.getElementById('password').classList.add('input-error');
+        console.log(error);
+        this.hideLoader();
+      });
+    },
+    async confirmAuthorization(user_data) {
+      const config = {
+        headers: { 'Authorization': `Bearer ${user_data.authToken}` }
+      };
+
+      await axios.get(window.BASE_URL_API_XANO + '/auth/me', config).then((data) => {
+        if(data) {
+          window.localStorage.setItem('user-data', JSON.stringify(user_data));
+          this.Login();
+        } else {
+          document.getElementById('name').classList.add('input-error');
+          document.getElementById('password').classList.add('input-error');
+        }
+      }).catch((error) => {
+        document.getElementById('name').classList.add('input-error');
         document.getElementById('password').classList.add('input-error');
         console.log(error);
         this.hideLoader();
@@ -85,15 +103,15 @@ export default {
     }
   },
   watch: {
-    email(newValue, oldValue) {
+    name(newValue, oldValue) {
       if(newValue != oldValue) {
-        document.getElementById('email').classList.remove('input-error');
+        document.getElementById('name').classList.remove('input-error');
         document.getElementById('password').classList.remove('input-error');
       }
     },
     password(newValue, oldValue) {
       if(newValue != oldValue) {
-        document.getElementById('email').classList.remove('input-error');
+        document.getElementById('name').classList.remove('input-error');
         document.getElementById('password').classList.remove('input-error');
       }
     },

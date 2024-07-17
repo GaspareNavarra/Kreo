@@ -127,31 +127,13 @@ export default {
     linkTo(page) {
       this.$router.push(page);
     },
-    setUserState() {
-      let logged = window.localStorage.getItem('isAuth');
-
-      if(logged === 'true') {
-        this.userState = false;
-        window.localStorage.setItem('isAuth', this.userState);
-      }
-    },
     doLogout() {
       this.showLoader();
-      let request = { 'users_id': JSON.parse(window.localStorage.getItem('user-data')).id *1};
-
-      axios.post(window.BASE_URL_API_XANO + '/logout', request).then((data) => {
-        let response = data.data;
-        if(!response.logged) {
-          this.userState = false;
-          window.localStorage.setItem('isAuth', this.userState);
-          window.localStorage.setItem('user-data', '');
-          this.linkTo('/');
-        }
-        this.hideLoader();
-      }).catch((error) => {
-        this.hideLoader();
-        console.log(error);
-      });
+      this.userState = false;
+      window.localStorage.setItem('isAuth', this.userState);
+      window.localStorage.removeItem('user-data');
+      this.linkTo('/');
+      this.hideLoader();
     },
     showLoader() {
       this.loader = true;
@@ -265,10 +247,25 @@ export default {
     resetMailError(value) {
       if(value == 'error_subject') this.empty_subject = false;
       if(value == 'error_mail_text') this.empty_mail_text = false;
+    },
+    checkUserState() {
+      let user = window.localStorage.getItem('user-data');
+      let url = window.location.href.split('/')[window.location.href.split('/').length - 1];
+
+      if(user != null && url != 'login' && url != '') {
+        this.userState = true;
+        window.localStorage.setItem('isAuth', this.userState);
+        this.linkTo('/' + url);
+      } else {
+        window.localStorage.removeItem('user-data');
+        this.userState = false;
+        window.localStorage.setItem('isAuth', this.userState);
+        this.linkTo('/');
+      }
     }
   },
   mounted() {
-    this.setUserState();
+    this.checkUserState();
   },
 }
 </script>

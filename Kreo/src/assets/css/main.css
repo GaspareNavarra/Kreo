@@ -535,9 +535,6 @@ input:checked[type="checkbox"]::before {
   padding-right: 0.3vw;
   color: white;
 }
-.inputBox #email {
-  text-transform: lowercase!important;
-}
 .second-row {
   margin-top: 5%!important;
 }
