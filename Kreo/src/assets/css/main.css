@@ -66,14 +66,17 @@ body {
   transition: 0.5s;
 }
 .inputBox input:valid ~ span,
-.inputBox input:focus ~ span {
-  color: #000000;
-  transform: translateX(10px) translateY(-7px);
-  font-size: 0.7em;
-  padding: 0 10px;
-  background: #fff;
-  border: solid 1px #c6c7d2;
-  border-radius: 5px;
+.inputBox input:focus ~ span,
+.inputBox ~ span:not(.textarea-management),
+.inputBox textarea:focus ~ span,
+.textarea-management {
+  color: #000000!important;
+  transform: translateX(10px) translateY(-7px)!important;
+  font-size: 0.7em!important;
+  padding: 0 10px!important;
+  background: #fff!important;
+  border: solid 1px #c6c7d2!important;
+  border-radius: 5px!important;
 }
 .inputBox input:focus ~ span {
   border-color: #000000;
@@ -385,11 +388,6 @@ input:checked[type="checkbox"]::before {
 .dati-scheda-tecnica {
   padding: 2%;
 }
-.label-datasheet {
-  justify-content: center;
-  font-size: xxx-large;
-  margin-bottom: 6%;
-}
 .custom-dropdown-container::-webkit-scrollbar {
   /* Hide scrollbar */
   display: none;
@@ -537,11 +535,6 @@ input:checked[type="checkbox"]::before {
 }
 .second-row {
   margin-top: 5%!important;
-}
-.select_customer_size {
-  margin-top: 72px !important;
-  width: 84%!important;
-  height: 65.5vh!important;
 }
 .birthday-customer {
   padding-right: 1vw!important;

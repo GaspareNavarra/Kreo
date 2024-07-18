@@ -42,7 +42,7 @@
       'login-size_pannel col-9 col-sm-5': loginPage,
       'Homepage col-11 col-sm-9 mt-4 mt-sm-5': homePage,
       'not-found': notFound,
-      'select_customer_size': selectCustomerPage,
+      'col-sm-10 col-10 h-75 mt-5': selectCustomerPage,
       'Customer col-11 col-sm-9 mt-4 mt-sm-5': customer,
       'Birthday col-sm-4 col-10 mt-4 mt-sm-4': birthday
     }">
@@ -165,7 +165,11 @@ export default {
     },
     getCustomers() {
       this.showLoader();
-      axios.get(window.BASE_URL_API_XANO + '/customer').then((data) => {
+      let user_data = JSON.parse(window.localStorage.getItem('user-data'));
+      const config = {
+        headers: { 'Authorization': `Bearer ${user_data.authToken}` }
+      };
+      axios.get(window.BASE_URL_API_XANO + '/customer', config).then((data) => {
         let response = data.data;
         this.customerList = response.sort((customer_one, customer_two) => {
           customer_one.compleanno = false;
@@ -215,7 +219,11 @@ export default {
       this.closePopUpEmail();
       this.showLoader();
       if(this.checkMailParameter()) {
-        axios.post(window.BASE_URL_API_CUSTOM + '/send-mail', this.email)
+        let user_data = JSON.parse(window.localStorage.getItem('user-data'));
+        const config = {
+          headers: { 'Authorization': `Bearer ${user_data.authToken}` }
+        };
+        axios.post(window.BASE_URL_API_CUSTOM + '/send-mail', this.email, config)
         .then((response) => {
           this.email = {};
           this.goBack();

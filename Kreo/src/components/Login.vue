@@ -54,8 +54,6 @@ export default {
           document.getElementById('name').classList.add('input-error');
           document.getElementById('password').classList.add('input-error');
         }
-        this.getCustomers();
-        this.hideLoader();
       }).catch((error) => {
         document.getElementById('name').classList.add('input-error');
         document.getElementById('password').classList.add('input-error');
@@ -72,6 +70,8 @@ export default {
         if(data) {
           window.localStorage.setItem('user-data', JSON.stringify(user_data));
           this.Login();
+          this.getCustomers();
+          this.hideLoader();
         } else {
           document.getElementById('name').classList.add('input-error');
           document.getElementById('password').classList.add('input-error');

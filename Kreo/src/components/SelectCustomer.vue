@@ -1,30 +1,30 @@
 <template>
   <div id="dati-scheda-tecnica" class="dati-scheda-tecnica" @click="disableDropdown()">
     <div v-show="customerSelection">
-      <div class="row label-datasheet">Dati del Cliente</div>
+      <div class="welcome-message mb-5">Dati del Cliente</div>
       <div class="row inputLine">
-        <div class="inputBox col-sm-3 no-padding">
+        <div class="inputBox col-10 col-sm-3 no-padding">
           <input id="searchname" type="text" required="required" v-model="searchname" ref="searchname" @keyup="searchName">
           <span>Nome</span>
           <div v-show="filtredCustomerList.length == 0 ? false : viewDropdown" class="col-sm-12 custom-dropdown-container">
             <div v-for="(customer, index) in filtredCustomerList" :key="index" class="custom-dropdown" @click="setCustomerData(customer)">{{ customer.name + ' ' + customer.surname }}</div>
           </div>
         </div>
-        <div class="inputBox col-sm-3 no-padding">
+        <div class="inputBox col-10 col-sm-3 no-padding">
           <input id="sheet-surname" type="text" required="required" v-model="surname" ref="surname">
           <span>Cognome</span>
         </div>
-        <div class="inputBox col-sm-3 no-padding">
+        <div class="inputBox col-10 col-sm-3 no-padding">
           <input id="cellphone" type="text" required="required" v-model="cellphone" ref="cellphone" @keydown="checkChar()" maxlength="10">
           <span>Telefono</span>
         </div>
       </div>
       <div class="row second-row inputLine">
-        <div class="inputBox col-sm-3 no-padding">
+        <div class="inputBox col-10 col-sm-3 no-padding">
           <input id="email" type="text" required="required" v-model="email" ref="email">
           <span>E-mail</span>
         </div>
-        <div class="inputBox col-sm-3 no-padding">
+        <div class="inputBox col-10 col-sm-3 no-padding">
           <input id="birthday" class="birthday-customer" type="text" required="required" v-model="birthday" ref="birthday" @keydown="checkChar()" maxlength="10">
           <span>Data di nascita</span>
         </div>
@@ -161,7 +161,12 @@ export default {
     },
     selectCustomer(customer) {
       this.showLoader();
-      axios.get(window.BASE_URL_API_CUSTOM + '/search-customer').then((data) => {
+      let user_data = JSON.parse(window.localStorage.getItem('user-data'));
+      const config = {
+        headers: { 'Authorization': `Bearer ${user_data.authToken}` }
+      };
+
+      axios.get(window.BASE_URL_API_CUSTOM + '/search-customer', config).then((data) => {
         let response = data.data;
         let result = this.searCustomer(response, customer);
 

@@ -4,7 +4,7 @@ import Login from '@/components/Login.vue';
 import SelectCustomer from '@/components/SelectCustomer.vue';
 import DataSheet from '@/components/DataSheet.vue';
 import Customer from '@/components/Customer.vue';
-import Birthday from '@/components/BirthDayNew.vue';
+import Birthday from '@/components/BirthDay.vue';
 import NotFound from '@/components/NotFound.vue';
 
 const router = createRouter({
