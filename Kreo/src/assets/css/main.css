@@ -139,10 +139,12 @@ body {
   padding: 0!important;
 }
 .checkbox-container {
-  margin-top: 20px!important;
+  margin-top: 20px !important;
   margin-left: auto;
   margin-right: auto;
-  padding: 0!important;
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+  padding-left: 8vw !important;
   height: fit-content;
   display: flex;
 }
@@ -375,6 +377,8 @@ input:checked[type="checkbox"]::before {
   position: absolute;
   max-height: 230%;
   overflow-y: auto;
+  z-index: 1;
+  background: #fff;
   -ms-overflow-style: none;  /* IE and Edge */
   scrollbar-width: none;  /* Firefox */
 }
@@ -534,7 +538,7 @@ input:checked[type="checkbox"]::before {
   color: white;
 }
 .second-row {
-  margin-top: 5%!important;
+  margin-top: 1%!important;
 }
 .birthday-customer {
   padding-right: 1vw!important;
@@ -545,11 +549,10 @@ input:checked[type="checkbox"]::before {
   align-items: center;
   justify-content: center;
   border-radius: 12px;
-  position: absolute;
-  top: 75vh;
 }
 .clear-data {
   width: 50px;
+  margin-right: 10px;
   background-color: red;
   animation: clearInput 0.4s forwards;
 }
@@ -567,7 +570,7 @@ input:checked[type="checkbox"]::before {
 }
 .forward {
   color: #fff;
-  padding-left: 15px;
+  padding-left: 27px!important;
   background: #2bb163!important;
   animation: forwardButton 0.4s forwards;
 }
@@ -676,6 +679,22 @@ input:checked[type="checkbox"]::before {
 }
 .paper-plane-icon {
   font-size: 5vh;
+}
+.first-line .inputBox,
+.second-row .inputBox {
+  margin-bottom: 3vh;
+}
+.select-customer-container-button {
+  justify-content: end;
+}
+.selectCustomerPage {
+  margin-top: 12vh !important;
+}
+.container-info-entrance {
+  justify-content: center;
+}
+.inputBox #email {
+  text-transform: lowercase;
 }
 /* ------------------------------------------------------------------------------------------------------------ */
 @keyframes shake {

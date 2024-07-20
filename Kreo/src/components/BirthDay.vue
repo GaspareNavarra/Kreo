@@ -101,6 +101,7 @@ export default {
 <style scoped>
 .welcome-message {
   margin-bottom: 6%;
+  font-size: xx-large!important;
 }
 .inputBox span {
   left: 15px!important;
@@ -119,9 +120,6 @@ export default {
 }
 .inputBox {
   margin-bottom: 3vh;
-}
-.welcome-message {
-  font-size: xx-large!important;
 }
 </style>
 <!-- .disabled-input {

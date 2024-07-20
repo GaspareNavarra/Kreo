@@ -42,11 +42,11 @@
       'login-size_pannel col-9 col-sm-5': loginPage,
       'Homepage col-11 col-sm-9 mt-4 mt-sm-5': homePage,
       'not-found': notFound,
-      'col-sm-10 col-10 h-75 mt-5': selectCustomerPage,
+      'selectCustomerPage col-sm-10 col-10': selectCustomerPage,
       'Customer col-11 col-sm-9 mt-4 mt-sm-5': customer,
       'Birthday col-sm-4 col-10 mt-4 mt-sm-4': birthday
     }">
-      <router-view :empty_subject="empty_subject" :empty_mail_text="empty_mail_text"></router-view>
+      <router-view :empty_subject="empty_subject" :empty_mail_text="empty_mail_text" :back_select_customer_check="back_select_customer_check"></router-view>
     </div>
   </div>
 </template>
@@ -68,7 +68,8 @@ export default {
       getCustomers: this.getCustomers,
       capitalize: this.capitalize,
       openPopUpEmail: this.openPopUpEmail,
-      resetMailError: this.resetMailError
+      resetMailError: this.resetMailError,
+      setBackSelectCustomerCheck: this.setBackSelectCustomerCheck
     }
   },
   data() {
@@ -87,6 +88,7 @@ export default {
       email: {},
       empty_subject: false,
       empty_mail_text: false,
+      back_select_customer_check: false
     }
   },
   methods: {
@@ -154,8 +156,11 @@ export default {
       
       if(url.includes('/BirthDay')) {
         this.linkTo('/Customer');
-      } 
-      else this.linkTo('/HomePage');
+      } else if(url.includes('/SelectCustomer')) {
+        this.back_select_customer_check = true;
+      } else {
+        this.linkTo('/HomePage');
+      }
     },
     showMessageModal() {
       this.notFound = true;
@@ -270,6 +275,9 @@ export default {
         window.localStorage.setItem('isAuth', this.userState);
         this.linkTo('/');
       }
+    },
+    setBackSelectCustomerCheck(value) {
+      this.back_select_customer_check = value;
     }
   },
   mounted() {

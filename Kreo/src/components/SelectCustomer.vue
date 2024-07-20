@@ -1,12 +1,12 @@
 <template>
   <div id="dati-scheda-tecnica" class="dati-scheda-tecnica" @click="disableDropdown()">
     <div v-show="customerSelection">
-      <div class="welcome-message mb-5">Dati del Cliente</div>
-      <div class="row inputLine">
+      <div class="welcome-message mb-4">Dati del Cliente</div>
+      <div class="row first-line inputLine">
         <div class="inputBox col-10 col-sm-3 no-padding">
           <input id="searchname" type="text" required="required" v-model="searchname" ref="searchname" @keyup="searchName">
           <span>Nome</span>
-          <div v-show="filtredCustomerList.length == 0 ? false : viewDropdown" class="col-sm-12 custom-dropdown-container">
+          <div v-show="filtredCustomerList.length == 0 ? false : viewDropdown" class="col-sm-12 col-12 custom-dropdown-container">
             <div v-for="(customer, index) in filtredCustomerList" :key="index" class="custom-dropdown" @click="setCustomerData(customer)">{{ customer.name + ' ' + customer.surname }}</div>
           </div>
         </div>
@@ -34,22 +34,23 @@
           <div class="remember-label">Uomo</div>
         </div>
       </div>
-      <div id="functionalities-container">
-        <div id="clear-data" class="clear-data" @click="clearData()"><i class="fa-solid fa-trash clear-data-icon"></i></div>
-        <div id="forward" class="forward" @click="forward()">Avanti<i class="fa-solid fa-circle-chevron-right forward-button"></i></div>
+      <div id="functionalities-container" class="row select-customer-container-button">
+        <div id="clear-data" class="clear-data col-2 col-sm-1" @click="clearData()"><i class="fa-solid fa-trash clear-data-icon"></i></div>
+        <div id="forward" class="forward col-3 col-sm-1" @click="forward()">Avanti<i class="fa-solid fa-circle-chevron-right forward-button"></i></div>
       </div>
     </div>
     <div v-show="!customerSelection">
-      <Entrance></Entrance>
+      <TechnicalSheet></TechnicalSheet>
     </div>
   </div>
 </template>
 <script>
 import axios from 'axios';
-import Entrance from '@/components/Entrance.vue';
+import TechnicalSheet from '@/components/TechnicalSheet.vue';
 export default {
-  components: {Entrance},
-  inject: ['classSelector', 'showLoader', 'hideLoader', 'linkTo', 'capitalize'],
+  components: {TechnicalSheet},
+  inject: ['classSelector', 'showLoader', 'hideLoader', 'linkTo', 'capitalize', 'setBackSelectCustomerCheck'],
+  props:['back_select_customer_check'],
   data() {
     return {
       filtredCustomerList: [],
@@ -213,7 +214,7 @@ export default {
           event.preventDefault();
         }
       }
-    }
+    },
   },
   watch: {
     searchname(newValue, oldValue) {
@@ -233,14 +234,22 @@ export default {
         this.$refs.email.classList.remove('input-error');
     },
     birthday(newValue, oldValue) {
-      if(oldValue == '' && newValue != '')
-        this.$refs.birthday.classList.remove('input-error');
+      if(oldValue == '' && newValue != '') this.$refs.birthday.classList.remove('input-error');
       
-        if((newValue.length > oldValue.length && newValue.length == 2) || (newValue.length > oldValue.length && newValue.length == 5)) {
-          this.birthday += '/';
-        } else if((newValue.length < oldValue.length && newValue.length == 3) || (newValue.length < oldValue.length && newValue.length == 6)) {
-          this.birthday = this.birthday.slice(0, -1);
-        }
+      if((newValue.length > oldValue.length && newValue.length == 2) || (newValue.length > oldValue.length && newValue.length == 5)) {
+        this.birthday += '/';
+      } else if((newValue.length < oldValue.length && newValue.length == 3) || (newValue.length < oldValue.length && newValue.length == 6)) {
+        this.birthday = this.birthday.slice(0, -1);
+      }
+    },
+    back_select_customer_check(newValue) {
+      if(newValue && !this.customerSelection) {
+        this.customerSelection = true;
+      } else if(newValue && this.customerSelection) {
+        this.linkTo('/HomePage');
+      }
+
+      if(newValue) this.setBackSelectCustomerCheck(false);
     }
   },
   mounted() {
@@ -259,6 +268,9 @@ export default {
   text-transform: capitalize;
 }
 .checkbox-container {
-    justify-content: end;
+    justify-content: start;
+}
+.welcome-message {
+  padding-top: 0;
 }
 </style>
