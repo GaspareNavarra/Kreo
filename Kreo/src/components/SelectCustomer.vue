@@ -49,7 +49,7 @@ import axios from 'axios';
 import TechnicalSheet from '@/components/TechnicalSheet.vue';
 export default {
   components: {TechnicalSheet},
-  inject: ['classSelector', 'showLoader', 'hideLoader', 'linkTo', 'capitalize', 'setBackSelectCustomerCheck'],
+  inject: ['classSelector', 'showLoader', 'hideLoader', 'linkTo', 'capitalize', 'setBackSelectCustomerCheck', 'changePanelForCustomerSelection'],
   props:['back_select_customer_check'],
   data() {
     return {
@@ -119,6 +119,11 @@ export default {
       let array_data = data.split('-');
       return array_data[2] + '/' + array_data[1] + '/' + array_data[0];
     },
+    formatTextForDate(data) {
+      if(data == '') return '';
+      let array_data = data.split('/');
+      return array_data[2] + '-' + array_data[1] + '-' + array_data[0];
+    },
     clearData() {
       this.searchname = '';
       this.surname = '';
@@ -135,12 +140,17 @@ export default {
     },
     forward() {
       let customer = {};
-      if(this.searchname != '' && this.surname != '' && this.cellphone != '' && this.email != '' && this.birthday != '') {
+      if(this.searchname != '' && this.surname != '' && this.cellphone != '' && this.email != '' && this.birthday != '' && this.email.includes('@')) {
         customer.name = this.capitalize(this.searchname);
         customer.surname = this.capitalize(this.surname);
         customer.cellphone = this.cellphone;
         customer.email = this.email.toLowerCase();
         customer.birthday = this.birthday;
+        this.$refs.searchname.classList.remove('input-error');
+        this.$refs.surname.classList.remove('input-error');
+        this.$refs.cellphone.classList.remove('input-error');
+        this.$refs.email.classList.remove('input-error');
+        this.$refs.birthday.classList.remove('input-error');
         this.selectCustomer(customer);
       } else {
         if(this.searchname == '') {
@@ -152,7 +162,7 @@ export default {
         if(this.cellphone == '') {
           this.$refs.cellphone.classList.add('input-error');
         }
-        if(this.email == '') {
+        if(this.email == '' || !this.email.includes('@')) {
           this.$refs.email.classList.add('input-error');
         }
         if(this.birthday == '') {
@@ -173,6 +183,7 @@ export default {
 
         if(result) {
           this.customerSelection = false;
+          this.changePanelForCustomerSelection(this.customerSelection);
           this.hideLoader();
         } else {
           this.addCustomer(customer);
@@ -187,13 +198,22 @@ export default {
       this.gender = !this.gender;
     },
     addCustomer(customer) {
-      axios.patch(window.BASE_URL_API_XANO + '/customer', customer).then((data) => {
-        let response = data.data;
-        // if() {
-
-        // }
+      let customer_to_add = {};
+      customer_to_add.name = customer.name;
+      customer_to_add.surname = customer.surname;
+      customer_to_add.data_di_nascita = this.formatTextForDate(customer.birthday);
+      customer_to_add.email = customer.email;
+      customer_to_add.numero_di_telefono = customer.cellphone;
+      customer_to_add.gender = !this.gender? 'D' : 'U';
+      axios.post(window.BASE_URL_API_XANO + '/customer', customer_to_add).then((data) => {
+        if(data.status = 200) {
+          this.customerSelection = false;
+          this.changePanelForCustomerSelection(this.customerSelection);
+        }
+        this.hideLoader();
         console.log(response);
       }).catch((error) => {
+        this.hideLoader();
         console.log(error);
       });
     },
@@ -245,6 +265,7 @@ export default {
     back_select_customer_check(newValue) {
       if(newValue && !this.customerSelection) {
         this.customerSelection = true;
+        this.changePanelForCustomerSelection(this.customerSelection);
       } else if(newValue && this.customerSelection) {
         this.linkTo('/HomePage');
       }

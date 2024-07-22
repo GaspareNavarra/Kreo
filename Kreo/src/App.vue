@@ -26,7 +26,7 @@
       <div class="col-sm-2 col-2">
         <i v-show="back" class="fa-regular fa-arrow-left back-arrow" @click="goBack()"></i>
       </div>
-      <img src="/Img/LogoNew.png" class="logo_size">
+      <img src="/Img/LogoNew.png" class="logo_size" @click="linkTo('/HomePage')">
       <div class="col-sm-2  col-2 container-logout">
         <div v-show="userState" id="logoutButton" class="logout-button col-8 col-sm-8" @click="doLogout()">
           <i class="fa-solid fa-power-off logout-icon"></i>
@@ -37,7 +37,7 @@
 
     <!-- <BirthDay v-show="userState" :customerList="customerList" :userState="userState"></BirthDay> -->
     
-    <div id="scheda-tecnica" class="datasheet_size"
+    <div id="scheda-tecnica" class="datasheet_size" ref="scheda_tecnica"
     :class="{
       'login-size_pannel col-9 col-sm-5': loginPage,
       'Homepage col-11 col-sm-9 mt-4 mt-sm-5': homePage,
@@ -69,7 +69,8 @@ export default {
       capitalize: this.capitalize,
       openPopUpEmail: this.openPopUpEmail,
       resetMailError: this.resetMailError,
-      setBackSelectCustomerCheck: this.setBackSelectCustomerCheck
+      setBackSelectCustomerCheck: this.setBackSelectCustomerCheck,
+      changePanelForCustomerSelection: this.changePanelForCustomerSelection
     }
   },
   data() {
@@ -278,6 +279,15 @@ export default {
     },
     setBackSelectCustomerCheck(value) {
       this.back_select_customer_check = value;
+    },
+    changePanelForCustomerSelection(value) {
+      if(value) {
+        this.$refs.scheda_tecnica.classList.remove('col-sm-5');
+        this.$refs.scheda_tecnica.classList.add('col-sm-10');
+      } else {
+        this.$refs.scheda_tecnica.classList.remove('col-sm-10');
+        this.$refs.scheda_tecnica.classList.add('col-sm-5');
+      }
     }
   },
   mounted() {
