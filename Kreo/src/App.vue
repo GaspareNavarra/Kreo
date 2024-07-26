@@ -22,9 +22,38 @@
       </div>
     </div>
 
+    <div id="savePopUp" v-show="popup_save" class="shadow-container row no-margin">
+      <div class="datasheet_size popup-message col-sm-5 col-11">
+        <div id="description" class="popup-description">
+          <div id="paper-plane-icon" class="paper-plane-icon col-sm-12">
+            <i class="fa-solid fa-floppy-disk"></i>
+          </div>
+          <span class="col-sm-12">Vuoi salvare le modifiche?</span>
+        </div>
+        <div id="buttonContainer" class="email-popup-button col-sm-12">
+          <button class="btn btn-success col-sm-3 col-4 back-popup-button" @click="closePopUpSave()">Annulla</button>
+          <button class="btn btn-success col-sm-3 col-4" @click="saveEntrance()">Conferma</button>
+        </div>
+      </div>
+    </div>
+
+    <div id="savePopUp" v-show="affermativeModal || negativeModal" class="shadow-container row no-margin">
+      <div class="datasheet_size popup-message col-sm-5 col-11">
+        <div id="description" class="popup-description">
+          <div id="paper-plane-icon" class="paper-plane-icon col-sm-12">
+            <i :class="{'fa-regular fa-circle-xmark': negativeModal, 'fa-regular fa-circle-check': affermativeModal}"></i>
+          </div>
+          <span class="col-sm-12">{{ messageView }}</span>
+        </div>
+        <div id="buttonContainer" class="email-popup-button col-sm-12">
+          <button class="btn btn-success col-sm-3 col-4" @click="closeMessageModal()">Conferma</button>
+        </div>
+      </div>
+    </div>
+
     <div id="navbar" class="custom-navbar row col-sm-12 col-12">
       <div class="col-sm-2 col-2">
-        <i v-show="back" class="fa-regular fa-arrow-left back-arrow" @click="goBack()"></i>
+        <i v-show="back" class="fa-regular fa-arrow-left back-arrow" @click="goBack(true)"></i>
       </div>
       <img src="/Img/LogoNew.png" class="logo_size" @click="linkTo('/HomePage')">
       <div class="col-sm-2  col-2 container-logout">
@@ -44,9 +73,14 @@
       'not-found': notFound,
       'selectCustomerPage col-sm-10 col-10': selectCustomerPage,
       'Customer col-11 col-sm-9 mt-4 mt-sm-5': customer,
-      'Birthday col-sm-4 col-10 mt-4 mt-sm-4': birthday
+      'Birthday col-sm-4 col-10 mt-4 mt-sm-4': birthday,
+      'col-11 col-sm-9 mt-4 mt-sm-5': customerDetail
     }">
-      <router-view :empty_subject="empty_subject" :empty_mail_text="empty_mail_text" :back_select_customer_check="back_select_customer_check"></router-view>
+      <router-view
+      :empty_subject="empty_subject"
+      :empty_mail_text="empty_mail_text"
+      :back_select_customer_check="back_select_customer_check"
+      :clearCustomerSelected="clearCustomerSelected"></router-view>
     </div>
   </div>
 </template>
@@ -70,7 +104,9 @@ export default {
       openPopUpEmail: this.openPopUpEmail,
       resetMailError: this.resetMailError,
       setBackSelectCustomerCheck: this.setBackSelectCustomerCheck,
-      changePanelForCustomerSelection: this.changePanelForCustomerSelection
+      openPopUpSave: this.openPopUpSave,
+      setClearCustomerSelected: this.setClearCustomerSelected,
+      setTechnicalsheetError: this.setTechnicalsheetError
     }
   },
   data() {
@@ -89,7 +125,18 @@ export default {
       email: {},
       empty_subject: false,
       empty_mail_text: false,
-      back_select_customer_check: false
+      back_select_customer_check: false,
+      popup_save: false,
+      treatments: '',
+      notes: '',
+      prodotti: '',
+      clearCustomerSelected: false,
+      customerDetail: false,
+      messageView: '',
+      affermativeModal: false,
+      negativeModal: false,
+      prezzo: 0,
+      technicalsheetError: false
     }
   },
   methods: {
@@ -102,6 +149,7 @@ export default {
       this.homePage = false;
       this.loginPage = false;
       this.birthday = false;
+      this.customerDetail = false;
 
       if(notFound == 1) {
         this.notFound = true;
@@ -111,10 +159,12 @@ export default {
         this.homePage = true
       } else if(url.includes('/SelectCustomer')){
         this.selectCustomerPage = true;
-      } else if(url.includes('/Customer')) {
-        this.customer = true;
+      } else if(url.includes('/CustomerDetail')) {
+        this.customerDetail = true;
       } else if(url.includes('/BirthDay')) {
         this.birthday = true;
+      } else if(url.includes('/Customer')) {
+        this.customer = true;
       }
 
       if(!url.includes('/Login') && !url.includes('/HomePage'))
@@ -152,16 +202,22 @@ export default {
       else
         this.back = true;
     },
-    goBack() {
+    goBack(arrow) {
       let url = window.location.href;
-      
+
       if(url.includes('/BirthDay')) {
         this.linkTo('/Customer');
-      } else if(url.includes('/SelectCustomer')) {
+      } else if(url.includes('/SelectCustomer') && arrow) {
         this.back_select_customer_check = true;
+      } else if(!arrow && url.includes('/SelectCustomer')) {
+        this.back_select_customer_check = true;
+        this.clearCustomerSelected = true;
+      } else if(url.includes('/CustomerDetail')) {
+        this.linkTo('/Customer');
       } else {
         this.linkTo('/HomePage');
       }
+
     },
     showMessageModal() {
       this.notFound = true;
@@ -280,14 +336,78 @@ export default {
     setBackSelectCustomerCheck(value) {
       this.back_select_customer_check = value;
     },
-    changePanelForCustomerSelection(value) {
-      if(value) {
-        this.$refs.scheda_tecnica.classList.remove('col-sm-5');
-        this.$refs.scheda_tecnica.classList.add('col-sm-10');
-      } else {
-        this.$refs.scheda_tecnica.classList.remove('col-sm-10');
-        this.$refs.scheda_tecnica.classList.add('col-sm-5');
-      }
+    saveEntrance() {
+      this.popup_save = false;
+      this.showLoader();
+      // {
+      //   "customer_id": 0,
+      //   "prodotti_comprati": "\"\"",
+      //   "trattamento": "\"\"",
+      //   "note": "\"\"",
+      //   "data_ingresso": ""
+      // }
+      let user_data = JSON.parse(window.localStorage.getItem('user-data'));
+      const config = {
+        headers: { 'Authorization': `Bearer ${user_data.authToken}` }
+      };
+
+      let customer = JSON.parse(window.localStorage.getItem('customer'));
+      let ingresso = {};
+      ingresso.customer_id = customer.id;
+      ingresso.trattamento = this.treatments;
+      ingresso.note = this.notes;
+      ingresso.prodotti_comprati = this.prodotti == ''? 'Nessun prodotto' : this.prodotti;
+      ingresso.data_ingresso = new Date;
+
+      axios.post(window.BASE_URL_API_XANO + '/ingressi', ingresso, config)
+      .then((response) => {
+        if(response.status == 200){
+          this.viewMessage('Ingresso salvato correttamente', true);
+        } else {
+          this.viewMessage(response.data.error.detail, false);
+        }
+        this.hideLoader();
+      }).catch((error) => {
+        this.hideLoader();
+        this.viewMessage(response.data.error.detail, false);
+        console.log(error);
+      });
+    },
+    viewMessage(message, type) {
+      // type == true - apre la modale affermativa
+      // type == false - apre la modale negativa
+      this.messageView = message;
+
+      if(type) this.affermativeModal = true;
+      else this.negativeModal = true;
+    },
+    closeMessageModal() {
+      this.affermativeModal = false;
+      this.negativeModal = false;
+      this.messageView = '';
+
+      let url = window.location.href;
+      if(url.includes('/SelectCustomer')) this.goBack();
+    },
+    closePopUpSave() {
+      this.treatments = '';
+      this.notes = '';
+      this.prodotti = '';
+      this.popup_save = false;
+    },
+    openPopUpSave(treatments, notes, prodotti, prezzo) {
+      this.treatments = treatments;
+      this.notes = notes;
+      this.prodotti = prodotti;
+      this.prezzo = prezzo;
+      if(this.treatments != '' && this.prezzo != 0) this.popup_save = true;
+      else this.technicalsheetError = true;
+    },
+    setTechnicalsheetError(value) {
+      this.technicalsheetError = value;
+    },
+    setClearCustomerSelected(value) {
+      this.clearCustomerSelected = value;
     }
   },
   mounted() {

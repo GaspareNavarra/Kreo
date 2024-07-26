@@ -49,8 +49,8 @@ import axios from 'axios';
 import TechnicalSheet from '@/components/TechnicalSheet.vue';
 export default {
   components: {TechnicalSheet},
-  inject: ['classSelector', 'showLoader', 'hideLoader', 'linkTo', 'capitalize', 'setBackSelectCustomerCheck', 'changePanelForCustomerSelection'],
-  props:['back_select_customer_check'],
+  inject: ['classSelector', 'showLoader', 'hideLoader', 'linkTo', 'capitalize', 'setBackSelectCustomerCheck', 'setClearCustomerSelected'],
+  props:['back_select_customer_check', 'clearCustomerSelected'],
   data() {
     return {
       filtredCustomerList: [],
@@ -95,6 +95,7 @@ export default {
       this.filtredCustomerList = [];
       this.viewDropdown = false;
       this.selectedCustomer = customer;
+      window.localStorage.setItem('customer', JSON.stringify(customer));
       console.log(customer);
     },
     searchName() {
@@ -131,7 +132,8 @@ export default {
       this.email = '';
       this.birthday = '';
       this.gender = false;
-
+      
+      window.localStorage.removeItem('customer');
       this.$refs.searchname.classList.remove('input-error');
       this.$refs.surname.classList.remove('input-error');
       this.$refs.cellphone.classList.remove('input-error');
@@ -183,7 +185,6 @@ export default {
 
         if(result) {
           this.customerSelection = false;
-          this.changePanelForCustomerSelection(this.customerSelection);
           this.hideLoader();
         } else {
           this.addCustomer(customer);
@@ -208,7 +209,6 @@ export default {
       axios.post(window.BASE_URL_API_XANO + '/customer', customer_to_add).then((data) => {
         if(data.status = 200) {
           this.customerSelection = false;
-          this.changePanelForCustomerSelection(this.customerSelection);
         }
         this.hideLoader();
         console.log(response);
@@ -265,17 +265,25 @@ export default {
     back_select_customer_check(newValue) {
       if(newValue && !this.customerSelection) {
         this.customerSelection = true;
-        this.changePanelForCustomerSelection(this.customerSelection);
       } else if(newValue && this.customerSelection) {
         this.linkTo('/HomePage');
       }
 
       if(newValue) this.setBackSelectCustomerCheck(false);
+    },
+    clearCustomerSelected(newValue) {
+      if(newValue) {
+        this.clearData();
+        this.setClearCustomerSelected(false);
+      }
     }
   },
   mounted() {
     this.customerList = JSON.parse(window.localStorage.getItem('customerList'));
     this.classSelector();
+  },
+  beforeDestroy() {
+    window.localStorage.removeItem('customer');
   }
 }
 </script>
@@ -287,6 +295,7 @@ export default {
 .inputBox input {
   font-size: larger;
   text-transform: capitalize;
+  padding-right: 10px!important;
 }
 .checkbox-container {
     justify-content: start;

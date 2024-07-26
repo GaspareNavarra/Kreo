@@ -388,9 +388,11 @@ input:checked[type="checkbox"]::before {
 }
 .custom-dropdown {
   font-size: larger;
+  padding-left: 5px;
 }
 .dati-scheda-tecnica {
   padding: 2%;
+  padding-bottom: 1%;
 }
 .custom-dropdown-container::-webkit-scrollbar {
   /* Hide scrollbar */
@@ -688,26 +690,52 @@ input:checked[type="checkbox"]::before {
   justify-content: end;
 }
 .selectCustomerPage {
-  margin-top: 12vh !important;
+  margin-top: 5vh !important;
 }
 .container-info-entrance {
   justify-content: center;
+  display: flex;
 }
 .inputBox #email {
   text-transform: lowercase;
 }
-.treatments-notes {
+.note-ingresso {
   border-radius: 10px;
   resize: none;
   padding: 5px;
-  height: 50vh;
+  /* height: 50vh; */
+  height: 18vh;
   margin-bottom: 10px;
   font-size: larger;
+}
+.treatments-notes {
+  height: 25vh;
 }
 .align-button-forward {
   justify-content: end;
   display: flex;
-  padding: 0!important;
+}
+.container-data {
+  display: flex;
+  justify-content: center;
+}
+.align-searchbar-customer {
+  margin-bottom: 1%;
+}
+.input-customer {
+  border-color: black;
+  outline: none;
+  box-shadow: none;
+}
+.searchbar-container {
+  justify-content: flex-end;
+  display: flex;
+  padding-right: 3.3vw;
+}
+.inputPrice {
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
 }
 /* ------------------------------------------------------------------------------------------------------------ */
 @keyframes shake {

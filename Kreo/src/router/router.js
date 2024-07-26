@@ -5,6 +5,7 @@ import SelectCustomer from '@/components/SelectCustomer.vue';
 import DataSheet from '@/components/DataSheet.vue';
 import Customer from '@/components/Customer.vue';
 import Birthday from '@/components/BirthDay.vue';
+import CustomerDetail from '@/components/CustomerDetail.vue';
 import NotFound from '@/components/NotFound.vue';
 
 const router = createRouter({
@@ -17,6 +18,7 @@ const router = createRouter({
     {path: '/DataSheet', component: DataSheet},
     {path: '/Customer', component: Customer},
     {path: '/BirthDay', component: Birthday},
+    {path: '/CustomerDetail', component: CustomerDetail},
     {path: '/:pathMatch(.*)*', component: NotFound},
   ]
 });
