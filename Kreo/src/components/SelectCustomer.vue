@@ -298,7 +298,7 @@ export default {
   padding-right: 10px!important;
 }
 .checkbox-container {
-    justify-content: start;
+  justify-content: start;
 }
 .welcome-message {
   padding-top: 0;

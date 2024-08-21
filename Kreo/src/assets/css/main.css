@@ -557,6 +557,7 @@ input:checked[type="checkbox"]::before {
   margin-right: 10px;
   background-color: red;
   animation: clearInput 0.4s forwards;
+  color: #fff;
 }
 .clear-data-icon {
   color: #fff;
@@ -699,25 +700,9 @@ input:checked[type="checkbox"]::before {
 .inputBox #email {
   text-transform: lowercase;
 }
-.note-ingresso {
-  border-radius: 10px;
-  resize: none;
-  padding: 5px;
-  /* height: 50vh; */
-  height: 18vh;
-  margin-bottom: 10px;
-  font-size: larger;
-}
-.treatments-notes {
-  height: 25vh;
-}
 .align-button-forward {
   justify-content: end;
   display: flex;
-}
-.container-data {
-  display: flex;
-  justify-content: center;
 }
 .align-searchbar-customer {
   margin-bottom: 1%;
@@ -731,11 +716,6 @@ input:checked[type="checkbox"]::before {
   justify-content: flex-end;
   display: flex;
   padding-right: 3.3vw;
-}
-.inputPrice {
-  display: flex;
-  justify-content: center;
-  align-items: baseline;
 }
 /* ------------------------------------------------------------------------------------------------------------ */
 @keyframes shake {
