@@ -7,9 +7,10 @@ import Button from 'primevue/button';
 import Column from 'primevue/column';
 import Rating from 'primevue/rating';
 import Tag from 'primevue/tag';
-import Aura from '@primevue/themes/aura';
+import Lara from '@primevue/themes/lara';
 
 import './assets/css/main.css';
+import './assets/css/primevue.css';
 import 'bootstrap/dist/css/bootstrap.css';
 
 window.BASE_URL_API_XANO = 'https://x8ki-letl-twmt.n7.xano.io/api:Fh-KZon-';
@@ -20,9 +21,30 @@ const app = createApp(App);
 
 app.use(router);
 app.use(PrimeVue, {
-  // Default theme configuration
+  // pt: {
+  //   global: {
+  //     css: `
+  //       .p-datatable-row-selected,
+  //       .p-paginator-page-selected {
+  //         background-color: #565656!important;
+  //       }
+  //       .p-datatable-row-selected td,
+  //       .p-datatable-row-selected,
+  //       .p-paginator-page-selected,
+  //       .p-datatable-column-sorted .p-datatable-sort-icon {
+  //         color: #fff!important;
+  //       }
+  //       .p-datatable-tbody > tr.p-datatable-row-selected > td {
+  //         border-bottom-color: white!important;
+  //       }
+  //       .p-datatable-column-sorted {
+  //         background-color: #dad6d6!important;
+  //       }
+  //     `
+  //   }
+  // },
   theme: {
-    preset: Aura,
+    preset: Lara,
     options: {
       prefix: 'p',
       darkModeSelector: '',

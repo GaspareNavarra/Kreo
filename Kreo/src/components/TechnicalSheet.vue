@@ -3,7 +3,7 @@
     <div id="container-info-entrance" class="col-sm-12 container-info-entrance">
       <div class="col-sm-12 col-10">
         <div class="row">
-          <DataTable v-model:selection="selectedProduct" :value="treatments" :selectionMode="'multiple'"  paginator :rows="6" tableStyle="min-width: 50rem">
+          <DataTable v-model:selection="selectedProduct" :value="treatments" :selectionMode="'multiple'" paginator removableSort :rows="6" tableStyle="min-width: 50rem">
             <Column sortable field="nome_trattamento" header="Trattamento"></Column>
             <Column sortable field="tipo_trattamento" header="Tipo"></Column>
             <Column sortable field="Azienda" header="Azienda"></Column>
@@ -59,7 +59,7 @@ export default {
 .clear-data-icon {
   padding-left: 5px;
 }
-/* .p-datatable-tbody > tr.p-datatable-row-selected {
-  background-color: #0c1310!important;
-} */
+.p-datatable-row-selected {
+  background-color: blueviolet!important;
+}
 </style>

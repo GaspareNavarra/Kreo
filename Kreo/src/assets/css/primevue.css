@@ -1,0 +1,24 @@
+.p-datatable-row-selected,
+.p-paginator-page-selected {
+  /* background-color: #393939!important; */
+  background-color: black!important;
+}
+.p-datatable-row-selected td,
+.p-datatable-row-selected,
+.p-paginator-page-selected,
+.p-datatable-column-sorted .p-datatable-column-header-content .p-datatable-sort-icon path  {
+  color: #fff!important;
+}
+.p-datatable-tbody > tr.p-datatable-row-selected > td {
+  border-bottom-color: white!important;
+}
+.p-datatable-column-sorted {
+  /* background-color: #dad6d6!important; */
+  background-color: black!important;
+}
+.p-datatable-column-sorted .p-datatable-column-header-content .p-datatable-column-title {
+  color: #fff;
+}
+/* .p-datatable-header-cell {
+  background: rgb(53, 53, 53)!important;
+} */
