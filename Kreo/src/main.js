@@ -5,8 +5,10 @@ import PrimeVue from 'primevue/config';
 import DataTable from 'primevue/datatable';
 import Button from 'primevue/button';
 import Column from 'primevue/column';
-import Rating from 'primevue/rating';
-import Tag from 'primevue/tag';
+import IconField from 'primevue/iconfield';
+import InputIcon from 'primevue/inputicon';
+import InputText from 'primevue/inputtext';
+import Listbox from 'primevue/listbox';
 import Lara from '@primevue/themes/lara';
 
 import './assets/css/main.css';
@@ -52,10 +54,13 @@ app.use(PrimeVue, {
     }
   }
 });
+
+app.component('IconField', IconField);
+app.component('InputIcon', InputIcon);
+app.component('InputText', InputText);
+app.component('Listbox', Listbox);
 app.component('DataTable', DataTable);
 app.component('Button', Button);
 app.component('Column', Column);
-app.component('Rating', Rating);
-app.component('Tag', Tag);
 
 app.mount('#app');

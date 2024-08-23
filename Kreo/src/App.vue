@@ -7,6 +7,40 @@
       </div>
     </div>
 
+    <div id="TreatmentsPopup" v-if="treatments_popup" class="shadow-container">
+      <div class="white-modal-tretments row no-padding no-margin col-sm-4 mt-5">
+        <div class="welcome-message col-sm-12 mt-4">Aggiungi Trattamento</div>
+        <div id="TreatmentsPopupInput">
+          <div class="inputBox col-sm-8 no-padding">
+            <input id="treatments-name" type="text" required="required" v-model="treatments_name" ref="treatments-name">
+            <span>Nome Trattamento</span>
+          </div>
+          <!-- <div class="inputBox col-sm-8 no-padding">
+            <input id="treatments-type" type="text" required="required" v-model="treatments_type.name" ref="treatments-type">
+            <span>Tipo Trattamento</span>
+          </div> -->
+          
+          <div class="mini-welcome-message col-sm-8">Tipo Trattamento</div>
+          <div class="inputBox inputBoxListBox card flex col-sm-8" ref="treatments-type">
+            <Listbox v-model="treatments_type" :options="treatments_type_list" multiple optionLabel="name" class="w-full md:w-56" />
+          </div>
+
+          <div class="inputBox col-sm-8 no-padding">
+            <input id="treatments-company" type="text" required="required" v-model="treatments_company">
+            <span>Azienda</span>
+          </div>
+          <div class="inputBox col-sm-8 no-padding treatmentsPrice">
+            <input id="treatments-price" type="text" required="required" v-model="treatments_price">
+            <span>Prezzo</span>
+          </div>
+          <div id="TreatmentsPopupButton" class="col-sm-12">
+            <div id="clear" class="clear-data col-4 col-sm-5" @click="closeAddTreatments()">Annulla</div>
+            <div id="forward" class="forward col-4 col-sm-5" @click="addTreatments()">Aggiungi<i class="fa-solid fa-plus forward-button"></i></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <div id="emailPopUp" v-show="popup_email" class="shadow-container row no-margin">
       <div class="datasheet_size popup-message col-sm-5 col-11">
         <div id="description" class="popup-description">
@@ -74,13 +108,15 @@
       'selectCustomerPage col-sm-10 col-10': selectCustomerPage,
       'Customer col-11 col-sm-9 mt-4 mt-sm-5': customer,
       'Birthday col-sm-4 col-10 mt-4 mt-sm-4': birthday,
-      'col-11 col-sm-9 mt-4 mt-sm-5': customerDetail
+      'col-11 col-sm-9 mt-4 mt-sm-5': customerDetail,
+      'treatmentsPage': treatments
     }">
       <router-view
       :empty_subject="empty_subject"
       :empty_mail_text="empty_mail_text"
       :back_select_customer_check="back_select_customer_check"
-      :clearCustomerSelected="clearCustomerSelected"></router-view>
+      :clearCustomerSelected="clearCustomerSelected"
+      :new_treatments="new_treatments"></router-view>
     </div>
   </div>
 </template>
@@ -106,11 +142,15 @@ export default {
       setBackSelectCustomerCheck: this.setBackSelectCustomerCheck,
       openPopUpSave: this.openPopUpSave,
       setClearCustomerSelected: this.setClearCustomerSelected,
-      setTechnicalsheetError: this.setTechnicalsheetError
+      updateTreatments: this.updateTreatments,
+      openAddTreatments: this.openAddTreatments,
+      closeAddTreatments: this.closeAddTreatments,
+      setNewTreatments: this.setNewTreatments
     }
   },
   data() {
     return {
+      treatments: false,
       userState: false,
       loginPage: true,
       homePage: false,
@@ -136,7 +176,19 @@ export default {
       affermativeModal: false,
       negativeModal: false,
       prezzo: 0,
-      technicalsheetError: false
+      treatments_popup: false,
+      treatments_name: '',
+      treatments_type: '',
+      treatments_company: '',
+      treatments_price: '',
+      new_treatments: {},
+      treatments_type_list: [
+        { name: 'Lunghezza'},
+        { name: 'Curativo'},
+        { name: 'Estetico'},
+        { name: 'Movimento'},
+        { name: 'Liscio Perfetto'},
+      ]
     }
   },
   methods: {
@@ -172,9 +224,64 @@ export default {
       else
         this.back = false;
     },
+    addTreatments() {
+      if(this.treatments_name != '' && this.treatments_type != '') {
+        this.$refs['treatments-name'].classList.remove('input-error');
+        this.$refs['treatments-type'].classList.remove('input-error');
+        this.updateTreatmentsDB();
+      } else {
+        if(this.treatments_name == '') {
+          this.$refs['treatments-name'].classList.add('input-error');
+        }
+        if(this.treatments_type == '') {
+          this.$refs['treatments-type'].classList.add('input-error');
+        }
+      }
+    },
+    updateTreatmentsDB() {
+      this.showLoader();
+      let user_data = JSON.parse(localStorage.getItem('user-data'));
+      const config = {
+        headers: { 'Authorization': `Bearer ${user_data.authToken}` }
+      };
+      let treatments_row = {};
+      treatments_row.nome_trattamento = this.treatments_name;
+      treatments_row.tipo_trattamento = this.treatments_type;
+      treatments_row.azienda = this.treatments_company;
+      treatments_row.prezzo = this.treatments_price;
+      this.closeAddTreatments();
+      axios.post(window.BASE_URL_API_XANO + '/treatments', treatments_row, config).then((data) => {
+        let response = data.data;
+
+        if(data.status == 200) {
+          this.setNewTreatments(response);
+          this.hideLoader();
+        }
+
+      }).catch((error) => {
+        console.log(error);
+        this.hideLoader();
+      });
+    },
+    setNewTreatments(value) {
+      this.new_treatments = value;
+    },
+    openAddTreatments() {
+      this.treatments_popup = true;
+    },
+    closeAddTreatments() {
+      this.treatments_popup = false;
+      this.treatments_name = '';
+      this.treatments_type = '';
+      this.treatments_company = '';
+      this.treatments_price = '';
+    },
+    updateTreatments(value) {
+      this.treatments = value;
+    },
     Login() {
       this.userState = true;
-      window.localStorage.setItem('isAuth', this.userState);
+      localStorage.setItem('isAuth', this.userState);
       this.linkTo('/HomePage');
     },
     linkTo(page) {
@@ -183,8 +290,8 @@ export default {
     doLogout() {
       this.showLoader();
       this.userState = false;
-      window.localStorage.setItem('isAuth', this.userState);
-      window.localStorage.removeItem('user-data');
+      localStorage.setItem('isAuth', this.userState);
+      localStorage.removeItem('user-data');
       this.linkTo('/');
       this.hideLoader();
     },
@@ -207,7 +314,7 @@ export default {
 
       if(url.includes('/BirthDay')) {
         this.linkTo('/Customer');
-      } else if(url.includes('/SelectCustomer') && arrow) {
+      } else if(arrow && url.includes('/SelectCustomer')) {
         this.back_select_customer_check = true;
       } else if(!arrow && url.includes('/SelectCustomer')) {
         this.back_select_customer_check = true;
@@ -227,7 +334,7 @@ export default {
     },
     getCustomers() {
       this.showLoader();
-      let user_data = JSON.parse(window.localStorage.getItem('user-data'));
+      let user_data = JSON.parse(localStorage.getItem('user-data'));
       const config = {
         headers: { 'Authorization': `Bearer ${user_data.authToken}` }
       };
@@ -258,7 +365,7 @@ export default {
             return 0;
           }
         });
-        window.localStorage.setItem('customerList', JSON.stringify(this.customerList));
+        localStorage.setItem('customerList', JSON.stringify(this.customerList));
         this.hideLoader();
       }).catch((error) => {
         this.hideLoader();
@@ -281,7 +388,7 @@ export default {
       this.closePopUpEmail();
       this.showLoader();
       if(this.checkMailParameter()) {
-        let user_data = JSON.parse(window.localStorage.getItem('user-data'));
+        let user_data = JSON.parse(localStorage.getItem('user-data'));
         const config = {
           headers: { 'Authorization': `Bearer ${user_data.authToken}` }
         };
@@ -319,17 +426,17 @@ export default {
       if(value == 'error_mail_text') this.empty_mail_text = false;
     },
     checkUserState() {
-      let user = window.localStorage.getItem('user-data');
+      let user = localStorage.getItem('user-data');
       let url = window.location.href.split('/')[window.location.href.split('/').length - 1];
 
       if(user != null && url != 'login' && url != '') {
         this.userState = true;
-        window.localStorage.setItem('isAuth', this.userState);
+        localStorage.setItem('isAuth', this.userState);
         this.linkTo('/' + url);
       } else {
-        window.localStorage.removeItem('user-data');
+        localStorage.removeItem('user-data');
         this.userState = false;
-        window.localStorage.setItem('isAuth', this.userState);
+        localStorage.setItem('isAuth', this.userState);
         this.linkTo('/');
       }
     },
@@ -346,12 +453,12 @@ export default {
       //   "note": "\"\"",
       //   "data_ingresso": ""
       // }
-      let user_data = JSON.parse(window.localStorage.getItem('user-data'));
+      let user_data = JSON.parse(localStorage.getItem('user-data'));
       const config = {
         headers: { 'Authorization': `Bearer ${user_data.authToken}` }
       };
 
-      let customer = JSON.parse(window.localStorage.getItem('customer'));
+      let customer = JSON.parse(localStorage.getItem('customer'));
       let ingresso = {};
       ingresso.customer_id = customer.id;
       ingresso.trattamento = this.treatments;
@@ -396,15 +503,12 @@ export default {
       this.popup_save = false;
     },
     openPopUpSave(treatments, notes, prodotti, prezzo) {
+      // TODO: Usare questa funzione per salvare i dati
       this.treatments = treatments;
       this.notes = notes;
       this.prodotti = prodotti;
       this.prezzo = prezzo;
       if(this.treatments != '' && this.prezzo != 0) this.popup_save = true;
-      else this.technicalsheetError = true;
-    },
-    setTechnicalsheetError(value) {
-      this.technicalsheetError = value;
     },
     setClearCustomerSelected(value) {
       this.clearCustomerSelected = value;

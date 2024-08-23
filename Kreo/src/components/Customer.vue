@@ -50,8 +50,8 @@ export default {
   props: ['empty_subject', 'empty_mail_text'],
   data() {
     return {
-      customerList: JSON.parse(window.localStorage.getItem('customerList')),
-      customerListToDisplay: JSON.parse(window.localStorage.getItem('customerList')),
+      customerList: JSON.parse(localStorage.getItem('customerList')),
+      customerListToDisplay: JSON.parse(localStorage.getItem('customerList')),
       searchname: '',
       filterLimit: 2,
     }
@@ -62,7 +62,7 @@ export default {
       return formattedData[2] + '/' + formattedData[1] + '/' + formattedData[0];
     },
     goToMailPage(customer) {
-      window.localStorage.setItem('customer', JSON.stringify(customer));
+      localStorage.setItem('customer', JSON.stringify(customer));
       this.linkTo('/BirthDay');
     },
     searchName() {
@@ -107,7 +107,7 @@ export default {
       return false;
     },
     openCustomerDetail(customer) {
-      window.localStorage.setItem('customer', JSON.stringify(customer));
+      localStorage.setItem('customer', JSON.stringify(customer));
       this.linkTo('/CustomerDetail');
     }
   },
@@ -119,7 +119,7 @@ export default {
   mounted() {
     this.classSelector();
     this.getCustomers();
-    window.localStorage.removeItem('customer');
+    localStorage.removeItem('customer');
     console.log(this.customerList);
   }
 }

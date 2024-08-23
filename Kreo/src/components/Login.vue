@@ -68,7 +68,7 @@ export default {
 
       await axios.get(window.BASE_URL_API_XANO + '/auth/me', config).then((data) => {
         if(data) {
-          window.localStorage.setItem('user-data', JSON.stringify(user_data));
+          localStorage.setItem('user-data', JSON.stringify(user_data));
           this.Login();
           this.getCustomers();
           this.hideLoader();

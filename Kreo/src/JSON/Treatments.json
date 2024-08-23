@@ -1,112 +1,40 @@
 {
   "product": [
     {
-      "nome_trattamento": "Peeling Dermopurificante",
-      "tipo_trattamento": "Cute",
-      "Azienda": "Farmaca International",
-      "Prezzo": "20€"
+      "nome_trattamento": "In attesa di dati...",
+      "tipo_trattamento": "In attesa di dati...",
+      "Azienda": "In attesa di dati...",
+      "Prezzo": "In attesa di dati..."
     },
     {
-      "nome_trattamento": "Komplex",
-      "tipo_trattamento": "Cute",
-      "Azienda": "Farmaca International",
-      "Prezzo": "10€"
+      "nome_trattamento": "In attesa di dati...",
+      "tipo_trattamento": "In attesa di dati...",
+      "Azienda": "In attesa di dati...",
+      "Prezzo": "In attesa di dati..."
     },
     {
-      "nome_trattamento": "Siero Riequilibrante",
-      "tipo_trattamento": "Cute",
-      "Azienda": "Farmaca International",
-      "Prezzo": "10€"
+      "nome_trattamento": "In attesa di dati...",
+      "tipo_trattamento": "In attesa di dati...",
+      "Azienda": "In attesa di dati...",
+      "Prezzo": "In attesa di dati..."
     },
     {
-      "nome_trattamento": "Purify",
-      "tipo_trattamento": "Cute",
-      "Azienda": "Napura",
-      "Prezzo": "20€"
+      "nome_trattamento": "In attesa di dati...",
+      "tipo_trattamento": "In attesa di dati...",
+      "Azienda": "In attesa di dati...",
+      "Prezzo": "In attesa di dati..."
     },
     {
-      "nome_trattamento": "Active",
-      "tipo_trattamento": "Cute",
-      "Azienda": "Napura",
-      "Prezzo": "20€"
+      "nome_trattamento": "In attesa di dati...",
+      "tipo_trattamento": "In attesa di dati...",
+      "Azienda": "In attesa di dati...",
+      "Prezzo": "In attesa di dati..."
     },
     {
-      "nome_trattamento": "Cleans",
-      "tipo_trattamento": "Cute",
-      "Azienda": "Napura",
-      "Prezzo": "20€"
-    },
-    {
-      "nome_trattamento": "Fiala Riequilibrante",
-      "tipo_trattamento": "Cute",
-      "Azienda": "Napura",
-      "Prezzo": "10€"
-    },
-    {
-      "nome_trattamento": "Fusiodose",
-      "tipo_trattamento": "Lunghezza - Curativo",
-      "Azienda": "",
-      "Prezzo": "20€"
-    },
-    {
-      "nome_trattamento": "Mineral Leafe",
-      "tipo_trattamento": "Lunghezza - Curativo",
-      "Azienda": "",
-      "Prezzo": "25€"
-    },
-    {
-      "nome_trattamento": "Fiala Di Minerali",
-      "tipo_trattamento": "Lunghezza - Curativo",
-      "Azienda": "",
-      "Prezzo": "10€"
-    },
-    {
-      "nome_trattamento": "Laminazione",
-      "tipo_trattamento": "Lunghezza - Curativo",
-      "Azienda": "",
-      "Prezzo": "20€"
-    },
-    {
-      "nome_trattamento": "Molecolare",
-      "tipo_trattamento": "Lunghezza - Curativo",
-      "Azienda": "",
-      "Prezzo": "30€"
-    },
-    {
-      "nome_trattamento": "Olaplex",
-      "tipo_trattamento": "Lunghezza - Curativo",
-      "Azienda": "",
-      "Prezzo": "30€"
-    },
-    {
-      "nome_trattamento": "Permanente",
-      "tipo_trattamento": "Lunghezza - Estetico - Movimento",
-      "Azienda": "",
-      "Prezzo": "Da 45€ a 65€"
-    },
-    {
-      "nome_trattamento": "Semipermanente",
-      "tipo_trattamento": "Lunghezza - Estetico - Movimento",
-      "Azienda": "",
-      "Prezzo": "65€"
-    },
-    {
-      "nome_trattamento": "Riccio Valorizzato",
-      "tipo_trattamento": "Lunghezza - Estetico - Movimento",
-      "Azienda": "",
-      "Prezzo": "4€ al gr"
-    },
-    {
-      "nome_trattamento": "Trattamento Alla Cheratina - Liscio Assoluto",
-      "tipo_trattamento": "Lunghezza - Estetico - Liscio Perfetto",
-      "Azienda": "",
-      "Prezzo": "4€ al gr"
-    },
-    {
-      "nome_trattamento": "Trattamento Control Lisa",
-      "tipo_trattamento": "Lunghezza - Estetico - Liscio Perfetto",
-      "Azienda": "",
-      "Prezzo": "4€ al gr"
+      "nome_trattamento": "In attesa di dati...",
+      "tipo_trattamento": "In attesa di dati...",
+      "Azienda": "In attesa di dati...",
+      "Prezzo": "In attesa di dati..."
     }
   ]
 }

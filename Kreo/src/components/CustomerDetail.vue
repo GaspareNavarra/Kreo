@@ -8,7 +8,7 @@ export default {
   inject: ['classSelector'],
   data() {
     return {
-      customer: JSON.parse(window.localStorage.getItem('customer'))
+      customer: JSON.parse(localStorage.getItem('customer'))
     }
   },
   mounted() {

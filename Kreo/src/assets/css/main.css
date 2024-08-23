@@ -545,24 +545,29 @@ input:checked[type="checkbox"]::before {
 .birthday-customer {
   padding-right: 1vw!important;
 }
-.clear-data, .forward {
+.clear-data, .forward, .add-treatments {
   height: 50px;
   display: flex;
   align-items: center;
   justify-content: center;
   border-radius: 12px;
 }
-.clear-data {
+.clear-data, .add-treatments {
   width: 50px;
   margin-right: 10px;
-  background-color: red;
   animation: clearInput 0.4s forwards;
   color: #fff;
+}
+.clear-data {
+  background-color: red;
+}
+.add-treatments {
+  background-color: #8a2be2;
 }
 .clear-data-icon {
   color: #fff;
 }
-.clear-data:hover, .forward:hover {
+.clear-data:hover, .forward:hover, .add-treatments {
   cursor: pointer;
 }
 .inputLine {
@@ -693,7 +698,10 @@ input:checked[type="checkbox"]::before {
 .selectCustomerPage {
   margin-top: 5vh !important;
 }
-.container-info-entrance {
+.treatmentsPage {
+  margin-top: 2vh !important;
+}
+.container-info-entrance, #TreatmentsPopup, #TreatmentsPopupButton {
   justify-content: center;
   display: flex;
 }
@@ -716,6 +724,37 @@ input:checked[type="checkbox"]::before {
   justify-content: flex-end;
   display: flex;
   padding-right: 3.3vw;
+}
+.white-modal-tretments {
+  background-color: white;
+  border-radius: 20px;
+  /* display: flex;
+  justify-content: center; */
+  flex-direction: column;
+  height: fit-content;
+}
+.white-modal-tretments .welcome-message {
+  padding-top: 0;
+  margin-top: -5vh;
+}
+#TreatmentsPopupInput .treatmentsPrice {
+  margin-bottom: 5vh;
+}
+#TreatmentsPopupButton {
+  margin-bottom: 5vh;
+}
+#TreatmentsPopupButton .forward {
+  padding-left: 15px!important;
+}
+.mini-welcome-message {
+  font-size: large;
+  text-align: left;
+  margin-top: 20px;
+  margin-left: auto!important;
+  margin-right: auto!important;
+}
+.inputBoxListBox {
+  margin-top: 0!important;
 }
 /* ------------------------------------------------------------------------------------------------------------ */
 @keyframes shake {

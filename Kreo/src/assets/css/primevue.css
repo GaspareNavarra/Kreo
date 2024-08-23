@@ -19,6 +19,17 @@
 .p-datatable-column-sorted .p-datatable-column-header-content .p-datatable-column-title {
   color: #fff;
 }
-/* .p-datatable-header-cell {
-  background: rgb(53, 53, 53)!important;
-} */
+.justify-end {
+  justify-content: end;
+}
+.p-datatable-hoverable .p-datatable-header {
+  max-height: 10vh;
+  padding: 1vh;
+}
+.p-inputtext:enabled:focus {
+  box-shadow: none!important;
+  border-color: black!important;
+}
+.p-inputtext:enabled:hover {
+  border-color: black!important;
+}

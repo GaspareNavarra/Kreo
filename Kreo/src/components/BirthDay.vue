@@ -35,7 +35,7 @@ export default {
   },
   methods: {
     getCustomerToText() {
-      this.customer = JSON.parse(window.localStorage.getItem('customer'));
+      this.customer = JSON.parse(localStorage.getItem('customer'));
       this.destinatario = this.customer.email;
     },
     adjustTextareaHeight() {

@@ -39,8 +39,8 @@
         <div id="forward" class="forward col-3 col-sm-1" @click="forward()">Avanti<i class="fa-solid fa-circle-chevron-right forward-button"></i></div>
       </div>
     </div>
-    <div v-show="!customerSelection">
-      <TechnicalSheet></TechnicalSheet>
+    <div v-if="!customerSelection">
+      <TechnicalSheet :back_select_customer_check="back_select_customer_check" :new_treatments="new_treatments"></TechnicalSheet>
     </div>
   </div>
 </template>
@@ -50,7 +50,7 @@ import TechnicalSheet from '@/components/TechnicalSheet.vue';
 export default {
   components: {TechnicalSheet},
   inject: ['classSelector', 'showLoader', 'hideLoader', 'linkTo', 'capitalize', 'setBackSelectCustomerCheck', 'setClearCustomerSelected'],
-  props:['back_select_customer_check', 'clearCustomerSelected'],
+  props:['back_select_customer_check', 'clearCustomerSelected', 'new_treatments'],
   data() {
     return {
       filtredCustomerList: [],
@@ -95,7 +95,7 @@ export default {
       this.filtredCustomerList = [];
       this.viewDropdown = false;
       this.selectedCustomer = customer;
-      window.localStorage.setItem('customer', JSON.stringify(customer));
+      localStorage.setItem('customer', JSON.stringify(customer));
       console.log(customer);
     },
     searchName() {
@@ -133,7 +133,7 @@ export default {
       this.birthday = '';
       this.gender = false;
       
-      window.localStorage.removeItem('customer');
+      localStorage.removeItem('customer');
       this.$refs.searchname.classList.remove('input-error');
       this.$refs.surname.classList.remove('input-error');
       this.$refs.cellphone.classList.remove('input-error');
@@ -174,7 +174,7 @@ export default {
     },
     selectCustomer(customer) {
       this.showLoader();
-      let user_data = JSON.parse(window.localStorage.getItem('user-data'));
+      let user_data = JSON.parse(localStorage.getItem('user-data'));
       const config = {
         headers: { 'Authorization': `Bearer ${user_data.authToken}` }
       };
@@ -279,11 +279,11 @@ export default {
     }
   },
   mounted() {
-    this.customerList = JSON.parse(window.localStorage.getItem('customerList'));
+    this.customerList = JSON.parse(localStorage.getItem('customerList'));
     this.classSelector();
   },
   beforeDestroy() {
-    window.localStorage.removeItem('customer');
+    localStorage.removeItem('customer');
   }
 }
 </script>
