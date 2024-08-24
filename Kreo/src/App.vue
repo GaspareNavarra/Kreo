@@ -8,7 +8,7 @@
     </div>
 
     <div id="TreatmentsPopup" v-if="treatments_popup" class="shadow-container">
-      <div class="white-modal-tretments row no-padding no-margin col-sm-4 mt-5">
+      <div class="white-modal-tretments row no-padding no-margin col-sm-8 mt-5">
         <div class="welcome-message col-sm-12 mt-4">Aggiungi Trattamento</div>
         <div id="TreatmentsPopupInput">
           <div class="inputBox col-sm-8 no-padding">
@@ -20,9 +20,14 @@
             <span>Tipo Trattamento</span>
           </div> -->
           
-          <div class="mini-welcome-message col-sm-8">Tipo Trattamento</div>
+          <!-- <div class="mini-welcome-message col-sm-8">Tipo Trattamento</div>
           <div class="inputBox inputBoxListBox card flex col-sm-8" ref="treatments-type">
             <Listbox v-model="treatments_type" :options="treatments_type_list" multiple optionLabel="name" class="w-full md:w-56" />
+          </div> -->
+
+          <div class="card flex justify-center col-sm-8 inputBoxListBox">
+            <MultiSelect v-model="treatments_type" display="chip" :options="treatments_type_list" optionLabel="name" filter placeholder="Tipo Trattamento"
+             class="w-full md:w-80" />
           </div>
 
           <div class="inputBox col-sm-8 no-padding">

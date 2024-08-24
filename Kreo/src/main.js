@@ -9,6 +9,7 @@ import IconField from 'primevue/iconfield';
 import InputIcon from 'primevue/inputicon';
 import InputText from 'primevue/inputtext';
 import Listbox from 'primevue/listbox';
+import MultiSelect from 'primevue/multiselect';
 import Lara from '@primevue/themes/lara';
 
 import './assets/css/main.css';
@@ -59,6 +60,7 @@ app.component('IconField', IconField);
 app.component('InputIcon', InputIcon);
 app.component('InputText', InputText);
 app.component('Listbox', Listbox);
+app.component('MultiSelect', MultiSelect);
 app.component('DataTable', DataTable);
 app.component('Button', Button);
 app.component('Column', Column);

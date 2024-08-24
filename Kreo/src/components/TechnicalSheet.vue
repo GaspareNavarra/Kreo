@@ -4,7 +4,7 @@
       <div class="col-sm-12 col-10">
         <div class="row">
           <div class="welcome-message mb-4">Seleziona Trattamenti</div>
-          <DataTable v-model:filters="filters" :globalFilterFields="['nome_trattamento']"  v-model:selection="selectedProduct" :value="treatments" :selectionMode="'multiple'" paginator removableSort :rows="4" tableStyle="min-width: 50rem">
+          <DataTable v-model:filters="filters" :globalFilterFields="['nome_trattamento', 'tipo_trattamento', 'azienda', 'prezzo']"  v-model:selection="selectedProduct" :value="treatments" :selectionMode="'multiple'" paginator removableSort :rows="4" tableStyle="min-width: 50rem">
             <template #header>
               <div class="flex justify-end">
                 <IconField>
@@ -46,7 +46,10 @@ export default {
       selectedProduct: [],
       filters: {
         global: { value: null, matchMode: FilterMatchMode.CONTAINS },
-        nome_trattamento: { value: null, matchMode: FilterMatchMode.STARTS_WITH }
+        nome_trattamento: { value: null, matchMode: FilterMatchMode.STARTS_WITH },
+        tipo_trattamento: { value: null, matchMode: FilterMatchMode.STARTS_WITH },
+        azienda: { value: null, matchMode: FilterMatchMode.STARTS_WITH },
+        prezzo: { value: null, matchMode: FilterMatchMode.STARTS_WITH }
       }
     }
   },
