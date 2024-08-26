@@ -33,3 +33,26 @@
 .p-inputtext:enabled:hover {
   border-color: black!important;
 }
+.p-multiselect:not(.p-disabled):hover {
+  border-color: black!important;
+}
+.p-multiselect:not(.p-disabled).p-focus {
+  box-shadow: none!important;
+  border-color: black!important;
+}
+.p-checkbox-input {
+  width: 0px!important;
+}
+.p-checkbox, .p-checkbox-box svg path {
+  color: #fff!important;
+}
+.p-checkbox-box svg, .p-checkbox-checked .p-checkbox-box {
+  background-color: black!important;
+  border-color: black!important;
+}
+.p-checkbox:not(.p-disabled):has(.p-checkbox-input:hover) .p-checkbox-box {
+  border-color: black!important;
+}
+.multiselect-radius {
+  border-radius: 10px!important;
+}

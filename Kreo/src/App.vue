@@ -25,9 +25,8 @@
             <Listbox v-model="treatments_type" :options="treatments_type_list" multiple optionLabel="name" class="w-full md:w-56" />
           </div> -->
 
-          <div class="card flex justify-center col-sm-8 inputBoxListBox">
-            <MultiSelect v-model="treatments_type" display="chip" :options="treatments_type_list" optionLabel="name" filter placeholder="Tipo Trattamento"
-             class="w-full md:w-80" />
+          <div class="card flex justify-center col-sm-8 inputBoxListBox" ref="treatments-type">
+            <MultiSelect v-model="treatments_type" class="multiselect-radius" display="chip" :options="treatments_type_list" optionLabel="name" filter placeholder="Tipo Trattamento" />
           </div>
 
           <div class="inputBox col-sm-8 no-padding">
@@ -251,9 +250,16 @@ export default {
       };
       let treatments_row = {};
       treatments_row.nome_trattamento = this.treatments_name;
-      treatments_row.tipo_trattamento = this.treatments_type;
       treatments_row.azienda = this.treatments_company;
       treatments_row.prezzo = this.treatments_price;
+
+      this.treatments_type.forEach((treatments, index) => {
+        if(index == 0) treatments_row.tipo_trattamento = treatments.name;
+        else {
+          treatments_row.tipo_trattamento += ' - ' + treatments.name;
+        }
+      });
+
       this.closeAddTreatments();
       axios.post(window.BASE_URL_API_XANO + '/treatments', treatments_row, config).then((data) => {
         let response = data.data;
@@ -517,6 +523,13 @@ export default {
     },
     setClearCustomerSelected(value) {
       this.clearCustomerSelected = value;
+    }
+  },
+  watch: {
+    treatments_type(newValue, oldValue) {
+      if(newValue.length > 0 && oldValue.length == 0) {
+        this.$refs['treatments-type'].classList.remove('input-error');
+      }
     }
   },
   mounted() {
