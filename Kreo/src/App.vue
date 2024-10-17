@@ -8,7 +8,7 @@
     </div>
 
     <div id="TreatmentsPopup" v-if="treatments_popup" class="shadow-container">
-      <div class="white-modal-tretments row no-padding no-margin col-sm-8 mt-5">
+      <div class="white-modal-tretments row no-padding no-margin col-sm-8 col-8 mt-5">
         <div class="welcome-message col-sm-12 mt-4">Aggiungi Trattamento</div>
         <div id="TreatmentsPopupInput">
           <div class="inputBox col-sm-8 no-padding">
@@ -113,7 +113,7 @@
       'Customer col-11 col-sm-9 mt-4 mt-sm-5': customer,
       'Birthday col-sm-4 col-10 mt-4 mt-sm-4': birthday,
       'col-11 col-sm-9 mt-4 mt-sm-5': customerDetail,
-      'treatmentsPage': treatments
+      'treatmentsPage': treatmentsPage
     }">
       <router-view
       :empty_subject="empty_subject"
@@ -154,7 +154,7 @@ export default {
   },
   data() {
     return {
-      treatments: false,
+      treatmentsPage: false,
       userState: false,
       loginPage: true,
       homePage: false,

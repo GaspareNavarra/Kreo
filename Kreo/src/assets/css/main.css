@@ -9,6 +9,9 @@
   font-family: 'Poppins';
   color: #000000;
 }
+button {
+  border-radius: 12px;
+}
 body {
   display: flex;
   justify-content: center;
@@ -696,7 +699,7 @@ input:checked[type="checkbox"]::before {
   justify-content: end;
 }
 .selectCustomerPage {
-  margin-top: 5vh !important;
+  margin-top: 4vh !important;
 }
 .treatmentsPage {
   margin-top: 2vh !important;

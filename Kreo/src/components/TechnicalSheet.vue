@@ -21,7 +21,7 @@
             <Column sortable field="prezzo" header="Prezzo"></Column>
           </DataTable>
         </div>
-        <div id="treatments-button" class="align-button-forward">
+        <div id="treatments-button" class="align-button-forward mt-2">
           <div id="add-treatments" class="add-treatments col-4 col-sm-2" @click="openAddTreatments()">Trattamento<i class="fa-solid fa-plus clear-data-icon"></i></div>
           <div id="clear" class="clear-data col-4 col-sm-2" @click="clearData()">Reset<i class="fa-solid fa-trash clear-data-icon"></i></div>
           <div id="forward" class="forward col-4 col-sm-2" @click="openPopUpSave(treatments, notes, prodotti, price)">Salva<i class="fa-solid fa-floppy-disk forward-button"></i></div>
@@ -56,6 +56,7 @@ export default {
   methods: {
     clearData() {
       this.selectedProduct = [];
+      this.filters['global'].value = null;
     },
     getAllTreatments() {
       this.showLoader();
