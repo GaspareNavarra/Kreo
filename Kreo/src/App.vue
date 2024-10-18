@@ -149,7 +149,8 @@ export default {
       updateTreatments: this.updateTreatments,
       openAddTreatments: this.openAddTreatments,
       closeAddTreatments: this.closeAddTreatments,
-      setNewTreatments: this.setNewTreatments
+      setNewTreatments: this.setNewTreatments,
+      openSummaryPopUp: this.openSummaryPopUp
     }
   },
   data() {
@@ -179,7 +180,6 @@ export default {
       messageView: '',
       affermativeModal: false,
       negativeModal: false,
-      prezzo: 0,
       treatments_popup: false,
       treatments_name: '',
       treatments_type: '',
@@ -513,13 +513,15 @@ export default {
       this.prodotti = '';
       this.popup_save = false;
     },
-    openPopUpSave(treatments, notes, prodotti, prezzo) {
+    openPopUpSave(treatments, notes, prodotti) {
       // TODO: Usare questa funzione per salvare i dati
       this.treatments = treatments;
       this.notes = notes;
       this.prodotti = prodotti;
-      this.prezzo = prezzo;
-      if(this.treatments != '' && this.prezzo != 0) this.popup_save = true;
+      if(this.treatments != '') this.popup_save = true;
+    },
+    openSummaryPopUp() {
+
     },
     setClearCustomerSelected(value) {
       this.clearCustomerSelected = value;
