@@ -24,7 +24,7 @@
         <div id="treatments-button" class="align-button-forward mt-2">
           <div id="add-treatments" class="add-treatments col-4 col-sm-2" @click="openAddTreatments()">Trattamento<i class="fa-solid fa-plus clear-data-icon"></i></div>
           <div id="clear" class="clear-data col-4 col-sm-2" @click="clearData()">Reset<i class="fa-solid fa-trash clear-data-icon"></i></div>
-          <div id="forward" class="forward col-4 col-sm-2" @click="openSummaryPopUp(treatments, notes, prodotti)">Riepilogo<i class="fa-solid fa-arrow-right forward-button"></i></div>
+          <div id="forward" class="forward col-4 col-sm-2" @click="openSummaryPage(selectedProduct)">Riepilogo<i class="fa-solid fa-arrow-right forward-button"></i></div>
           <!-- <div id="forward" class="forward col-4 col-sm-2" @click="openPopUpSave(treatments, notes, prodotti)">Salva<i class="fa-solid fa-floppy-disk forward-button"></i></div> -->
         </div>
       </div>
@@ -39,7 +39,7 @@ import {product} from '@/JSON/Treatments.json';
 import axios from 'axios';
 export default {
   components: [DataTable, Column],
-  inject: ['openPopUpSave', 'updateTreatments', 'showLoader', 'hideLoader', 'openAddTreatments', 'closeAddTreatments', 'setNewTreatments', 'openSummaryPopUp'],
+  inject: ['openPopUpSave', 'updateTreatments', 'showLoader', 'hideLoader', 'openAddTreatments', 'closeAddTreatments', 'setNewTreatments', 'openSummaryPage'],
   props: ['back_select_customer_check', 'new_treatments'],
   data() {
     return {

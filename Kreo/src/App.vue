@@ -113,14 +113,16 @@
       'Customer col-11 col-sm-9 mt-4 mt-sm-5': customer,
       'Birthday col-sm-4 col-10 mt-4 mt-sm-4': birthday,
       'col-11 col-sm-9 mt-4 mt-sm-5': customerDetail,
-      'treatmentsPage': treatmentsPage
+      'treatmentsPage': treatmentsPage,
+      'summaryPage col-sm-10': summaryPage
     }">
       <router-view
       :empty_subject="empty_subject"
       :empty_mail_text="empty_mail_text"
       :back_select_customer_check="back_select_customer_check"
       :clearCustomerSelected="clearCustomerSelected"
-      :new_treatments="new_treatments"></router-view>
+      :new_treatments="new_treatments"
+      :selectedTreatments="selectedTreatments"></router-view>
     </div>
   </div>
 </template>
@@ -150,11 +152,12 @@ export default {
       openAddTreatments: this.openAddTreatments,
       closeAddTreatments: this.closeAddTreatments,
       setNewTreatments: this.setNewTreatments,
-      openSummaryPopUp: this.openSummaryPopUp
+      openSummaryPage: this.openSummaryPage
     }
   },
   data() {
     return {
+      summaryPage: false,
       treatmentsPage: false,
       userState: false,
       loginPage: true,
@@ -192,7 +195,8 @@ export default {
         { name: 'Estetico'},
         { name: 'Movimento'},
         { name: 'Liscio Perfetto'},
-      ]
+      ],
+      selectedTreatments: []
     }
   },
   methods: {
@@ -332,6 +336,8 @@ export default {
         this.clearCustomerSelected = true;
       } else if(url.includes('/CustomerDetail')) {
         this.linkTo('/Customer');
+      } else if(url.includes('/Summary')) {
+        this.linkTo('/SelectCustomer');
       } else {
         this.linkTo('/HomePage');
       }
@@ -520,8 +526,10 @@ export default {
       this.prodotti = prodotti;
       if(this.treatments != '') this.popup_save = true;
     },
-    openSummaryPopUp() {
-
+    openSummaryPage(treatments) {
+      this.selectedTreatments = treatments;
+      this.summaryPage = true;
+      this.linkTo('/Summary');
     },
     setClearCustomerSelected(value) {
       this.clearCustomerSelected = value;

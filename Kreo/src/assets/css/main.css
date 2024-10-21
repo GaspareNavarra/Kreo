@@ -762,6 +762,16 @@ input:checked[type="checkbox"]::before {
   margin-top: 20px;
   border-radius: 10px!important;
 }
+.summaryPage {
+  margin-top: 4vh!important;
+}
+.summary-container {
+  justify-content: center;
+}
+.summary-box {
+  padding-left: 0!important;
+  padding-right: 0!important;
+}
 /* ------------------------------------------------------------------------------------------------------------ */
 @keyframes shake {
   0% {
