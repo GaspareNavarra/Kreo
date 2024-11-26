@@ -93,7 +93,7 @@
       <div class="col-sm-2 col-2">
         <i v-show="back" class="fa-regular fa-arrow-left back-arrow" @click="goBack(true)"></i>
       </div>
-      <img src="/Img/LogoNew.png" class="logo_size" @click="linkTo('/HomePage')">
+      <img src="/Img/LogoNew.png" class="logo_size" @click="goToHome()">
       <div class="col-sm-2  col-2 container-logout">
         <div v-show="userState" id="logoutButton" class="logout-button col-8 col-sm-8" @click="doLogout()">
           <i class="fa-solid fa-power-off logout-icon"></i>
@@ -148,11 +148,11 @@ export default {
       setBackSelectCustomerCheck: this.setBackSelectCustomerCheck,
       openPopUpSave: this.openPopUpSave,
       setClearCustomerSelected: this.setClearCustomerSelected,
-      updateTreatments: this.updateTreatments,
       openAddTreatments: this.openAddTreatments,
       closeAddTreatments: this.closeAddTreatments,
       setNewTreatments: this.setNewTreatments,
-      openSummaryPage: this.openSummaryPage
+      openSummaryPage: this.openSummaryPage,
+      openDeleteProcessPopUp: this.openDeleteProcessPopUp
     }
   },
   data() {
@@ -175,9 +175,7 @@ export default {
       empty_mail_text: false,
       back_select_customer_check: false,
       popup_save: false,
-      treatments: '',
       notes: '',
-      prodotti: '',
       clearCustomerSelected: false,
       customerDetail: false,
       messageView: '',
@@ -210,6 +208,7 @@ export default {
       this.loginPage = false;
       this.birthday = false;
       this.customerDetail = false;
+      this.summaryPage = false;
 
       if(notFound == 1) {
         this.notFound = true;
@@ -219,6 +218,8 @@ export default {
         this.homePage = true
       } else if(url.includes('/SelectCustomer')){
         this.selectCustomerPage = true;
+      } else if(url.includes('/Summary')){
+        this.summaryPage = true;
       } else if(url.includes('/CustomerDetail')) {
         this.customerDetail = true;
       } else if(url.includes('/BirthDay')) {
@@ -291,9 +292,6 @@ export default {
       this.treatments_company = '';
       this.treatments_price = '';
     },
-    updateTreatments(value) {
-      this.treatments = value;
-    },
     Login() {
       this.userState = true;
       localStorage.setItem('isAuth', this.userState);
@@ -301,6 +299,10 @@ export default {
     },
     linkTo(page) {
       this.$router.push(page);
+    },
+    goToHome() {
+      let isAuth = localStorage.getItem('isAuth');
+      if(isAuth != undefined && isAuth != null && isAuth == "true") {this.linkTo('/HomePage');}
     },
     doLogout() {
       this.showLoader();
@@ -463,13 +465,6 @@ export default {
     saveEntrance() {
       this.popup_save = false;
       this.showLoader();
-      // {
-      //   "customer_id": 0,
-      //   "prodotti_comprati": "\"\"",
-      //   "trattamento": "\"\"",
-      //   "note": "\"\"",
-      //   "data_ingresso": ""
-      // }
       let user_data = JSON.parse(localStorage.getItem('user-data'));
       const config = {
         headers: { 'Authorization': `Bearer ${user_data.authToken}` }
@@ -478,14 +473,14 @@ export default {
       let customer = JSON.parse(localStorage.getItem('customer'));
       let ingresso = {};
       ingresso.customer_id = customer.id;
-      ingresso.trattamento = this.treatments;
+      ingresso.trattamento = this.formatTreatments(this.selectedTreatments);
       ingresso.note = this.notes;
-      ingresso.prodotti_comprati = this.prodotti == ''? 'Nessun prodotto' : this.prodotti;
       ingresso.data_ingresso = new Date;
 
       axios.post(window.BASE_URL_API_XANO + '/ingressi', ingresso, config)
       .then((response) => {
         if(response.status == 200){
+          this.linkTo("/SelectCustomer");
           this.viewMessage('Ingresso salvato correttamente', true);
         } else {
           this.viewMessage(response.data.error.detail, false);
@@ -496,6 +491,14 @@ export default {
         this.viewMessage(response.data.error.detail, false);
         console.log(error);
       });
+    },
+    formatTreatments(trattamenti) {
+      let stringified_treatments = '';
+      Object.values(trattamenti).forEach((treatment, index) => {
+        stringified_treatments += treatment.id;
+        if(index < trattamenti.length - 1) {stringified_treatments += ' - ';}
+      });
+      return stringified_treatments;
     },
     viewMessage(message, type) {
       // type == true - apre la modale affermativa
@@ -510,25 +513,22 @@ export default {
       this.negativeModal = false;
       this.messageView = '';
 
-      let url = window.location.href;
-      if(url.includes('/SelectCustomer')) this.goBack();
+      // let url = window.location.href;
+      // if(url.includes('/SelectCustomer')) this.goBack();
     },
     closePopUpSave() {
-      this.treatments = '';
+      this.selectedTreatments = [];
       this.notes = '';
       this.prodotti = '';
       this.popup_save = false;
     },
-    openPopUpSave(treatments, notes, prodotti) {
-      // TODO: Usare questa funzione per salvare i dati
-      this.treatments = treatments;
+    openPopUpSave(notes) {
       this.notes = notes;
-      this.prodotti = prodotti;
-      if(this.treatments != '') this.popup_save = true;
+      if(this.selectedTreatments != [] && this.notes != '') this.popup_save = true;
     },
     openSummaryPage(treatments) {
       this.selectedTreatments = treatments;
-      this.summaryPage = true;
+      // this.summaryPage = true;
       this.linkTo('/Summary');
     },
     setClearCustomerSelected(value) {

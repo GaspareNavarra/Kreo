@@ -764,6 +764,7 @@ input:checked[type="checkbox"]::before {
 }
 .summaryPage {
   margin-top: 4vh!important;
+  background: none!important;
 }
 .summary-container {
   justify-content: center;
@@ -771,6 +772,21 @@ input:checked[type="checkbox"]::before {
 .summary-box {
   padding-left: 0!important;
   padding-right: 0!important;
+}
+.align-card-text {
+  display: flex;
+  height: 25px;
+}
+.spacer-label-card {
+  padding-right: 5px;
+  font-style: italic;
+  font-weight: bold;
+}
+.textarea-notes {
+  resize: none;
+  width: 100%;
+  height: 46vh;
+  padding: 10px;
 }
 /* ------------------------------------------------------------------------------------------------------------ */
 @keyframes shake {

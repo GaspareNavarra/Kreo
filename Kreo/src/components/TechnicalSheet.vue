@@ -39,8 +39,8 @@ import {product} from '@/JSON/Treatments.json';
 import axios from 'axios';
 export default {
   components: [DataTable, Column],
-  inject: ['openPopUpSave', 'updateTreatments', 'showLoader', 'hideLoader', 'openAddTreatments', 'closeAddTreatments', 'setNewTreatments', 'openSummaryPage'],
-  props: ['back_select_customer_check', 'new_treatments'],
+  inject: ['openPopUpSave', 'showLoader', 'hideLoader', 'openAddTreatments', 'closeAddTreatments', 'setNewTreatments', 'openSummaryPage'],
+  props: ['new_treatments'],
   data() {
     return {
       treatments: product,
@@ -76,9 +76,6 @@ export default {
     }
   },
   watch: {
-    back_select_customer_check(newValue) {
-      if(newValue) this.updateTreatments(false);
-    },
     new_treatments(newValue) {
       if(this.new_treatments.length > 0) {
         this.treatments = newValue;
@@ -89,11 +86,7 @@ export default {
   },
   mounted() {
     this.getAllTreatments();
-    this.updateTreatments(true);
   },
-  beforeUnmount(){
-    this.updateTreatments(false);
-  }
 }
 </script>
 <style scoped>

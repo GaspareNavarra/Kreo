@@ -7,6 +7,7 @@ import Button from 'primevue/button';
 import Column from 'primevue/column';
 import IconField from 'primevue/iconfield';
 import InputIcon from 'primevue/inputicon';
+import Card from 'primevue/card';
 import InputText from 'primevue/inputtext';
 import Listbox from 'primevue/listbox';
 import MultiSelect from 'primevue/multiselect';
@@ -56,6 +57,7 @@ app.use(PrimeVue, {
   }
 });
 
+app.component('Card', Card);
 app.component('IconField', IconField);
 app.component('InputIcon', InputIcon);
 app.component('InputText', InputText);
