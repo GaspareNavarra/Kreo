@@ -13,6 +13,7 @@ import Listbox from 'primevue/listbox';
 import MultiSelect from 'primevue/multiselect';
 import Lara from '@primevue/themes/lara';
 
+import 'primeicons/primeicons.css'
 import './assets/css/main.css';
 import './assets/css/primevue.css';
 import 'bootstrap/dist/css/bootstrap.css';

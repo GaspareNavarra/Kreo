@@ -788,6 +788,9 @@ input:checked[type="checkbox"]::before {
   height: 46vh;
   padding: 10px;
 }
+.customerDetail {
+  
+}
 /* ------------------------------------------------------------------------------------------------------------ */
 @keyframes shake {
   0% {

@@ -12,6 +12,7 @@
     "@primevue/themes": "^4.0.4",
     "axios": "^1.6.8",
     "bootstrap": "^5.3.3",
+    "primeicons": "^7.0.0",
     "primevue": "^4.0.4",
     "vue": "^3.4.15",
     "vue-router": "^4.2.5"
