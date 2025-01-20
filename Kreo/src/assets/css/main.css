@@ -802,6 +802,27 @@ input:checked[type="checkbox"]::before {
 .customerDetail {
   padding: 0px 10px 0px 10px;
 }
+
+/* TODO: Rimuovere lo style per quando sarà implementata la pagina */
+.piastra-disabled {
+  opacity: 0.5;
+  background-color: #665d5d;
+}
+.piastra-disabled:hover {
+  color: #404144;
+  border: solid 2px #524d4d;
+  background-color: #665d5d;
+  cursor: default;
+}
+.style-pi-lock {
+  position: absolute;
+  font-size: xxx-large !important;
+  top: 53%;
+  bottom: 50%;
+  opacity: 1;
+  color: #ffffff;
+}
+/* TODO: Rimuovere lo style per quando sarà implementata la pagina */
 /* ------------------------------------------------------------------------------------------------------------ */
 @keyframes shake {
   0% {

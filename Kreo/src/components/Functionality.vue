@@ -15,18 +15,14 @@
             <div class="piastra-label text-truncate">Gestisci Clienti</div>
           </div>
         </div>
-        <div class="piastra col-5 col-sm-2" @click="selectFunction('Modifica Dati di Accesso')">
+        <!-- TODO: Rimuovere lo style per quando sarà implementata la pagina -->
+        <div class="piastra col-5 col-sm-2 piastra-disabled">
+          <i class="pi pi-lock style-pi-lock"></i>
           <div class="align-content-piastra col-12 col-sm-12">
-            <i class="fa-solid fa-gear icona-piastra col-12 col-sm-12"></i>
-            <div class="piastra-label text-truncate">Modifica Dati di Accesso</div>
+            <i class="fa-solid fa-gear icona-piastra col-12 col-sm-12" style="color:#404144;"></i>
+            <div class="piastra-label text-truncate" style="color:#404144;">Impostazioni</div>
           </div>
         </div>
-        <!-- <div class="piastra col-5 col-sm-2" @click="selectFunction('Invia Auguri di Compleanno')">
-          <div class="align-content-piastra col-12 col-sm-12">
-            <i class="fa-solid fa-cake-candles icona-piastra col-12 col-sm-12"></i>
-            <div class="piastra-label text-truncate">Invia Auguri di Compleanno</div>
-          </div>
-        </div> -->
       </div>
     </div>
   </div>
@@ -45,7 +41,7 @@ export default {
         case 'Gestisci Clienti':
           this.linkTo('/Customer');
           break;
-        case 'Modifica Dati di Accesso':
+        case 'Impostazioni':
           this.linkTo('/');
           break;
       }
