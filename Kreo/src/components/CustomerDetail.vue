@@ -1,22 +1,44 @@
 <template>
   <div>
     <div class="welcome-message col-sm-12 mb-4">{{ customer.name + ' ' + customer.surname}}</div>
-    <DataTable :value="entrances" v-model:expandedRows="expandedRows" scrollable>
-      <template #header>
-        <div class="flex flex-wrap justify-end gap-2">
-          <Button text icon="pi pi-plus" label="Apri Tutto" @click="expandAll"></Button>
-          <Button text icon="pi pi-minus" label="Chiudi Tutto" @click="collapseAll"></Button>
-        </div>
-      </template>
-      <!-- TODO: Capire cosa mostrare  -->
-      <Column expander></Column>
-      <Column field="data_ingresso" header="Data Ingresso"></Column>
-      <Column field="trattamento" header="Tipo Trattamento"></Column>
-      <Column field="note" header="Note"></Column>
-      <template #expansion="">
-        <!-- TODO: Capire se ha davvero senso fare delle righe che si espandono -->
-      </template>
-    </DataTable>
+    <div class="timeline-container">
+      <Timeline :value="entrances">
+        <template #marker>
+          <i class="pi pi-check-circle" style="font-weight: bolder;"></i> <!-- style="color: #2bb163" -->
+        </template>
+        <template #content="slotProps">
+          <Skeleton v-if="entrances?.entrances" height="10rem" class="card-spacer"></Skeleton>
+          <Card class="card-spacer" v-if="entrances.length > 0">
+            <template #title>{{ "Ingresso avvenuto il " + formatDate(slotProps.item.data_ingresso) }}</template>
+            <template #subtitle><pre style="font-family: 'Poppins';">{{ 'Note: \n' + slotProps.item.note }}</pre></template>
+            <template #content>
+              <DataTable :value="slotProps.item.trattamento" showGridlines>
+                <Column field="nome_trattamento" header="Trattamento">
+                  <template #body v-if="entrances.length == 0">
+                    <Skeleton></Skeleton>
+                  </template>
+                </Column>
+                <Column field="tipo_trattamento" header="Tipo Trattamento">
+                  <template #body v-if="entrances.length == 0">
+                    <Skeleton></Skeleton>
+                  </template>
+                </Column>
+                <Column field="azienda" header="Azienda">
+                  <template #body v-if="entrances.length == 0">
+                    <Skeleton></Skeleton>
+                  </template>
+                </Column>
+                <Column field="prezzo" header="Prezzo">
+                  <template #body v-if="entrances.length == 0">
+                    <Skeleton></Skeleton>
+                  </template>
+                </Column>
+              </DataTable>
+            </template>
+          </Card>
+        </template>
+      </Timeline>
+    </div>
   </div>
 </template>
 <script>
@@ -28,8 +50,7 @@ export default {
   data() {
     return {
       customer: JSON.parse(localStorage.getItem('customer')),
-      entrances: Entrances.entrances,
-      expandedRows: []
+      entrances: Entrances,
     }
   },
   methods: {
@@ -43,13 +64,12 @@ export default {
       axios.post(window.BASE_URL_API_XANO + '/ingressi-customer', body, config)
       .then((response) => {
         let data = response.data;
-        this.entrances = data;
-        this.getTretments();
+        this.getTretments(data);
       }).catch((error) => {
         console.log(error);
       });
     },
-    getTretments() {
+    getTretments(ingressi) {
       let user_data = JSON.parse(localStorage.getItem('user-data'));
       const config = {
         headers: { 'Authorization': `Bearer ${user_data.authToken}` }
@@ -58,18 +78,19 @@ export default {
       axios.get(window.BASE_URL_API_XANO + '/treatments', config)
       .then((response) => {
         let data = response.data;
-        Object.values(this.entrances).forEach((ingresso) => {
+        Object.values(ingressi).forEach((ingresso) => {
           ingresso.trattamento = this.decryptTreatments(data, ingresso.trattamento);
         });
+        this.entrances = ingressi;
       }).catch((error) => {
         console.log(error);
       });
     },
-    expandAll() {
-      this.expandedRows = this.entrances;
-    },
-    collapseAll() {
-      this.expandedRows = [];
+    formatDate(date) {
+      if(date == undefined || date == null) return '';
+      let pieces = date.split('-');
+
+      return pieces[2] + '/' + pieces[1] + '/' + pieces[0];
     }
   },
   beforeMount() {

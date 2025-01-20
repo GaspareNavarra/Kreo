@@ -112,7 +112,7 @@
       'selectCustomerPage col-sm-10 col-10': selectCustomerPage,
       'Customer col-11 col-sm-9 mt-4 mt-sm-5': customer,
       'Birthday col-sm-4 col-10 mt-4 mt-sm-4': birthday,
-      'customerDetail col-11 col-sm-9 mt-4 mt-sm-4 pb-4': customerDetail,
+      'customerDetail col-11 col-sm-10 mt-4 mt-sm-4 pb-4': customerDetail,
       'treatmentsPage': treatmentsPage,
       'summaryPage col-sm-10': summaryPage
     }">
@@ -502,12 +502,21 @@ export default {
       return stringified_treatments;
     },
     decryptTreatments(all_treatments, treatments_to_decrypt) {
-      debugger
       let da_decriptare = treatments_to_decrypt.split(' - ');
       let result = [];
+      let index = 0;
+      let exit = false;
 
-      Object.values(da_decriptare).forEach((treatment) => {
-        // TODO: Aggiungere While che cicla i tutti i trattamenti e che vada a creare l'array decriptato
+      Object.values(da_decriptare).forEach((treatment, k) => {
+        while(index < all_treatments.length && !exit) {
+          if(all_treatments[index].id == treatment) {
+            result.push(all_treatments[index]);
+            exit = true;
+          }
+          index++;
+        }
+        exit = false;
+        index = 0;
       });
 
       return result;

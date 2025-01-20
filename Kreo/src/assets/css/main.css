@@ -788,8 +788,19 @@ input:checked[type="checkbox"]::before {
   height: 46vh;
   padding: 10px;
 }
+.timeline-container {
+  padding: 10px;
+  max-height: 57vh;
+  overflow-y: scroll;
+}
+.card-spacer {
+  margin-bottom: 20px;
+}
+.p-timeline-event-opposite {
+  display: none!important;
+}
 .customerDetail {
-  
+  padding: 0px 10px 0px 10px;
 }
 /* ------------------------------------------------------------------------------------------------------------ */
 @keyframes shake {

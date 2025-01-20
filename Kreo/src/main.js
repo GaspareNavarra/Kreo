@@ -11,6 +11,8 @@ import Card from 'primevue/card';
 import InputText from 'primevue/inputtext';
 import Listbox from 'primevue/listbox';
 import MultiSelect from 'primevue/multiselect';
+import Timeline from 'primevue/timeline';
+import Skeleton from 'primevue/skeleton';
 import Lara from '@primevue/themes/lara';
 
 import 'primeicons/primeicons.css'
@@ -66,6 +68,8 @@ app.component('Listbox', Listbox);
 app.component('MultiSelect', MultiSelect);
 app.component('DataTable', DataTable);
 app.component('Button', Button);
+app.component('Timeline', Timeline);
 app.component('Column', Column);
+app.component('Skeleton', Skeleton);
 
 app.mount('#app');
