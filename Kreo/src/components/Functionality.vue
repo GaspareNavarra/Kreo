@@ -15,12 +15,11 @@
             <div class="piastra-label text-truncate">Gestisci Clienti</div>
           </div>
         </div>
-        <!-- TODO: Rimuovere lo style per quando sarà implementata la pagina -->
-        <div class="piastra col-5 col-sm-2 piastra-disabled">
-          <i class="pi pi-lock style-pi-lock"></i>
+        <!-- TODO: Togliere v-if -->
+        <div class="piastra col-5 col-sm-2" v-if="false">
           <div class="align-content-piastra col-12 col-sm-12">
-            <i class="fa-solid fa-gear icona-piastra col-12 col-sm-12" style="color:#404144;"></i>
-            <div class="piastra-label text-truncate" style="color:#404144;">Impostazioni</div>
+            <i class="fa-solid fa-gear icona-piastra col-12 col-sm-12"></i>
+            <div class="piastra-label text-truncate">Impostazioni</div>
           </div>
         </div>
       </div>
