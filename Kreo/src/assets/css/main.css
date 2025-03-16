@@ -802,6 +802,15 @@ input:checked[type="checkbox"]::before {
 .customerDetail {
   padding: 0px 10px 0px 10px;
 }
+.pi-exclamation-triangle {
+  color: #cb0505;
+}
+.no-customer-message {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
 /* ------------------------------------------------------------------------------------------------------------ */
 @keyframes shake {
   0% {
