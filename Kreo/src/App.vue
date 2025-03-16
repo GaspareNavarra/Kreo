@@ -625,7 +625,7 @@ export default {
       ingresso.data_ingresso = new Date();
 
       axios
-        .post(window.BASE_URL_API_XANO + "/ingressi", ingresso, config)
+        .post(window.BASE_URL_API_CUSTOM + "/save-entrance", ingresso, config)
         .then((response) => {
           if (response.status == 200) {
             localStorage.removeItem("customer");
