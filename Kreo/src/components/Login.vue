@@ -59,7 +59,7 @@ export default {
       eyeIcon: true
     }
       eyeIcon: true,
-    };
+    }
   },
   methods: {
     async doLogin() {
