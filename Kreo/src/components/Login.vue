@@ -58,8 +58,6 @@ export default {
       password: '',
       eyeIcon: true
     }
-      eyeIcon: true,
-    }
   },
   methods: {
     async doLogin() {
