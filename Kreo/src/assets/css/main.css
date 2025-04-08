@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Poppins');
+
 * {
   margin: 0;
   padding: 0;
@@ -9,9 +10,11 @@
   font-family: 'Poppins';
   color: #000000;
 }
+
 button {
   border-radius: 12px;
 }
+
 body {
   display: flex;
   justify-content: center;
@@ -23,42 +26,48 @@ body {
   align-items: center;
   justify-content: center;
 }
+
 #MainBody {
   background-color: #383636;
   height: 100vh;
   width: 100vw;
   overflow: auto;
 }
+
 .custom-navbar {
   background-color: black;
   height: 80px;
   text-align: center;
   align-items: center;
-  margin: 0!important;
+  margin: 0 !important;
 }
+
 .logo_size {
   margin-left: auto;
   margin-right: auto;
-  width: 285px!important;
+  width: 285px !important;
   height: 67px;
 }
+
 .datasheet_size {
   background: #fff;
   border-radius: 20px;
-  margin-left: auto!important;
-  margin-right: auto!important;
-  margin-top: 10px!important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  margin-top: 10px !important;
   /* width: 95%;
   height: 89.5vh; */
   transition: .4s;
 }
+
 .login-size_pannel {
   height: fit-content;
   margin-top: 70px !important;
   padding-left: 10px;
   padding-right: 10px;
 }
-.inputBox span{
+
+.inputBox span {
   color: rgba(0, 0, 0, 0.55);
   position: absolute;
   left: 0;
@@ -68,25 +77,29 @@ body {
   text-transform: uppercase;
   transition: 0.5s;
 }
-.inputBox input:valid ~ span,
-.inputBox input:focus ~ span,
-.inputBox ~ span:not(.textarea-management),
-.inputBox textarea:focus ~ span,
+
+.inputBox input:valid~span,
+.inputBox input:focus~span,
+.inputBox~span:not(.textarea-management),
+.inputBox textarea:focus~span,
 .textarea-management {
-  color: #000000!important;
-  transform: translateX(10px) translateY(-7px)!important;
-  font-size: 0.7em!important;
-  padding: 0 10px!important;
-  background: #fff!important;
-  border: solid 1px #c6c7d2!important;
-  border-radius: 5px!important;
+  color: #000000 !important;
+  transform: translateX(10px) translateY(-7px) !important;
+  font-size: 0.7em !important;
+  padding: 0 10px !important;
+  background: #fff !important;
+  border: solid 1px #c6c7d2 !important;
+  border-radius: 5px !important;
 }
-.inputBox input:focus ~ span {
+
+.inputBox input:focus~span {
   border-color: #000000;
 }
+
 .inputBox input:focus {
   border-color: #000000;
 }
+
 .inputBox {
   position: relative;
   height: fit-content;
@@ -94,6 +107,7 @@ body {
   margin-right: auto;
   margin-top: 20px;
 }
+
 .inputBox input {
   width: 100%;
   padding: 10px;
@@ -105,24 +119,31 @@ body {
   color: black;
   font-size: 1em;
 }
+
 .container-login-input {
   padding-top: 2%;
 }
-.title, .subtitle {
+
+.title,
+.subtitle {
   text-align: center;
   color: #000000;
 }
+
 .subtitle {
   font-size: 2.5vh;
 }
+
 .title {
   font-weight: bold;
   font-size: 6vh;
 }
+
 .container-input {
   margin-top: 5vh;
   padding-bottom: 4vh;
 }
+
 .access-button {
   background-color: #000000;
   color: whitesmoke;
@@ -133,14 +154,17 @@ body {
   margin-right: auto;
   font-size: 1em;
   height: 35px;
-  margin-top: 25px!important;
+  margin-top: 25px !important;
 }
+
 .no-margin {
-  margin: 0!important;
+  margin: 0 !important;
 }
+
 .no-padding {
-  padding: 0!important;
+  padding: 0 !important;
 }
+
 .checkbox-container {
   margin-top: 20px !important;
   margin-left: auto;
@@ -151,6 +175,7 @@ body {
   height: fit-content;
   display: flex;
 }
+
 input[type="checkbox"] {
   position: relative;
   width: 45px;
@@ -162,9 +187,11 @@ input[type="checkbox"] {
   box-shadow: inset 0 0 5px rgba(0, 0, 0, .2);
   transition: 0.5s;
 }
+
 input:checked[type="checkbox"] {
   background: #4b6bf8;
 }
+
 input[type="checkbox"]::before {
   content: '';
   position: absolute;
@@ -178,12 +205,15 @@ input[type="checkbox"]::before {
   box-shadow: 0 2px 5px rgba(0, 0, 0, .2);
   transition: .4s;
 }
+
 input:checked[type="checkbox"]::before {
   left: 22px;
 }
+
 .remember-label {
   padding-left: 10px;
 }
+
 .password-eye {
   position: absolute;
   right: 0;
@@ -193,10 +223,12 @@ input:checked[type="checkbox"]::before {
   top: 0px;
   pointer-events: all;
 }
+
 .input-error {
   animation: shake .13s 3;
-  border-color: red!important;
+  border-color: red !important;
 }
+
 .logout-button {
   height: 40px;
   border: solid 1px white;
@@ -207,13 +239,16 @@ input:checked[type="checkbox"]::before {
   overflow: hidden;
   margin: auto;
 }
+
 .logout-button:hover {
   cursor: pointer;
   background-color: #920b0b;
 }
+
 .container-logout {
   padding: 0 !important;
 }
+
 .piastra {
   border: solid 2px #524d4d;
   border-radius: 5px;
@@ -224,9 +259,11 @@ input:checked[type="checkbox"]::before {
   flex-direction: column;
   /* min-width: min-content; */
 }
+
 .container-piastre {
   justify-content: center;
 }
+
 .functionality-page {
   width: 70% !important;
   /* height: 68.5vh; */
@@ -234,9 +271,11 @@ input:checked[type="checkbox"]::before {
   /* width: 45% !important;
   height: 76.5vh; */
 }
+
 .container-funzioni {
   margin-top: 6%;
 }
+
 .icona-piastra {
   /* font-size: 450%; */
   font-size: 5.5vw;
@@ -246,31 +285,38 @@ input:checked[type="checkbox"]::before {
   color: #404144;
   margin-bottom: 8px;
 }
+
 .piastra:hover {
   background-color: #000000;
   cursor: pointer;
   border-color: #fff;
 }
+
 .piastra:hover .icona-piastra,
 .piastra:hover .piastra-label {
   color: #fff;
 }
+
 .piastra-label {
   overflow: hidden;
 }
+
 .not-found {
-  margin-top: 155px!important;
+  margin-top: 155px !important;
   width: 58%;
   height: 45.5vh;
 }
+
 .not-found-label {
   font-size: 220%;
 }
+
 .warning {
   color: #d60505;
   padding-top: 50px;
   font-size: 150px;
 }
+
 .warning-button {
   border-radius: 20px;
   border: none;
@@ -282,18 +328,22 @@ input:checked[type="checkbox"]::before {
   background-color: #000000;
   color: whitesmoke;
 }
+
 .not-found-container {
   text-align: center;
-  margin: 0!important;
+  margin: 0 !important;
 }
+
 .add-user {
-  margin-top: auto!important;
-  margin-bottom: auto!important;
+  margin-top: auto !important;
+  margin-bottom: auto !important;
 }
+
 .align-button {
   display: flex;
   justify-content: center;
 }
+
 .shadow-container {
   width: 100%;
   height: 100%;
@@ -301,6 +351,7 @@ input:checked[type="checkbox"]::before {
   background: rgba(0, 0, 0, 0.573);
   z-index: 2;
 }
+
 .center-loader {
   position: absolute;
   top: 50%;
@@ -308,16 +359,19 @@ input:checked[type="checkbox"]::before {
   transform: translate(-50%, -50%);
   z-index: 999;
 }
+
 .ring {
   width: 300px;
   height: 300px;
   border-radius: 50%;
   background: transparent;
 }
+
 .ring {
   box-shadow: 0 4px 0 #262626;
   animation: animate 1s linear infinite;
 }
+
 .loader-text {
   position: absolute;
   width: 300px;
@@ -331,6 +385,7 @@ input:checked[type="checkbox"]::before {
   z-index: 999;
   color: #fff;
 }
+
 .back-arrow {
   /* position: absolute; */
   color: #fff;
@@ -338,31 +393,38 @@ input:checked[type="checkbox"]::before {
   /* top: 2.5%;
   left: 2%; */
 }
+
 .welcome-message {
   font-size: xxx-large;
   text-align: center;
   padding-top: 30px;
 }
+
 .register {
   margin-left: auto;
   margin-right: auto;
   text-align: right;
   padding: 0;
 }
+
 .fill-data {
   font-size: xx-large;
   text-align: center;
 }
+
 .container-message-modal {
   text-align: center;
-  margin: 0!important;
+  margin: 0 !important;
 }
+
 .check {
   font-size: 590%;
 }
+
 .message-label {
   font-size: 220%;
 }
+
 .message-button {
   border-radius: 20px;
   border: none;
@@ -374,6 +436,7 @@ input:checked[type="checkbox"]::before {
   background-color: #000000;
   color: whitesmoke;
 }
+
 .custom-dropdown-container {
   border: 1px solid;
   border-radius: 5px;
@@ -382,25 +445,32 @@ input:checked[type="checkbox"]::before {
   overflow-y: auto;
   z-index: 1;
   background: #fff;
-  -ms-overflow-style: none;  /* IE and Edge */
-  scrollbar-width: none;  /* Firefox */
+  -ms-overflow-style: none;
+  /* IE and Edge */
+  scrollbar-width: none;
+  /* Firefox */
 }
+
 .custom-dropdown:hover {
   background-color: #383636;
   color: #fff;
 }
+
 .custom-dropdown {
   font-size: larger;
   padding-left: 5px;
 }
+
 .dati-scheda-tecnica {
   padding: 2%;
   padding-bottom: 1%;
 }
+
 .custom-dropdown-container::-webkit-scrollbar {
   /* Hide scrollbar */
   display: none;
 }
+
 .birthday-box {
   margin-top: 25vh;
   position: absolute;
@@ -412,6 +482,7 @@ input:checked[type="checkbox"]::before {
   border: solid 1px;
   z-index: 1;
 }
+
 .arrow-birthday-box {
   background: #fff;
   border-radius: 0 20px 20px 0;
@@ -425,27 +496,35 @@ input:checked[type="checkbox"]::before {
   margin-top: 10vh;
   border-right: solid 2px;
 }
-.birthday-cake, .angle-right {
+
+.birthday-cake,
+.angle-right {
   margin-top: auto;
   margin-bottom: auto;
 }
+
 .birthday-cake {
   padding-right: 3px;
 }
+
 .closed-birthday-box {
   margin-left: -31vw;
 }
+
 .arrow-birthday-box:hover {
   margin-left: 100%;
   width: 4vw;
 }
+
 .open-birthday-box {
   margin-left: 94% !important;
   width: 3vw !important;
 }
+
 .close-arrow {
   rotate: 180deg;
 }
+
 #CustomersBirthDay {
   position: absolute;
   width: 31vw;
@@ -455,11 +534,13 @@ input:checked[type="checkbox"]::before {
   text-align: center;
   z-index: -1;
 }
+
 .birthday-title {
   font-size: x-large;
   margin-top: -1vh;
   margin-bottom: 1vh;
 }
+
 .box-customer-birthday {
   overflow-y: auto;
   height: 100%;
@@ -469,37 +550,45 @@ input:checked[type="checkbox"]::before {
   left: 1vw;
   border-radius: 20px;
 }
+
 .no-birthday-icon {
   font-size: xxx-large;
   margin-top: 4vh;
   color: red;
 }
+
 .no-birthday-label {
   padding-top: 1vh;
   font-size: x-large;
 }
+
 .birthday-row {
   text-align: left;
   padding: 1vw;
   font-size: large;
 }
+
 .align-birthday-customers {
   border: solid 1px;
   border-radius: 15px;
   border-top: none;
   border-right: none;
 }
+
 ::-webkit-scrollbar {
   display: none;
 }
+
 .align-birthday-message-icon {
   position: absolute;
   right: 2vw;
   margin-top: 0.5vh;
 }
+
 .align-birthday-message-icon:hover {
   cursor: pointer;
 }
+
 #sendMessageModal {
   position: absolute;
   top: 0;
@@ -509,15 +598,17 @@ input:checked[type="checkbox"]::before {
   margin: 0;
   justify-content: center;
 }
+
 .textarea-message {
   border: solid 1px;
   border-radius: 15px;
-  margin-top: auto!important;
+  margin-top: auto !important;
   height: 20vh;
   margin-bottom: 2vh;
   font-size: x-large;
   outline: none;
 }
+
 .annulla-button {
   margin-right: 1.5vw;
   color: white;
@@ -526,6 +617,7 @@ input:checked[type="checkbox"]::before {
   border-radius: 6px;
   outline: none;
 }
+
 .invia-button {
   color: white;
   background: #1DB954;
@@ -533,201 +625,258 @@ input:checked[type="checkbox"]::before {
   border-radius: 6px;
   outline: none;
 }
+
 .container-message-button {
   display: flex;
   justify-content: center;
   height: fit-content;
 }
+
 .logout-icon {
   padding-right: 0.3vw;
   color: white;
 }
+
 .second-row {
-  margin-top: 1%!important;
+  margin-top: 1% !important;
 }
+
 .birthday-customer {
-  padding-right: 1vw!important;
+  padding-right: 1vw !important;
 }
-.clear-data, .forward, .add-treatments {
+
+.clear-data,
+.forward,
+.add-treatments {
   height: 50px;
   display: flex;
   align-items: center;
   justify-content: center;
   border-radius: 12px;
 }
-.clear-data, .add-treatments {
+
+.clear-data,
+.add-treatments {
   width: 50px;
   margin-right: 10px;
   animation: clearInput 0.4s forwards;
   color: #fff;
 }
+
 .clear-data {
   background-color: red;
 }
+
 .add-treatments {
   background-color: #8a2be2;
 }
+
 .clear-data-icon {
   color: #fff;
 }
-.clear-data:hover, .forward:hover, .add-treatments {
+
+.clear-data:hover,
+.forward:hover,
+.add-treatments {
   cursor: pointer;
 }
+
 .inputLine {
   justify-content: center;
 }
+
 .align-gender-label-female {
   padding-right: 10px;
 }
+
 .forward {
   color: #fff;
-  padding-left: 27px!important;
-  background: #2bb163!important;
+  padding-left: 27px !important;
+  background: #2bb163 !important;
   animation: forwardButton 0.4s forwards;
 }
+
 .forward-button {
   color: #fff;
   padding: 10px;
   padding-left: 5px;
   padding-right: 15px;
 }
+
 #function {
   overflow: hidden;
 }
+
 .align-content-piastra {
   margin: auto;
   text-align: center;
 }
+
 .Homepage {
   padding-bottom: 15px;
   min-height: 55%;
 }
+
 .Customer {
   min-height: 70%;
   max-height: 70%;
 }
+
 .table-container {
   padding-left: 2%;
   padding-right: 2%;
 }
+
 .table-size {
   /* margin: 5px; */
-  max-height: 46.5vh;
+  /* max-height: 46.5vh; */
+  max-height: 33vh;
   overflow-y: auto;
   border-top: solid 2px;
   border-top-color: #212529;
 }
+
 .arrow-down {
   font-size: xx-large;
   justify-content: center;
   display: flex;
 }
+
 .content-aligned {
   align-content: center;
 }
+
 .whiteLabels {
   color: #fff;
 }
+
 .btn:focus {
-  outline: none!important;
+  outline: none !important;
   box-shadow: none;
 }
+
 .btn-warning {
-  background-color: #8a2be2!important;
-  border-color: #8a2be2!important;
+  background-color: #8a2be2 !important;
+  border-color: #8a2be2 !important;
 }
+
 .btn-outline-warning {
-  border-color: #212529!important;
+  border-color: #212529 !important;
 }
+
 .birthdayUnchecked:hover {
-  background-color: inherit!important;
-  color: inherit!important;
-  text-decoration: none!important;
-  box-shadow: none!important;
+  background-color: inherit !important;
+  color: inherit !important;
+  text-decoration: none !important;
+  box-shadow: none !important;
 }
+
 .mail-content {
   border-radius: 20px;
   resize: none;
   padding: 10px;
   height: -webkit-fill-available;
 }
+
 .MailContainer {
   max-height: -webkit-fill-available;
 }
+
 .btn-success {
-  background-color: #212529!important;
-  border-color: #212529!important;
+  background-color: #212529 !important;
+  border-color: #212529 !important;
 }
+
 .btn-success:hover {
   background-color: black;
   border-color: black;
 }
+
 .align-button-mail {
   justify-content: flex-end;
   padding: 15px;
 }
+
 .popup-message {
   height: 30vh;
   margin-top: 30vh !important;
 }
+
 .Birthday {
   height: 80%;
 }
+
 .back-popup-button {
-  background-color: red!important;
-  border-color: red!important;
+  background-color: red !important;
+  border-color: red !important;
   margin-right: 8vw;
 }
+
 .popup-description {
   font-size: 4vh;
   text-align: center;
   margin-top: 3vh;
   margin-bottom: 6vh;
 }
+
 .email-popup-button {
   display: flex;
   justify-content: center;
 }
+
 .paper-plane-icon {
   font-size: 5vh;
 }
+
 .first-line .inputBox,
 .second-row .inputBox {
   margin-bottom: 3vh;
 }
+
 .select-customer-container-button {
   justify-content: end;
 }
+
 .selectCustomerPage {
   margin-top: 4vh !important;
 }
+
 .treatmentsPage {
   margin-top: 2vh !important;
 }
-.container-info-entrance, #TreatmentsPopup, #TreatmentsPopupButton {
+
+.container-info-entrance,
+#TreatmentsPopup,
+#TreatmentsPopupButton {
   justify-content: center;
   display: flex;
 }
+
 .inputBox #email {
   text-transform: lowercase;
 }
+
 .align-button-forward {
   justify-content: end;
   display: flex;
 }
+
 .align-searchbar-customer {
   margin-bottom: 1%;
 }
+
 .input-customer {
   border-color: black;
   outline: none;
   box-shadow: none;
 }
+
 .searchbar-container {
   justify-content: flex-end;
   display: flex;
   padding-right: 3.3vw;
 }
+
 .white-modal-tretments {
   background-color: white;
   border-radius: 20px;
@@ -736,113 +885,140 @@ input:checked[type="checkbox"]::before {
   flex-direction: column;
   height: fit-content;
 }
+
 .white-modal-tretments .welcome-message {
   padding-top: 0;
   margin-top: -5vh;
 }
+
 #TreatmentsPopupInput .treatmentsPrice {
   margin-bottom: 5vh;
 }
+
 #TreatmentsPopupButton {
   margin-bottom: 5vh;
 }
+
 #TreatmentsPopupButton .forward {
-  padding-left: 15px!important;
+  padding-left: 15px !important;
 }
+
 .mini-welcome-message {
   font-size: large;
   text-align: left;
   margin-top: 20px;
-  margin-left: auto!important;
-  margin-right: auto!important;
+  margin-left: auto !important;
+  margin-right: auto !important;
 }
+
 .inputBoxListBox {
   margin-left: auto;
   margin-right: auto;
   margin-top: 20px;
-  border-radius: 10px!important;
+  border-radius: 10px !important;
 }
+
 .summaryPage {
-  margin-top: 4vh!important;
-  background: none!important;
+  margin-top: 4vh !important;
+  background: none !important;
 }
+
 .summary-container {
   justify-content: center;
 }
+
 .summary-box {
-  padding-left: 0!important;
-  padding-right: 0!important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
 }
+
 .align-card-text {
   display: flex;
   height: 25px;
 }
+
 .spacer-label-card {
   padding-right: 5px;
   font-style: italic;
   font-weight: bold;
 }
+
 .textarea-notes {
   resize: none;
   width: 100%;
   height: 46vh;
   padding: 10px;
 }
+
 .timeline-container {
   padding: 10px;
   max-height: 57vh;
   overflow-y: scroll;
 }
+
 .card-spacer {
   margin-bottom: 20px;
 }
+
 .p-timeline-event-opposite {
-  display: none!important;
+  display: none !important;
 }
+
 .customerDetail {
   padding: 0px 10px 0px 10px;
 }
+
 .pi-exclamation-triangle {
   color: #cb0505;
 }
+
 .no-customer-message {
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
 }
+
 /* ------------------------------------------------------------------------------------------------------------ */
 @keyframes shake {
   0% {
     transform: translateX(0);
   }
+
   40% {
     transform: translateX(10px);
   }
+
   100% {
     transform: translateX(-10px);
   }
 }
+
 @keyframes animate {
   0% {
     transform: rotate(0deg);
   }
+
   100% {
     transform: rotate(360deg);
   }
 }
+
 @keyframes clearInput {
   0% {
     left: 74.7vw;
   }
+
   100% {
     left: 82.7vw;
   }
 }
+
 @keyframes forwardButton {
   0% {
     left: 78.5vw;
   }
+
   100% {
     left: 86vw;
   }
@@ -882,20 +1058,21 @@ input:checked[type="checkbox"]::before {
     width: 100vw;
   }
 }
+
 /* Small devices (portrait tablets and large phones, 600px and up) */
-@media only screen and (min-width: 600px) and (max-width: 767px) {
-}
+@media only screen and (min-width: 600px) and (max-width: 767px) {}
+
 /* Medium devices (landscape tablets, 768px and up) */
-@media only screen and (min-width: 768px) and (max-width: 991px) {
-}
+@media only screen and (min-width: 768px) and (max-width: 991px) {}
+
 /* Large devices (laptops/desktops, 992px and up) */
-@media only screen and (min-width: 992px) and (max-width: 1199px) {
-}
+@media only screen and (min-width: 992px) and (max-width: 1199px) {}
+
 /* Extra large devices (large laptops and desktops, 1200px and up) */
-@media only screen and (min-width: 1200px) {
-}
+@media only screen and (min-width: 1200px) {}
+
 @media only screen and (max-width: 576px) {
   .icona-piastra {
-    font-size: 9.5vw!important;
+    font-size: 9.5vw !important;
   }
 }

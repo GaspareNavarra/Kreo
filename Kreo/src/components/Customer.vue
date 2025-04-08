@@ -58,6 +58,7 @@ export default {
   },
   methods: {
     formatData(data) {
+      if(!data) return "";
       let formattedData = data.split('-');
       return formattedData[2] + '/' + formattedData[1] + '/' + formattedData[0];
     },

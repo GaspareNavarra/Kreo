@@ -116,6 +116,7 @@
 <script>
 import axios from "axios";
 import TechnicalSheet from "@/components/TechnicalSheet.vue";
+import config from 'primevue/config';
 export default {
   components: { TechnicalSheet },
   inject: [
@@ -242,6 +243,7 @@ export default {
         customer.cellphone = this.cellphone;
         customer.email = this.email.toLowerCase();
         customer.birthday = this.birthday;
+        customer.gender = !this.gender ? "D" : "U";
         this.$refs.searchname.classList.remove("input-error");
         this.$refs.surname.classList.remove("input-error");
         this.$refs.cellphone.classList.remove("input-error");
@@ -279,11 +281,17 @@ export default {
           let response = data.data;
           let result = this.searchCustomer(response, customer);
 
-          if (result) {
-            this.customerSelection = false;
-            this.hideLoader();
-          } else {
-            this.addCustomer(customer);
+          switch(result.found) {
+            case true: 
+              if(result.updateNeeded) {
+                this.updateCustomer(customer, result.id, config);
+              }
+              this.customerSelection = false;
+              this.hideLoader();
+              break;
+            case false:
+              this.addCustomer(customer);
+              break;
           }
           console.log(response);
         })
@@ -292,6 +300,27 @@ export default {
           console.log(error);
           this.viewMessage(error.data.error.detail, false);
         });
+    },
+    updateCustomer(customer, id, config) {
+      let url = "https://x8ki-letl-twmt.n7.xano.io/api:Fh-KZon-/customer/{customer_id}".replace("{customer_id}", id);
+      let customerToUpdate = {
+        "customer_id": id,
+        "name": customer.name,
+        "surname": customer.surname,
+        "data_di_nascita": customer.birthday,
+        "email": customer.email,
+        "numero_di_telefono": customer.cellphone,
+        "gender": customer.gender
+      };
+
+      axios.patch(url, customerToUpdate, config)
+      .then((response) => {
+        console.log(response);
+      }).catch((error) => {
+          this.hideLoader();
+          console.log(error);
+          this.viewMessage(error.data.error.detail, false);
+      });
     },
     changeCheckboxState() {
       this.gender = !this.gender;
@@ -322,21 +351,29 @@ export default {
         });
     },
     searchCustomer(customerList, customer) {
-      for (let singleCustomer in customerList) {
+      for (let existingCustomer of customerList) {
         if (
-          customerList[singleCustomer].name == customer.name &&
-          customerList[singleCustomer].surname == customer.surname &&
-          customerList[singleCustomer].numero_di_telefono ==
-            customer.cellphone &&
-          customerList[singleCustomer].email == customer.email &&
-          this.formatDateForText(
-            customerList[singleCustomer].data_di_nascita
-          ) == customer.birthday
+          existingCustomer.name === customer.name &&
+          existingCustomer.surname === customer.surname
         ) {
-          return true;
+          const phoneChanged = existingCustomer.numero_di_telefono !== customer.cellphone;
+          const emailChanged = existingCustomer.email !== customer.email;
+          const birthdayChanged = this.formatDateForText(existingCustomer.data_di_nascita) !== customer.birthday;
+
+          const updateNeeded = phoneChanged || emailChanged || birthdayChanged;
+
+          return {
+            found: true,
+            updateNeeded,
+            id: existingCustomer.id,
+          };
         }
       }
-      return false;
+
+      return {
+        found: false,
+        id: customer.id
+      };
     },
     disableDropdown() {
       this.viewDropdown = false;
@@ -409,9 +446,9 @@ export default {
     },
   },
   mounted() {
+    this.getCustomers();
     this.customerList = JSON.parse(localStorage.getItem("customerList"));
     this.classSelector();
-    this.getCustomers();
     let customer = JSON.parse(localStorage.getItem("customer"));
     if (customer != undefined && customer != null) {
       this.setCustomerData(customer);

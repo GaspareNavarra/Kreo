@@ -399,6 +399,7 @@ export default {
       this.$router.push(page);
     },
     goToHome() {
+      localStorage.removeItem("customer");
       let isAuth = localStorage.getItem("isAuth");
       if (isAuth != undefined && isAuth != null && isAuth == "true") {
         this.linkTo("/HomePage");
@@ -518,6 +519,7 @@ export default {
             JSON.stringify(this.customerList)
           );
           this.hideLoader();
+          return this.customerList;
         })
         .catch((error) => {
           this.hideLoader();
