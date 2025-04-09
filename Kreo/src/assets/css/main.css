@@ -977,6 +977,7 @@ input:checked[type="checkbox"]::before {
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  font-size: x-large;
 }
 
 /* ------------------------------------------------------------------------------------------------------------ */

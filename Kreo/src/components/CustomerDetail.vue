@@ -52,7 +52,7 @@
         </template>
       </Timeline>
       <!-- TODO: Aggiungere messaggio di nessun ingresso -->
-      <div class="no-customer-message">
+      <div class="no-customer-message" v-if="entrances.length==0">
         <i class="pi pi-exclamation-triangle"></i>
         <span class="">
           Non ci sono ingressi disponibili per questo cliente
@@ -130,3 +130,8 @@ export default {
   },
 };
 </script>
+<style scoped>
+.pi-exclamation-triangle {
+  font-size: xx-large;
+}
+</style>
